@@ -7,7 +7,56 @@
     ================================================== -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Article - Creaty.</title>
+    <title id="page-title">Article - Creaty.</title>
+
+    <!-- Dynamic SEO Meta Tags (populated via JavaScript from Strapi) -->
+    <meta id="meta-description" name="description"
+        content="Read the latest insights on digital marketing and community management from Creaty.">
+    <meta name="author" content="Creaty - Creativfolio Ltd">
+    <meta name="robots" content="index, follow">
+    <link id="meta-canonical" rel="canonical" href="https://creaty.mu/blog-single.html">
+
+    <!-- OpenGraph / Facebook (Dynamic) -->
+    <meta id="og-type" property="og:type" content="article">
+    <meta id="og-url" property="og:url" content="">
+    <meta id="og-title" property="og:title" content="">
+    <meta id="og-description" property="og:description" content="">
+    <meta id="og-image" property="og:image" content="">
+    <meta property="og:locale" content="en_MU">
+    <meta property="og:site_name" content="Creaty">
+    <meta id="og-article-published" property="article:published_time" content="">
+    <meta id="og-article-author" property="article:author" content="Creaty">
+
+    <!-- Twitter Card (Dynamic) -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta id="twitter-title" name="twitter:title" content="">
+    <meta id="twitter-description" name="twitter:description" content="">
+    <meta id="twitter-image" name="twitter:image" content="">
+
+    <!-- Article Schema (populated via JavaScript) -->
+    <script id="article-schema" type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "Article",
+        "headline": "",
+        "description": "",
+        "image": "",
+        "author": {
+            "@type": "Organization",
+            "name": "Creaty"
+        },
+        "publisher": {
+            "@type": "Organization",
+            "name": "Creaty",
+            "logo": {
+                "@type": "ImageObject",
+                "url": "https://creaty.mu/images/creaty.logo.svg"
+            }
+        },
+        "datePublished": "",
+        "dateModified": ""
+    }
+    </script>
 
     <script>
         document.documentElement.classList.remove('no-js');
@@ -18,6 +67,7 @@
     ================================================== -->
     <link rel="stylesheet" href="css/vendor.css">
     <link rel="stylesheet" href="css/styles.css">
+
 
     <style>
         .s-article {
@@ -641,8 +691,103 @@
                 const attrs = article.attributes || article;
                 console.log('Rendering article data:', attrs);
 
+                // Build image URL
+                let imageUrl = 'https://creaty.mu/images/og-image.jpg';
+                if (attrs.image) {
+                    if (attrs.image.data?.attributes?.url) {
+                        imageUrl = attrs.image.data.attributes.url.startsWith('http')
+                            ? attrs.image.data.attributes.url
+                            : CONFIG.STRAPI_BASE_URL + attrs.image.data.attributes.url;
+                    } else if (attrs.image.url) {
+                        imageUrl = attrs.image.url.startsWith('http')
+                            ? attrs.image.url
+                            : CONFIG.STRAPI_BASE_URL + attrs.image.url;
+                    }
+                }
+
+                // Extract description (first 160 chars for SEO)
+                let description = attrs.excerpt || attrs.description || '';
+                if (!description && Array.isArray(attrs.content)) {
+                    const firstParagraph = attrs.content.find(b => b.type === 'paragraph');
+                    if (firstParagraph) {
+                        description = firstParagraph.children.map(c => c.text).join('').substring(0, 160);
+                    }
+                }
+                if (description.length > 160) description = description.substring(0, 157) + '...';
+
+                const articleUrl = `https://creaty.mu/blog-single.html?slug=${attrs.slug || article.documentId}`;
+                const publishedDate = attrs.publishedAt || attrs.createdAt;
+                const modifiedDate = attrs.updatedAt || publishedDate;
+
                 // Update page title
                 document.title = `${attrs.title} - Creaty.`;
+
+                // --- UPDATE DYNAMIC SEO META TAGS ---
+
+                // Meta Description
+                const metaDesc = document.getElementById('meta-description');
+                if (metaDesc) metaDesc.setAttribute('content', description);
+
+                // Canonical URL
+                const metaCanonical = document.getElementById('meta-canonical');
+                if (metaCanonical) metaCanonical.setAttribute('href', articleUrl);
+
+                // OpenGraph tags
+                const ogUrl = document.getElementById('og-url');
+                if (ogUrl) ogUrl.setAttribute('content', articleUrl);
+
+                const ogTitle = document.getElementById('og-title');
+                if (ogTitle) ogTitle.setAttribute('content', attrs.title);
+
+                const ogDesc = document.getElementById('og-description');
+                if (ogDesc) ogDesc.setAttribute('content', description);
+
+                const ogImage = document.getElementById('og-image');
+                if (ogImage) ogImage.setAttribute('content', imageUrl);
+
+                const ogPublished = document.getElementById('og-article-published');
+                if (ogPublished) ogPublished.setAttribute('content', publishedDate);
+
+                // Twitter tags
+                const twitterTitle = document.getElementById('twitter-title');
+                if (twitterTitle) twitterTitle.setAttribute('content', attrs.title);
+
+                const twitterDesc = document.getElementById('twitter-description');
+                if (twitterDesc) twitterDesc.setAttribute('content', description);
+
+                const twitterImage = document.getElementById('twitter-image');
+                if (twitterImage) twitterImage.setAttribute('content', imageUrl);
+
+                // --- UPDATE ARTICLE SCHEMA ---
+                const schemaScript = document.getElementById('article-schema');
+                if (schemaScript) {
+                    const articleSchema = {
+                        "@context": "https://schema.org",
+                        "@type": "Article",
+                        "headline": attrs.title,
+                        "description": description,
+                        "image": imageUrl,
+                        "author": {
+                            "@type": "Organization",
+                            "name": "Creaty"
+                        },
+                        "publisher": {
+                            "@type": "Organization",
+                            "name": "Creaty",
+                            "logo": {
+                                "@type": "ImageObject",
+                                "url": "https://creaty.mu/images/creaty.logo.svg"
+                            }
+                        },
+                        "datePublished": publishedDate,
+                        "dateModified": modifiedDate,
+                        "mainEntityOfPage": {
+                            "@type": "WebPage",
+                            "@id": articleUrl
+                        }
+                    };
+                    schemaScript.textContent = JSON.stringify(articleSchema);
+                }
 
                 // Category
                 const categoryEl = document.getElementById('article-category');
@@ -662,7 +807,7 @@
                 // Date
                 const dateEl = document.getElementById('article-date');
                 if (dateEl) {
-                    const date = new Date(attrs.publishedAt || attrs.createdAt).toLocaleDateString('fr-FR', {
+                    const date = new Date(publishedDate).toLocaleDateString('fr-FR', {
                         day: 'numeric',
                         month: 'long',
                         year: 'numeric'
@@ -685,18 +830,6 @@
                 // Image
                 const imageEl = document.getElementById('article-image');
                 if (imageEl) {
-                    let imageUrl = 'images/sample-image.jpg';
-                    if (attrs.image) {
-                        if (attrs.image.data?.attributes?.url) {
-                            imageUrl = attrs.image.data.attributes.url.startsWith('http')
-                                ? attrs.image.data.attributes.url
-                                : CONFIG.STRAPI_BASE_URL + attrs.image.data.attributes.url;
-                        } else if (attrs.image.url) {
-                            imageUrl = attrs.image.url.startsWith('http')
-                                ? attrs.image.url
-                                : CONFIG.STRAPI_BASE_URL + attrs.image.url;
-                        }
-                    }
                     imageEl.src = imageUrl;
                     imageEl.alt = attrs.title || 'Article Image';
                     imageEl.classList.remove('skeleton');

@@ -1,0 +1,19 @@
+# Robots.txt for Creaty
+# https://creatymu.org
+
+User-agent: *
+Allow: /
+
+# Sitemap Location
+Sitemap: https://creatymu.org/sitemap.xml
+
+# Disallow internal directories
+Disallow: /strapi-blog/
+Disallow: /.git/
+
+# Allow search engines to index all public content
+User-agent: Googlebot
+Allow: /
+
+User-agent: Bingbot
+Allow: /
