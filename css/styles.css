@@ -4760,3 +4760,293 @@ img.u-pull-left {
 
 
 }
+/* ===================================================================
+ * # PROMO WIDGET & COOKIE BANNER
+ * ------------------------------------------------------------------- */
+
+/* Cookie Banner Styling */
+.cookie-banner {
+    position: fixed;
+    bottom: 3rem;
+    left: 3rem;
+    max-width: 420px;
+    background: rgba(10, 10, 10, 0.95);
+    backdrop-filter: blur(15px);
+    -webkit-backdrop-filter: blur(15px);
+    color: #ffffff;
+    padding: 3.2rem;
+    border-radius: 24px;
+    z-index: 9999;
+    transform: translateY(150%);
+    transition: transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.3);
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+}
+
+.cookie-banner.show {
+    transform: translateY(0);
+}
+
+.cookie-banner h4 {
+    color: #ffffff;
+    margin-bottom: 1.5rem;
+    font-size: 2.2rem;
+}
+
+.cookie-banner p {
+    color: rgba(255, 255, 255, 0.7);
+    font-size: 1.5rem;
+    margin-bottom: 2.5rem;
+    line-height: 1.6;
+}
+
+.cookie-banner__buttons {
+    display: flex;
+    gap: 1.5rem;
+}
+
+.cookie-banner__btn {
+    padding: 1.2rem 2.8rem;
+    border-radius: 12px;
+    font-size: 1.4rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    border: none;
+}
+
+.cookie-banner__btn--accept {
+    background: var(--color-1);
+    color: #ffffff;
+}
+
+.cookie-banner__btn--accept:hover {
+    background: var(--color-1-dark);
+}
+
+.cookie-banner__btn--decline {
+    background: rgba(255, 255, 255, 0.1);
+    color: #ffffff;
+}
+
+.cookie-banner__btn--decline:hover {
+    background: rgba(255, 255, 255, 0.2);
+}
+
+/* Promo Widget Styling */
+.promo-widget {
+    position: fixed;
+    bottom: 2rem;
+    right: 2rem;
+    max-width: 380px;
+    background: rgba(10, 10, 10, 0.9);
+    backdrop-filter: blur(25px);
+    -webkit-backdrop-filter: blur(25px);
+    color: #ffffff;
+    padding: 3.5rem;
+    border-radius: 32px;
+    z-index: 10000;
+    transform: translateX(calc(100% + 5rem));
+    transition: all 0.7s cubic-bezier(0.16, 1, 0.3, 1);
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    box-shadow: 0 30px 60px -12px rgba(0, 0, 0, 0.6);
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    max-height: 85vh;
+    overflow-y: auto;
+}
+
+.promo-widget.show {
+    transform: translateX(0);
+}
+
+.promo-widget__close {
+    position: absolute;
+    top: 2rem;
+    right: 2rem;
+    width: 32px;
+    height: 32px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.08);
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.promo-widget__close:hover {
+    background: rgba(255, 255, 255, 0.2);
+    transform: rotate(90deg);
+}
+
+.promo-widget__close svg {
+    width: 14px;
+    height: 14px;
+    fill: #ffffff;
+}
+
+.promo-widget__icon-header {
+    width: 56px;
+    height: 56px;
+    background: linear-gradient(135deg, var(--color-1) 0%, var(--color-2) 100%);
+    border-radius: 18px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 2.5rem;
+    box-shadow: 0 12px 24px rgba(0, 0, 0, 0.2);
+}
+
+.promo-widget h4 {
+    color: #ffffff;
+    margin: 0 0 1.2rem 0;
+    font-size: 2.4rem;
+    font-weight: 700;
+    letter-spacing: -0.035em;
+    line-height: 1.2;
+}
+
+.promo-widget p {
+    font-size: 1.55rem;
+    line-height: 1.6;
+    margin-bottom: 3rem;
+    color: rgba(255, 255, 255, 0.75);
+}
+
+.promo-widget__btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 1.8rem 3rem;
+    background: #ffffff;
+    color: #000000;
+    text-decoration: none;
+    border-radius: 16px;
+    font-size: 1.5rem;
+    font-weight: 700;
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+    text-align: center;
+}
+
+.promo-widget__btn:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 15px 30px rgba(255, 255, 255, 0.2);
+    background: #ffffff;
+    color: var(--color-1);
+}
+
+/* Floating Trigger Icon */
+.promo-trigger {
+    position: fixed;
+    bottom: 2rem;
+    right: 0;
+    width: 64px;
+    height: 64px;
+    background: var(--color-1);
+    border-radius: 32px 0 0 32px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    z-index: 9999;
+    transform: translateX(100%);
+    transition: all 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+    box-shadow: -5px 5px 20px rgba(0, 0, 0, 0.3);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-right: none;
+}
+
+.promo-trigger.show {
+    transform: translateX(0);
+    animation: promo-pulse 3s infinite;
+}
+
+.promo-trigger:hover {
+    padding-right: 1rem;
+    background: var(--color-1-dark);
+}
+
+.promo-trigger svg {
+    width: 28px;
+    height: 28px;
+    fill: #ffffff;
+}
+
+@keyframes promo-pulse {
+    0% {
+        box-shadow: -5px 5px 20px rgba(63, 136, 92, 0.3);
+    }
+    50% {
+        box-shadow: -5px 5px 35px rgba(63, 136, 92, 0.6);
+    }
+    100% {
+        box-shadow: -5px 5px 20px rgba(63, 136, 92, 0.3);
+    }
+}
+
+.promo-news {
+    margin-top: 2rem;
+    padding-top: 2rem;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.promo-news__title {
+    font-size: 1.4rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--color-1);
+    margin-bottom: 1.5rem;
+    display: block;
+}
+
+.promo-news__list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+.promo-news__item {
+    margin-bottom: 1.5rem;
+    transition: transform 0.3s ease;
+}
+
+.promo-news__item:hover {
+    transform: translateX(5px);
+}
+
+.promo-news__link {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    text-decoration: none;
+}
+
+.promo-news__post-title {
+    font-size: 1.4rem;
+    font-weight: 600;
+    color: #ffffff;
+    line-height: 1.4;
+    margin: 0;
+}
+
+.promo-news__date {
+    font-size: 1.1rem;
+    color: rgba(255, 255, 255, 0.4);
+}
+
+@media screen and (max-width: 600px) {
+    .promo-widget {
+        left: 1.5rem;
+        right: 1.5rem;
+        bottom: 1.5rem;
+        max-width: none;
+        padding: 3rem;
+    }
+}

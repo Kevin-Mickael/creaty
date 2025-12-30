@@ -99,6 +99,144 @@
                 background-position-x: -200%;
             }
         }
+
+        /* CTA Button Fix */
+        .s-header__cta .btn.s-header__cta-btn {
+            background-color: var(--color-1) !important;
+            border-color: var(--color-1) !important;
+            color: #ffffff !important;
+            transition: all 0.3s ease;
+        }
+
+        .s-header__cta .btn.s-header__cta-btn:hover {
+            background-color: var(--color-1-dark) !important;
+            border-color: var(--color-1-dark) !important;
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15);
+        }
+
+        .sticky .s-header__cta .btn.s-header__cta-btn {
+            background-color: var(--color-1) !important;
+            border-color: var(--color-1) !important;
+            opacity: 1;
+        }
+
+        /* Force Header Fixed on subpages */
+        .s-header.sticky {
+            position: fixed !important;
+            opacity: 1 !important;
+            visibility: visible !important;
+            background-color: var(--color-gray-19) !important;
+            transform: translateY(0) !important;
+            top: 0 !important;
+        }
+
+        .s-header__inner {
+            opacity: 1 !important;
+            transform: translateY(0) !important;
+        }
+
+        /* Comments Styling */
+        .article-comments {
+            padding-top: var(--vspace-4);
+            max-width: 800px;
+            margin: 4rem auto 0;
+            border-top: 1px solid var(--color-gray-4);
+        }
+
+        .comments-list {
+            list-style: none;
+            margin: 0;
+            padding: 0;
+        }
+
+        .comment-item {
+            padding: 3rem 0;
+            border-bottom: 1px solid var(--color-gray-2);
+        }
+
+        .comment-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1rem;
+        }
+
+        .comment-author {
+            font-weight: 700;
+            color: var(--color-text-dark);
+            font-size: 1.8rem;
+        }
+
+        .comment-date {
+            font-size: 1.4rem;
+            color: #888;
+        }
+
+        .comment-content {
+            font-size: 1.6rem;
+            line-height: 1.6;
+            color: var(--color-text-dark);
+        }
+
+        /* Admin Reply */
+        .comment-reply {
+            margin-top: 2rem;
+            margin-left: 4rem;
+            padding: 2rem;
+            background-color: var(--color-gray-1);
+            border-left: 3px solid var(--color-1);
+            border-radius: 0 8px 8px 0;
+        }
+
+        .comment-reply-header {
+            font-weight: 700;
+            color: var(--color-1);
+            margin-bottom: 0.5rem;
+            font-size: 1.3rem;
+            text-transform: uppercase;
+            letter-spacing: 0.1rem;
+        }
+
+        /* Comment Form */
+        .comment-form-section {
+            padding-top: var(--vspace-3);
+            margin-bottom: var(--vspace-4);
+        }
+
+        .comment-form-section h4 {
+            margin-bottom: 3rem;
+        }
+
+        .comment-form input,
+        .comment-form textarea {
+            width: 100%;
+            background: #fdfdfd;
+            border: 1px solid #ddd;
+            padding: 1.5rem 2rem;
+            border-radius: 8px;
+            margin-bottom: 2rem;
+            transition: all 0.3s ease;
+            font-size: 1.6rem;
+        }
+
+        .comment-form input:focus,
+        .comment-form textarea:focus {
+            border-color: var(--color-1);
+            outline: none;
+            background: #fff;
+            box-shadow: 0 0 0 4px rgba(63, 136, 92, 0.1);
+        }
+
+        .comment-form .btn {
+            width: 100%;
+            cursor: pointer;
+        }
+
+        #comment-status {
+            font-size: 1.5rem;
+            font-weight: 500;
+        }
     </style>
 
     <!-- favicons
@@ -151,12 +289,14 @@
                         <li><a href="index.html#intro">Intro</a></li>
                         <li><a href="index.html#about">About</a></li>
                         <li><a href="index.html#pricing">Pricing</a></li>
-                        <li><a href="blog.html">Blog</a></li>
+                        <li><a href="index.html#faq">FAQ</a></li>
+                        <li class="current"><a href="news.html">News</a></li>
+                        <li><a href="legal.html">Terms</a></li>
                     </ul>
                 </nav>
 
                 <div class="s-header__cta">
-                    <a href="index.html#contact" class="btn btn--stroke s-header__cta-btn">Contact us</a>
+                    <a href="index.html#contact" class="btn btn--primary s-header__cta-btn">Contact us</a>
                 </div>
 
             </div> <!-- end s-header__inner -->
@@ -170,22 +310,21 @@
 
             <div class="row">
                 <div class="column lg-12">
-                    <a href="blog.html" class="article-back">
+                    <a href="news.html" class="article-back">
                         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
                             <path d="M10.25 6.75L4.75 12L10.25 17.25M19.25 12H5"></path>
                         </svg>
-                        Back to Blog
+                        Back to News
                     </a>
                 </div>
             </div>
 
             <div class="row article-header" id="article-header">
-                <div class="column lg-12">
-                    <span class="article-header__category skeleton" id="article-category"
-                        style="width: 100px; height: 30px;">&nbsp;</span>
-                    <h1 class="article-header__title skeleton" id="article-title" style="height: 60px;">&nbsp;</h1>
+                <div class="column lg-12 text-center">
+                    <span class="article-header__category skeleton" id="article-category">&nbsp;</span>
+                    <h1 class="article-header__title skeleton" id="article-title">&nbsp;</h1>
                     <div class="article-header__meta" id="article-meta">
-                        <span id="article-date">Loading...</span>
+                        <span id="article-date"></span>
                         <span id="article-author"></span>
                         <span id="article-readtime"></span>
                     </div>
@@ -200,9 +339,38 @@
 
             <div class="row">
                 <div class="column lg-12">
-                    <div class="article-content" id="article-content">
+                    <div class="article-content" id="article-content"
+                        style="text-align: justify; color: var(--color-text-dark);">
                         <p class="skeleton" style="height: 100px;">&nbsp;</p>
                         <p class="skeleton" style="height: 80px;">&nbsp;</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Comments Section -->
+            <div class="row article-comments" id="comments">
+                <div class="column lg-12">
+                    <h3 id="comments-count">0 Comments</h3>
+
+                    <div id="comments-list-container">
+                        <p style="color: #888;">Loading comments...</p>
+                    </div>
+
+                    <div class="comment-form-section">
+                        <h4>Leave a Comment</h4>
+                        <form id="comment-form" class="comment-form">
+                            <div class="row">
+                                <div class="column lg-6 mob-12">
+                                    <input type="text" id="comment-name" placeholder="Your Name" required>
+                                </div>
+                                <div class="column lg-6 mob-12">
+                                    <input type="email" id="comment-email" placeholder="Your Email" required>
+                                </div>
+                            </div>
+                            <textarea id="comment-message" placeholder="Your Comment" rows="5" required></textarea>
+                            <button type="submit" class="btn btn--primary" id="submit-comment">Post Comment</button>
+                            <div id="comment-status"></div>
+                        </form>
                     </div>
                 </div>
             </div>
@@ -210,9 +378,31 @@
         </section> <!-- end s-content -->
 
 
-        <!-- # site-footer (same as blog.html)
+        <!-- # site-footer
         ================================================== -->
         <footer id="colophon" class="s-footer footer">
+
+            <div class="row s-footer__top">
+                <div class="column lg-12 text-center">
+                    <h2 class="text-display-1">
+                        Sign Up to Our Newsletter.
+                    </h2>
+                    <p class="lead">
+                        Subscribe for updates, special offers and more.
+                    </p>
+                </div>
+                <div class="column lg-12 s-footer__subscribe">
+                    <div class="subscribe-form">
+                        <form id="mc-form" class="mc-form">
+                            <input type="email" name="EMAIL" id="mce-EMAIL" class="u-fullwidth text-center"
+                                placeholder="Your Email Address" required>
+                            <input type="submit" name="subscribe" value="Subscribe"
+                                class="btn btn--primary u-fullwidth">
+                            <div class="mc-status"></div>
+                        </form>
+                    </div>
+                </div>
+            </div>
 
             <div class="row s-footer__bottom">
                 <div class="column lg-5 md-6 stack-on-900">
@@ -226,6 +416,42 @@
                         Creaty is a premier agency in Mauritius specialized in Community Management and Graphic Design.
                         We help businesses shine online.
                     </p>
+
+                    <ul class="s-footer__social">
+                        <li>
+                            <a href="">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                                    style="fill:rgba(0, 0, 0, 1);">
+                                    <path
+                                        d="M20,3H4C3.447,3,3,3.448,3,4v16c0,0.552,0.447,1,1,1h8.615v-6.96h-2.338v-2.725h2.338v-2c0-2.325,1.42-3.592,3.5-3.592 c0.699-0.002,1.399,0.034,2.095,0.107v2.42h-1.435c-1.128,0-1.348,0.538-1.348,1.325v1.735h2.697l-0.35,2.725h-2.348V21H20 c0.553,0,1-0.448,1-1V4C21,3.448,20.553,3,20,3z">
+                                    </path>
+                                </svg>
+                                <span class="u-screen-reader-text">Facebook</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#0">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                                    style="fill:rgba(0, 0, 0, 1);">
+                                    <path
+                                        d="M18.161 2H21.5L14.07 10.49L22.8 22H15.901L10.497 14.921L4.316 22H0.976L8.851 13.012L0.5 2H7.568L12.457 8.455L18.161 2ZM16.98 20.005H18.831L6.417 3.905H4.431L16.98 20.005Z">
+                                    </path>
+                                </svg>
+                                <span class="u-screen-reader-text">X.com</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#0">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 22 22"
+                                    style="fill:rgba(0, 0, 0, 1);">
+                                    <path
+                                        d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z">
+                                    </path>
+                                </svg>
+                                <span class="u-screen-reader-text">LinkedIn</span>
+                            </a>
+                        </li>
+                    </ul>
                 </div>
 
                 <div class="column lg-6 stack-on-900 end">
@@ -233,113 +459,384 @@
                         <li><a href="index.html#intro">Intro</a></li>
                         <li><a href="index.html#about">About</a></li>
                         <li><a href="index.html#pricing">Pricing</a></li>
-                        <li><a href="blog.html">Blog</a></li>
-                        <li><a href="index.html#contact">Contact</a></li>
+                        <li><a href="index.html#faq">FAQ</a></li>
+                        <li><a href="news.html">News</a></li>
+                        <li><a href="legal.html">Terms</a></li>
                     </ul>
 
+                    <p class="s-footer__contact">
+                        Do you have a question? Send us a word: <br>
+                        <a href="mailto:support@creaty.com" class="s-footer__mail-link">support@creaty.com</a>
+                    </p>
+
                     <div class="ss-copyright">
-                        <span>© Creaty 2025 — Operated by <b>Creativfolio Ltd</b>, registered in Mauritius</span>
+                        <span>© Creaty 2025 — Operated by <b>Creativfolio Ltd</b>, registered in Mauritius • <b>BRN:
+                                C25227739</b></span>
                     </div>
                 </div>
             </div>
 
         </footer> <!-- end footer -->
 
+        <!-- Cookie Banner -->
+        <div id="cookie-banner" class="cookie-banner">
+            <h4>We Value Your Privacy</h4>
+            <p>We use cookies to enhance your browsing experience and analyze our traffic. By clicking "Accept", you
+                consent to our use of cookies. <a href="legal.html"
+                    style="color: var(--color-1); text-decoration: underline;">Learn more</a></p>
+            <div class="cookie-banner__buttons">
+                <button class="cookie-banner__btn cookie-banner__btn--accept" onclick="acceptCookies()">Accept</button>
+                <button class="cookie-banner__btn cookie-banner__btn--decline"
+                    onclick="closeCookieBanner()">Decline</button>
+            </div>
+        </div>
+
+        <!-- Promo Widget -->
+        <div id="promo-widget" class="promo-widget">
+            <div class="promo-widget__close" onclick="minimizePromo()">
+                <svg viewBox="0 0 24 24">
+                    <path
+                        d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z" />
+                </svg>
+            </div>
+            <div class="promo-widget__icon-header">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="white">
+                    <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5" />
+                </svg>
+            </div>
+            <h4>Ready for a Digital Upgrade?</h4>
+            <p>
+                Stop dreaming about it. Whether you need a slick website or a mobile app that works, let's make it real.
+            </p>
+            <a href="https://creativfolio.com" target="_blank" class="promo-widget__btn">
+                Visit Creativfolio
+            </a>
+
+            <div class="promo-news">
+                <span class="promo-news__title">Latest News</span>
+                <div id="promo-news-container">
+                    <p style="font-size: 1.2rem; color: rgba(255,255,255,0.5);">Loading latest updates...</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Promo Trigger Icon -->
+        <div id="promo-trigger" class="promo-trigger" onclick="showPromo()">
+            <svg viewBox="0 0 24 24">
+                <path
+                    d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-6h2v6zm0-8h-2V7h2v2z" />
+            </svg>
+        </div>
 
         <!-- Java Script
     ================================================== -->
         <script src="js/plugins.js"></script>
         <script src="js/config.js"></script>
+        <script src="js/promo.js"></script>
         <script>
+            let currentArticleDocumentId = null;
+
             document.addEventListener('DOMContentLoaded', async () => {
                 const urlParams = new URLSearchParams(window.location.search);
                 const slug = urlParams.get('slug');
 
                 if (!slug) {
-                    window.location.href = 'blog.html';
+                    console.log('No slug found, redirecting to news.html');
+                    window.location.href = 'news.html';
                     return;
                 }
 
+                // Global Timeout to stop all loading indicators after 15s
+                const globalTimeout = setTimeout(() => {
+                    console.warn('Global loading timeout reached.');
+                    document.querySelectorAll('.skeleton').forEach(el => el.classList.remove('skeleton'));
+                    const preloader = document.getElementById('preloader');
+                    if (preloader) preloader.style.display = 'none';
+                }, 15000);
+
                 try {
-                    // Fetch article by slug or ID
-                    const response = await fetch(`${CONFIG.API_URL}/articles?filters[slug][$eq]=${slug}&populate=*`);
+                    console.log('Fetching article with slug/documentId:', slug);
 
-                    if (!response.ok) throw new Error('Article not found');
+                    const fetchWithTimeout = async (url, options = {}, timeout = 10000) => {
+                        const controller = new AbortController();
+                        const id = setTimeout(() => controller.abort(), timeout);
+                        try {
+                            const response = await fetch(url, { ...options, signal: controller.signal });
+                            clearTimeout(id);
+                            return response;
+                        } catch (e) {
+                            clearTimeout(id);
+                            throw e;
+                        }
+                    };
 
-                    const { data } = await response.json();
+                    let article = null;
 
-                    if (!data || data.length === 0) {
-                        // Try fetching by documentId (Strapi v5)
-                        const responseById = await fetch(`${CONFIG.API_URL}/articles/${slug}?populate=*`);
-                        if (!responseById.ok) throw new Error('Article not found');
-                        const singleData = await responseById.json();
-                        renderArticle(singleData.data);
-                    } else {
-                        renderArticle(data[0]);
+                    // 1. Try fetching by slug filter
+                    console.log('Attempting slug fetch...');
+                    try {
+                        const response = await fetchWithTimeout(`${CONFIG.API_URL}/articles?filters[slug][$eq]=${slug}&populate=*`);
+                        if (response.ok) {
+                            const { data } = await response.json();
+                            if (data && data.length > 0) {
+                                console.log('Article found via slug filter');
+                                article = data[0];
+                            }
+                        }
+                    } catch (e) {
+                        console.warn('Slug fetch failed or timed out:', e);
                     }
+
+                    // 2. Fallback: Try direct documentId fetch if not found by slug
+                    if (!article) {
+                        console.log('Attempting direct documentId fetch...');
+                        try {
+                            const responseById = await fetchWithTimeout(`${CONFIG.API_URL}/articles/${slug}?populate=*`);
+                            if (responseById.ok) {
+                                const singleData = await responseById.json();
+                                if (singleData.data) {
+                                    console.log('Article found via direct fetch');
+                                    article = singleData.data;
+                                }
+                            }
+                        } catch (e) {
+                            console.warn('Direct fetch failed or timed out:', e);
+                        }
+                    }
+
+                    if (article) {
+                        currentArticleDocumentId = article.documentId || article.id;
+                        renderArticle(article);
+                        loadComments(currentArticleDocumentId);
+                        clearTimeout(globalTimeout);
+                    } else {
+                        throw new Error('Article not found in database via slug or ID.');
+                    }
+
                 } catch (error) {
-                    console.error('Error loading article:', error);
-                    document.getElementById('article-content').innerHTML = '<p>Article non trouvé.</p>';
+                    console.error('Final Error loading article:', error);
+                    const contentEl = document.getElementById('article-content');
+                    if (contentEl) {
+                        contentEl.innerHTML = `
+                            <div class="alert-box alert-box--error">
+                                <p>Désolé, l'article n'a pas pu être chargé. (${error.message})</p>
+                                <p><a href="news.html" style="color: white; text-decoration: underline;">Retour aux news</a></p>
+                            </div>
+                        `;
+                    }
+                } finally {
+                    // Ensure skeletons and preloader are removed
+                    document.querySelectorAll('.skeleton').forEach(el => el.classList.remove('skeleton'));
+                    const preloader = document.getElementById('preloader');
+                    if (preloader) {
+                        preloader.classList.add('ss-loaded');
+                        document.body.classList.add('ss-show');
+                        setTimeout(() => { if (preloader) preloader.style.display = 'none'; }, 500);
+                    }
                 }
             });
 
             function renderArticle(article) {
+                if (!article) return;
                 const attrs = article.attributes || article;
+                console.log('Rendering article data:', attrs);
 
                 // Update page title
                 document.title = `${attrs.title} - Creaty.`;
 
                 // Category
                 const categoryEl = document.getElementById('article-category');
-                categoryEl.textContent = attrs.category || 'NEWS';
-                categoryEl.classList.remove('skeleton');
+                if (categoryEl) {
+                    categoryEl.textContent = attrs.category || 'NEWS';
+                    categoryEl.classList.remove('skeleton');
+                }
 
                 // Title
                 const titleEl = document.getElementById('article-title');
-                titleEl.textContent = attrs.title;
-                titleEl.classList.remove('skeleton');
-                titleEl.style.height = 'auto';
+                if (titleEl) {
+                    titleEl.textContent = attrs.title;
+                    titleEl.classList.remove('skeleton');
+                    titleEl.style.height = 'auto';
+                }
 
                 // Date
-                const date = new Date(attrs.publishedAt || attrs.createdAt).toLocaleDateString('fr-FR', {
-                    day: 'numeric',
-                    month: 'long',
-                    year: 'numeric'
-                });
-                document.getElementById('article-date').textContent = date;
+                const dateEl = document.getElementById('article-date');
+                if (dateEl) {
+                    const date = new Date(attrs.publishedAt || attrs.createdAt).toLocaleDateString('fr-FR', {
+                        day: 'numeric',
+                        month: 'long',
+                        year: 'numeric'
+                    });
+                    dateEl.textContent = date;
+                }
 
                 // Author
-                if (attrs.author) {
-                    document.getElementById('article-author').textContent = `By ${attrs.author}`;
+                const authorEl = document.getElementById('article-author');
+                if (authorEl && attrs.author) {
+                    authorEl.textContent = typeof attrs.author === 'string' ? `By ${attrs.author}` : (attrs.author.name ? `By ${attrs.author.name}` : '');
                 }
 
                 // Read time
-                if (attrs.readTime) {
-                    document.getElementById('article-readtime').textContent = `${attrs.readTime} min read`;
+                const readtimeEl = document.getElementById('article-readtime');
+                if (readtimeEl && attrs.readTime) {
+                    readtimeEl.textContent = `${attrs.readTime} min read`;
                 }
 
                 // Image
                 const imageEl = document.getElementById('article-image');
-                let imageUrl = 'images/sample-image.jpg';
-                if (attrs.image) {
-                    if (attrs.image.data?.attributes?.url) {
-                        imageUrl = attrs.image.data.attributes.url.startsWith('http')
-                            ? attrs.image.data.attributes.url
-                            : CONFIG.STRAPI_BASE_URL + attrs.image.data.attributes.url;
-                    } else if (attrs.image.url) {
-                        imageUrl = attrs.image.url.startsWith('http')
-                            ? attrs.image.url
-                            : CONFIG.STRAPI_BASE_URL + attrs.image.url;
+                if (imageEl) {
+                    let imageUrl = 'images/sample-image.jpg';
+                    if (attrs.image) {
+                        if (attrs.image.data?.attributes?.url) {
+                            imageUrl = attrs.image.data.attributes.url.startsWith('http')
+                                ? attrs.image.data.attributes.url
+                                : CONFIG.STRAPI_BASE_URL + attrs.image.data.attributes.url;
+                        } else if (attrs.image.url) {
+                            imageUrl = attrs.image.url.startsWith('http')
+                                ? attrs.image.url
+                                : CONFIG.STRAPI_BASE_URL + attrs.image.url;
+                        }
                     }
+                    imageEl.src = imageUrl;
+                    imageEl.alt = attrs.title || 'Article Image';
+                    imageEl.classList.remove('skeleton');
                 }
-                imageEl.src = imageUrl;
-                imageEl.alt = attrs.title;
-                imageEl.classList.remove('skeleton');
 
                 // Content
                 const contentEl = document.getElementById('article-content');
-                contentEl.innerHTML = attrs.content || attrs.description || '<p>No content available.</p>';
+                if (contentEl) {
+                    // Simple check if it's Blocks or HTML
+                    if (Array.isArray(attrs.content)) {
+                        // Very basic conversion of Strapi Blocks to text if needed
+                        contentEl.innerHTML = attrs.content.map(block => {
+                            if (block.type === 'paragraph') {
+                                return `<p>${block.children.map(child => child.text).join('')}</p>`;
+                            }
+                            return '';
+                        }).join('');
+                    } else {
+                        contentEl.innerHTML = attrs.content || attrs.description || '<p>No content available.</p>';
+                    }
+                }
+
+                // Final cleanup of skeletons
+                document.querySelectorAll('.skeleton').forEach(el => el.classList.remove('skeleton'));
             }
+
+            // --- Comments Logic ---
+
+            async function loadComments(articleDocId) {
+                try {
+                    const response = await fetch(`${CONFIG.API_URL}/comments?filters[article][documentId][$eq]=${articleDocId}&populate=*&sort=createdAt:desc`);
+                    if (!response.ok) return;
+                    const { data } = await response.json();
+                    renderComments(data);
+                } catch (err) {
+                    console.error('Error loading comments:', err);
+                }
+            }
+
+            function renderComments(comments) {
+                const container = document.getElementById('comments-list-container');
+                const countEl = document.getElementById('comments-count');
+
+                countEl.textContent = `${comments.length} Comment${comments.length !== 1 ? 's' : ''}`;
+
+                if (comments.length === 0) {
+                    container.innerHTML = '<p style="color: #888; font-style: italic;">No comments yet. Be the first to share your thoughts!</p>';
+                    return;
+                }
+
+                container.innerHTML = comments.map(comment => {
+                    const attrs = comment.attributes || comment;
+                    const date = new Date(attrs.createdAt).toLocaleDateString('fr-FR', {
+                        day: 'numeric',
+                        month: 'short',
+                        year: 'numeric',
+                        hour: '2-digit',
+                        minute: '2-digit'
+                    });
+
+                    let replyHTML = '';
+                    // Support for adminReply or reply field from Strapi
+                    const reply = attrs.adminReply || attrs.reply;
+                    if (reply) {
+                        replyHTML = `
+                            <div class="comment-reply">
+                                <div class="comment-reply-header">Creaty Team Response</div>
+                                <div class="comment-content">${reply}</div>
+                            </div>
+                        `;
+                    }
+
+                    return `
+                        <div class="comment-item">
+                            <div class="comment-header">
+                                <span class="comment-author">${attrs.authorName || 'Guest'}</span>
+                                <span class="comment-date">${date}</span>
+                            </div>
+                            <div class="comment-content">
+                                ${attrs.content || attrs.comment || ''}
+                            </div>
+                            ${replyHTML}
+                        </div>
+                    `;
+                }).join('');
+            }
+
+            document.getElementById('comment-form').addEventListener('submit', async (e) => {
+                e.preventDefault();
+                const submitBtn = document.getElementById('submit-comment');
+                const statusEl = document.getElementById('comment-status');
+
+                if (!currentArticleDocumentId) {
+                    statusEl.innerHTML = '<p style="color: #ff4a4a;">Error: Article ID not recovered.</p>';
+                    return;
+                }
+
+                const name = document.getElementById('comment-name').value;
+                const email = document.getElementById('comment-email').value;
+                const content = document.getElementById('comment-message').value;
+
+                submitBtn.disabled = true;
+                submitBtn.textContent = 'Sending...';
+                statusEl.innerHTML = '';
+
+                try {
+                    const response = await fetch(`${CONFIG.API_URL}/comments`, {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json',
+                        },
+                        body: JSON.stringify({
+                            data: {
+                                authorName: name,
+                                authorEmail: email,
+                                content: content,
+                                article: currentArticleDocumentId
+                            }
+                        })
+                    });
+
+                    if (!response.ok) {
+                        const errorData = await response.json();
+                        throw new Error(errorData.error?.message || 'Failed to post comment');
+                    }
+
+                    statusEl.innerHTML = '<p style="color: var(--color-1); margin-top: 2rem;">Votre commentaire a été envoyé avec succès ! Il apparaîtra après validation.</p>';
+                    document.getElementById('comment-form').reset();
+
+                    // Reload comments
+                    loadComments(currentArticleDocumentId);
+
+                } catch (error) {
+                    console.error('Comment Post Error:', error);
+                    statusEl.innerHTML = `<p style="color: #ff4a4a; margin-top: 2rem;">Erreur : ${error.message}. Assurez-vous que la collection "comments" est créée dans Strapi.</p>`;
+                } finally {
+                    submitBtn.disabled = false;
+                    submitBtn.textContent = 'Post Comment';
+                }
+            });
         </script>
         <script src="js/main.js"></script>
 

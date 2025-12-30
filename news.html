@@ -7,7 +7,7 @@
     ================================================== -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Blog - Creaty.</title>
+    <title>News - Creaty.</title>
 
     <script>
         document.documentElement.classList.remove('no-js');
@@ -138,6 +138,27 @@
             margin-bottom: 10px;
             background: #eee;
         }
+
+        /* CTA Button Fix */
+        .s-header__cta .btn.s-header__cta-btn {
+            background-color: var(--color-1) !important;
+            border-color: var(--color-1) !important;
+            color: #ffffff !important;
+            transition: all 0.3s ease;
+        }
+
+        .s-header__cta .btn.s-header__cta-btn:hover {
+            background-color: var(--color-1-dark) !important;
+            border-color: var(--color-1-dark) !important;
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15);
+        }
+
+        .sticky .s-header__cta .btn.s-header__cta-btn {
+            background-color: var(--color-1) !important;
+            border-color: var(--color-1) !important;
+            opacity: 1;
+        }
     </style>
 
     <!-- favicons
@@ -190,12 +211,14 @@
                         <li><a href="index.html#intro">Intro</a></li>
                         <li><a href="index.html#about">About</a></li>
                         <li><a href="index.html#pricing">Pricing</a></li>
-                        <li class="current"><a href="blog.html">Blog</a></li>
+                        <li><a href="index.html#faq">FAQ</a></li>
+                        <li class="current"><a href="news.html">News</a></li>
+                        <li><a href="legal.html">Terms</a></li>
                     </ul>
                 </nav>
 
                 <div class="s-header__cta">
-                    <a href="index.html#contact" class="btn btn--stroke s-header__cta-btn">Contact us</a>
+                    <a href="index.html#contact" class="btn btn--primary s-header__cta-btn">Contact us</a>
                 </div>
 
             </div> <!-- end s-header__inner -->
@@ -383,8 +406,9 @@
                         <li><a href="index.html#intro">Intro</a></li>
                         <li><a href="index.html#about">About</a></li>
                         <li><a href="index.html#pricing">Pricing</a></li>
-                        <li><a href="blog.html">Blog</a></li>
-                        <li><a href="index.html#contact">Contact</a></li>
+                        <li><a href="index.html#faq">FAQ</a></li>
+                        <li><a href="news.html">News</a></li>
+                        <li><a href="legal.html">Terms</a></li>
                     </ul>
 
                     <p class="s-footer__contact">
@@ -402,11 +426,61 @@
 
         </footer> <!-- end footer -->
 
+        <!-- Cookie Banner -->
+        <div id="cookie-banner" class="cookie-banner">
+            <h4>We Value Your Privacy</h4>
+            <p>We use cookies to enhance your browsing experience and analyze our traffic. By clicking "Accept", you
+                consent to our use of cookies. <a href="legal.html"
+                    style="color: var(--color-1); text-decoration: underline;">Learn more</a></p>
+            <div class="cookie-banner__buttons">
+                <button class="cookie-banner__btn cookie-banner__btn--accept" onclick="acceptCookies()">Accept</button>
+                <button class="cookie-banner__btn cookie-banner__btn--decline"
+                    onclick="closeCookieBanner()">Decline</button>
+            </div>
+        </div>
+
+        <!-- Promo Widget -->
+        <div id="promo-widget" class="promo-widget">
+            <div class="promo-widget__close" onclick="minimizePromo()">
+                <svg viewBox="0 0 24 24">
+                    <path
+                        d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z" />
+                </svg>
+            </div>
+            <div class="promo-widget__icon-header">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="white">
+                    <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5" />
+                </svg>
+            </div>
+            <h4>Ready for a Digital Upgrade?</h4>
+            <p>
+                Stop dreaming about it. Whether you need a slick website or a mobile app that works, let's make it real.
+            </p>
+            <a href="https://creativfolio.com" target="_blank" class="promo-widget__btn">
+                Visit Creativfolio
+            </a>
+
+            <div class="promo-news">
+                <span class="promo-news__title">Latest News</span>
+                <div id="promo-news-container">
+                    <p style="font-size: 1.2rem; color: rgba(255,255,255,0.5);">Loading latest updates...</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Promo Trigger Icon -->
+        <div id="promo-trigger" class="promo-trigger" onclick="showPromo()">
+            <svg viewBox="0 0 24 24">
+                <path
+                    d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-6h2v6zm0-8h-2V7h2v2z" />
+            </svg>
+        </div>
 
         <!-- Java Script
     ================================================== -->
         <script src="js/plugins.js"></script>
         <script src="js/config.js"></script>
+        <script src="js/promo.js"></script>
         <script src="js/blog-loader.js"></script>
         <script src="js/main.js"></script>
 

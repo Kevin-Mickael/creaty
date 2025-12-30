@@ -90,7 +90,7 @@ document.addEventListener('DOMContentLoaded', () => {
                                 </span>
                             </div>
                             <p class="blog-post-card__excerpt">${attrs.description || (attrs.content ? attrs.content.substring(0, 120) : '')}...</p>
-                            <a href="blog-single.html?slug=${attrs.slug || postId}" class="blog-post-card__link">READ MORE</a>
+                            <a href="blog-single.html?slug=${attrs.slug || post.documentId || post.id}" class="blog-post-card__link">READ MORE</a>
                         </div>
                     </article>
                 </div>
