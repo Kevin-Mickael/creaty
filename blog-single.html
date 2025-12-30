@@ -1,0 +1,348 @@
+<!DOCTYPE html>
+<html lang="en" class="no-js">
+
+<head>
+
+    <!--- basic page needs
+    ================================================== -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Article - Creaty.</title>
+
+    <script>
+        document.documentElement.classList.remove('no-js');
+        document.documentElement.classList.add('js');
+    </script>
+
+    <!-- CSS
+    ================================================== -->
+    <link rel="stylesheet" href="css/vendor.css">
+    <link rel="stylesheet" href="css/styles.css">
+
+    <style>
+        .s-article {
+            padding-top: var(--vspace-5);
+            padding-bottom: var(--vspace-5);
+        }
+
+        .article-header {
+            text-align: center;
+            margin-bottom: var(--vspace-4);
+        }
+
+        .article-header__category {
+            display: inline-block;
+            padding: 0.6rem 2rem;
+            border: 1px solid #ccc;
+            border-radius: 50px;
+            font-size: 1.2rem;
+            text-transform: uppercase;
+            letter-spacing: .15rem;
+            margin-bottom: 2rem;
+        }
+
+        .article-header__title {
+            font-size: 5rem;
+            margin-bottom: 2rem;
+            line-height: 1.2;
+        }
+
+        .article-header__meta {
+            display: flex;
+            justify-content: center;
+            gap: 3rem;
+            font-size: 1.4rem;
+            color: #666;
+        }
+
+        .article-featured-image {
+            width: 100%;
+            max-height: 600px;
+            object-fit: cover;
+            border-radius: 20px;
+            margin-bottom: var(--vspace-3);
+        }
+
+        .article-content {
+            max-width: 800px;
+            margin: 0 auto;
+            font-size: 1.8rem;
+            line-height: 1.8;
+        }
+
+        .article-content p {
+            margin-bottom: 2rem;
+        }
+
+        .article-back {
+            display: inline-flex;
+            align-items: center;
+            gap: 1rem;
+            font-weight: 700;
+            margin-bottom: var(--vspace-2);
+        }
+
+        .article-back svg {
+            width: 20px;
+            height: 20px;
+        }
+
+        /* Skeleton */
+        .skeleton {
+            background: linear-gradient(110deg, #ececec 8%, #f5f5f5 18%, #ececec 33%);
+            background-size: 200% 100%;
+            animation: 1.5s shine linear infinite;
+        }
+
+        @keyframes shine {
+            to {
+                background-position-x: -200%;
+            }
+        }
+    </style>
+
+    <!-- favicons
+    ================================================== -->
+    <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="favicon-16x16.png">
+    <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
+    <link rel="icon" href="favicon.ico" type="image/x-icon">
+    <link rel="manifest" href="site.webmanifest">
+    <meta name="theme-color" content="#ffffff">
+
+</head>
+
+
+<body id="top">
+
+
+    <!-- preloader
+    ================================================== -->
+    <div id="preloader">
+        <div id="loader">
+        </div>
+    </div>
+
+
+    <!-- page wrap
+    ================================================== -->
+    <div id="page" class="s-pagewrap">
+
+
+        <!-- # site header 
+        ================================================== -->
+        <header class="s-header sticky offset scrolling">
+
+            <div class="row s-header__inner">
+
+                <div class="s-header__block">
+                    <div class="s-header__logo">
+                        <a class="logo" href="index.html">
+                            <img src="images/creaty.logo.svg" alt="Homepage">
+                        </a>
+                    </div>
+
+                    <a class="s-header__menu-toggle" href="#0"><span>Menu</span></a>
+                </div> <!-- end s-header__block -->
+
+                <nav class="s-header__nav">
+                    <ul>
+                        <li><a href="index.html#intro">Intro</a></li>
+                        <li><a href="index.html#about">About</a></li>
+                        <li><a href="index.html#pricing">Pricing</a></li>
+                        <li><a href="blog.html">Blog</a></li>
+                    </ul>
+                </nav>
+
+                <div class="s-header__cta">
+                    <a href="index.html#contact" class="btn btn--stroke s-header__cta-btn">Contact us</a>
+                </div>
+
+            </div> <!-- end s-header__inner -->
+
+        </header> <!-- end s-header -->
+
+
+        <!-- # site-content
+        ================================================== -->
+        <section id="content" class="s-content s-article">
+
+            <div class="row">
+                <div class="column lg-12">
+                    <a href="blog.html" class="article-back">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
+                            <path d="M10.25 6.75L4.75 12L10.25 17.25M19.25 12H5"></path>
+                        </svg>
+                        Back to Blog
+                    </a>
+                </div>
+            </div>
+
+            <div class="row article-header" id="article-header">
+                <div class="column lg-12">
+                    <span class="article-header__category skeleton" id="article-category"
+                        style="width: 100px; height: 30px;">&nbsp;</span>
+                    <h1 class="article-header__title skeleton" id="article-title" style="height: 60px;">&nbsp;</h1>
+                    <div class="article-header__meta" id="article-meta">
+                        <span id="article-date">Loading...</span>
+                        <span id="article-author"></span>
+                        <span id="article-readtime"></span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="column lg-12">
+                    <img id="article-image" class="article-featured-image skeleton" src="" alt="">
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="column lg-12">
+                    <div class="article-content" id="article-content">
+                        <p class="skeleton" style="height: 100px;">&nbsp;</p>
+                        <p class="skeleton" style="height: 80px;">&nbsp;</p>
+                    </div>
+                </div>
+            </div>
+
+        </section> <!-- end s-content -->
+
+
+        <!-- # site-footer (same as blog.html)
+        ================================================== -->
+        <footer id="colophon" class="s-footer footer">
+
+            <div class="row s-footer__bottom">
+                <div class="column lg-5 md-6 stack-on-900">
+                    <div class="footer__logo">
+                        <a href="index.html">
+                            <img src="images/creaty.logo.svg" alt="Homepage">
+                        </a>
+                    </div>
+
+                    <p>
+                        Creaty is a premier agency in Mauritius specialized in Community Management and Graphic Design.
+                        We help businesses shine online.
+                    </p>
+                </div>
+
+                <div class="column lg-6 stack-on-900 end">
+                    <ul class="s-footer__site-links">
+                        <li><a href="index.html#intro">Intro</a></li>
+                        <li><a href="index.html#about">About</a></li>
+                        <li><a href="index.html#pricing">Pricing</a></li>
+                        <li><a href="blog.html">Blog</a></li>
+                        <li><a href="index.html#contact">Contact</a></li>
+                    </ul>
+
+                    <div class="ss-copyright">
+                        <span>© Creaty 2025 — Operated by <b>Creativfolio Ltd</b>, registered in Mauritius</span>
+                    </div>
+                </div>
+            </div>
+
+        </footer> <!-- end footer -->
+
+
+        <!-- Java Script
+    ================================================== -->
+        <script src="js/plugins.js"></script>
+        <script src="js/config.js"></script>
+        <script>
+            document.addEventListener('DOMContentLoaded', async () => {
+                const urlParams = new URLSearchParams(window.location.search);
+                const slug = urlParams.get('slug');
+
+                if (!slug) {
+                    window.location.href = 'blog.html';
+                    return;
+                }
+
+                try {
+                    // Fetch article by slug or ID
+                    const response = await fetch(`${CONFIG.API_URL}/articles?filters[slug][$eq]=${slug}&populate=*`);
+
+                    if (!response.ok) throw new Error('Article not found');
+
+                    const { data } = await response.json();
+
+                    if (!data || data.length === 0) {
+                        // Try fetching by documentId (Strapi v5)
+                        const responseById = await fetch(`${CONFIG.API_URL}/articles/${slug}?populate=*`);
+                        if (!responseById.ok) throw new Error('Article not found');
+                        const singleData = await responseById.json();
+                        renderArticle(singleData.data);
+                    } else {
+                        renderArticle(data[0]);
+                    }
+                } catch (error) {
+                    console.error('Error loading article:', error);
+                    document.getElementById('article-content').innerHTML = '<p>Article non trouvé.</p>';
+                }
+            });
+
+            function renderArticle(article) {
+                const attrs = article.attributes || article;
+
+                // Update page title
+                document.title = `${attrs.title} - Creaty.`;
+
+                // Category
+                const categoryEl = document.getElementById('article-category');
+                categoryEl.textContent = attrs.category || 'NEWS';
+                categoryEl.classList.remove('skeleton');
+
+                // Title
+                const titleEl = document.getElementById('article-title');
+                titleEl.textContent = attrs.title;
+                titleEl.classList.remove('skeleton');
+                titleEl.style.height = 'auto';
+
+                // Date
+                const date = new Date(attrs.publishedAt || attrs.createdAt).toLocaleDateString('fr-FR', {
+                    day: 'numeric',
+                    month: 'long',
+                    year: 'numeric'
+                });
+                document.getElementById('article-date').textContent = date;
+
+                // Author
+                if (attrs.author) {
+                    document.getElementById('article-author').textContent = `By ${attrs.author}`;
+                }
+
+                // Read time
+                if (attrs.readTime) {
+                    document.getElementById('article-readtime').textContent = `${attrs.readTime} min read`;
+                }
+
+                // Image
+                const imageEl = document.getElementById('article-image');
+                let imageUrl = 'images/sample-image.jpg';
+                if (attrs.image) {
+                    if (attrs.image.data?.attributes?.url) {
+                        imageUrl = attrs.image.data.attributes.url.startsWith('http')
+                            ? attrs.image.data.attributes.url
+                            : CONFIG.STRAPI_BASE_URL + attrs.image.data.attributes.url;
+                    } else if (attrs.image.url) {
+                        imageUrl = attrs.image.url.startsWith('http')
+                            ? attrs.image.url
+                            : CONFIG.STRAPI_BASE_URL + attrs.image.url;
+                    }
+                }
+                imageEl.src = imageUrl;
+                imageEl.alt = attrs.title;
+                imageEl.classList.remove('skeleton');
+
+                // Content
+                const contentEl = document.getElementById('article-content');
+                contentEl.innerHTML = attrs.content || attrs.description || '<p>No content available.</p>';
+            }
+        </script>
+        <script src="js/main.js"></script>
+
+</body>
+
+</html>

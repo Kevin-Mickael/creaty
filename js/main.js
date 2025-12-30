@@ -194,28 +194,28 @@
             }
         });
 
-        const testimonialsSwiper = new Swiper('.s-testimonials__slider', {
+        const screensSwiper = new Swiper('.s-about__screens-slider', {
+            slidesPerView: 1,
+            autoplay: {
+                delay: 3000,
+                disableOnInteraction: false,
+            },
+            loop: true,
+            speed: 1000,
+            effect: 'slide'
+        });
 
+        const howtoSwiper = new Swiper('.s-about__howto-slider', {
             slidesPerView: 1,
             pagination: {
                 el: '.swiper-pagination',
                 clickable: true,
             },
             breakpoints: {
-                // when window width is > 400px
-                401: {
-                    slidesPerView: 1,
-                    spaceBetween: 20
-                },
-                // when window width is > 800px
-                801: {
+                // when window width is > 600px
+                601: {
                     slidesPerView: 2,
-                    spaceBetween: 32
-                },
-                // when window width is > 1200px
-                1201: {
-                    slidesPerView: 2,
-                    spaceBetween: 80
+                    spaceBetween: 40
                 }
             }
         });
@@ -359,6 +359,62 @@
     }; // end ssMailChimpForm
 
 
+    /* contact form
+     * ---------------------------------------------------- */
+    const ssContactForm = function () {
+
+        const contactForm = document.querySelector('#contactForm');
+        if (!contactForm) return;
+
+        const contactMessage = document.querySelector('.contact-message');
+
+        contactForm.addEventListener('submit', function (event) {
+
+            event.preventDefault();
+
+            const submitButton = contactForm.querySelector('#submit');
+            const originalButtonValue = submitButton.value;
+
+            submitButton.value = 'Sending...';
+            submitButton.disabled = true;
+
+            // Simulate form submission
+            // In a real scenario, you would use fetch() or XMLHttpRequest to send data to a server
+            setTimeout(function () {
+
+                // For demonstration, we'll always show success unless there's a specific condition
+                // You can change this logic to handle real server responses
+                const isSuccess = true;
+
+                if (isSuccess) {
+                    contactMessage.innerHTML = `
+                        <div class="alert-box alert-box--success">
+                            <p>Your message has been sent. Thank you!</p>
+                            <span class="alert-box__close"></span>
+                        </div>
+                    `;
+                    contactForm.reset();
+                } else {
+                    contactMessage.innerHTML = `
+                        <div class="alert-box alert-box--error">
+                            <p>There was an error sending your message. Please try again.</p>
+                            <span class="alert-box__close"></span>
+                        </div>
+                    `;
+                }
+
+                submitButton.value = originalButtonValue;
+                submitButton.disabled = false;
+
+                // Re-initialize alert boxes close functionality
+                ssAlertBoxes();
+
+            }, 1000);
+        });
+
+    }; // end ssContactForm
+
+
     /* video Lightbox
      * ------------------------------------------------------ */
     const ssVideoLightbox = function () {
@@ -447,6 +503,42 @@
     }; // end ssMoveTo
 
 
+    /* pricing toggle
+     * ------------------------------------------------------ */
+    const ssPricingToggle = function () {
+
+        const pricingSection = document.querySelector('#pricing');
+        if (!pricingSection) return;
+
+        pricingSection.addEventListener('click', function (event) {
+
+            const btn = event.target.closest('.item-plan__show-more');
+
+            if (btn) {
+
+                event.preventDefault();
+
+                const features = btn.previousElementSibling;
+
+                if (features && features.classList.contains('item-plan__features')) {
+
+                    features.classList.toggle('item-plan__features--expanded');
+                    features.classList.toggle('item-plan__features--limited');
+
+                    const btnText = btn.querySelector('span');
+
+                    if (features.classList.contains('item-plan__features--expanded')) {
+                        if (btnText) btnText.textContent = 'Show less';
+                    } else {
+                        if (btnText) btnText.textContent = 'Show more';
+                    }
+                }
+            }
+        });
+
+    }; // end ssPricingToggle
+
+
     /* Initialize
      * ------------------------------------------------------ */
     (function ssInit() {
@@ -457,9 +549,11 @@
         ssScrollSpy();
         ssSwiper();
         ssMailChimpForm();
+        ssContactForm();
         ssVideoLightbox();
         ssAlertBoxes();
         ssMoveTo();
+        ssPricingToggle();
 
     })();
 
