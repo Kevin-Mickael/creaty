@@ -43,149 +43,6 @@
     <link rel="stylesheet" href="css/vendor.css">
     <link rel="stylesheet" href="css/styles.css">
 
-
-    <style>
-        .s-blog {
-            padding-top: var(--vspace-5);
-            padding-bottom: var(--vspace-5);
-        }
-
-        .blog-header {
-            margin-bottom: var(--vspace-4);
-            text-align: center;
-        }
-
-        .blog-post-card {
-            background: #fff;
-            transition: transform 0.3s ease;
-            height: 100%;
-            display: flex;
-            flex-direction: column;
-            margin-bottom: var(--vspace-2);
-        }
-
-        .blog-post-card__image {
-            width: 100%;
-            height: auto;
-            aspect-ratio: 3/2;
-            object-fit: cover;
-            margin-bottom: 2.4rem;
-        }
-
-        .blog-post-card__content {
-            flex-grow: 1;
-        }
-
-        .blog-post-card__title {
-            margin-top: 0;
-            margin-bottom: 1.6rem;
-            font-size: 2.2rem;
-            text-transform: uppercase;
-            font-weight: 700;
-            line-height: 1.2;
-            letter-spacing: .05rem;
-            color: #000;
-        }
-
-        .blog-post-card__meta-row {
-            display: flex;
-            align-items: center;
-            gap: 2rem;
-            margin-bottom: 2rem;
-            font-size: 1.1rem;
-            text-transform: uppercase;
-            letter-spacing: .1rem;
-            font-weight: 600;
-            color: #333;
-        }
-
-        .blog-post-card__category {
-            padding: 0.4rem 1.6rem;
-            border: 1px solid #ccc;
-            border-radius: 50px;
-            font-size: 1rem;
-        }
-
-        .blog-post-card__meta-item {
-            display: flex;
-            align-items: center;
-            gap: 0.6rem;
-        }
-
-        .blog-post-card__meta-item svg {
-            width: 14px;
-            height: 14px;
-            fill: #777;
-        }
-
-        .blog-post-card__excerpt {
-            margin-bottom: 2.4rem;
-            font-size: 1.6rem;
-            color: #555;
-            line-height: 1.6;
-        }
-
-        .blog-post-card__link {
-            font-weight: 700;
-            color: #000;
-            text-transform: uppercase;
-            letter-spacing: .15rem;
-            font-size: 1.2rem;
-            text-decoration: underline;
-            text-underline-offset: 4px;
-        }
-
-        .blog-post-card__link:hover {
-            color: var(--color-primary);
-        }
-
-        /* Skeleton loading */
-        .skeleton {
-            background: #eee;
-            background: linear-gradient(110deg, #ececec 8%, #f5f5f5 18%, #ececec 33%);
-            background-size: 200% 100%;
-            animation: 1.5s shine linear infinite;
-        }
-
-        @keyframes shine {
-            to {
-                background-position-x: -200%;
-            }
-        }
-
-        .skeleton-image {
-            aspect-ratio: 3/2;
-            width: 100%;
-        }
-
-        .skeleton-text {
-            height: 20px;
-            margin-bottom: 10px;
-            background: #eee;
-        }
-
-        /* CTA Button Fix */
-        .s-header__cta .btn.s-header__cta-btn {
-            background-color: var(--color-1) !important;
-            border-color: var(--color-1) !important;
-            color: #ffffff !important;
-            transition: all 0.3s ease;
-        }
-
-        .s-header__cta .btn.s-header__cta-btn:hover {
-            background-color: var(--color-1-dark) !important;
-            border-color: var(--color-1-dark) !important;
-            transform: translateY(-2px);
-            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15);
-        }
-
-        .sticky .s-header__cta .btn.s-header__cta-btn {
-            background-color: var(--color-1) !important;
-            border-color: var(--color-1) !important;
-            opacity: 1;
-        }
-    </style>
-
     <!-- favicons
     ================================================== -->
     <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
@@ -268,9 +125,9 @@
                     <div class="blog-post-card skeleton">
                         <div class="skeleton-image"></div>
                         <div class="blog-post-card__content">
-                            <div class="skeleton-text" style="width: 80%"></div>
-                            <div class="skeleton-text" style="width: 60%"></div>
-                            <div class="skeleton-text" style="width: 90%"></div>
+                            <div class="skeleton-text" class="skeleton-text w-80"></div>
+                            <div class="skeleton-text" class="skeleton-text w-60"></div>
+                            <div class="skeleton-text" class="skeleton-text w-90"></div>
                         </div>
                     </div>
                 </div>
@@ -278,9 +135,9 @@
                     <div class="blog-post-card skeleton">
                         <div class="skeleton-image"></div>
                         <div class="blog-post-card__content">
-                            <div class="skeleton-text" style="width: 80%"></div>
-                            <div class="skeleton-text" style="width: 60%"></div>
-                            <div class="skeleton-text" style="width: 90%"></div>
+                            <div class="skeleton-text" class="skeleton-text w-80"></div>
+                            <div class="skeleton-text" class="skeleton-text w-60"></div>
+                            <div class="skeleton-text" class="skeleton-text w-90"></div>
                         </div>
                     </div>
                 </div>
@@ -288,9 +145,9 @@
                     <div class="blog-post-card skeleton">
                         <div class="skeleton-image"></div>
                         <div class="blog-post-card__content">
-                            <div class="skeleton-text" style="width: 80%"></div>
-                            <div class="skeleton-text" style="width: 60%"></div>
-                            <div class="skeleton-text" style="width: 90%"></div>
+                            <div class="skeleton-text" class="skeleton-text w-80"></div>
+                            <div class="skeleton-text" class="skeleton-text w-60"></div>
+                            <div class="skeleton-text" class="skeleton-text w-90"></div>
                         </div>
                     </div>
                 </div>
@@ -298,7 +155,7 @@
 
             <div class="row">
                 <div class="column lg-12">
-                    <nav class="pgn" id="blog-pagination" style="display: none;">
+                    <nav class="pgn" id="blog-pagination" class="pgn d-none">
                         <ul id="pagination-list">
                             <!-- Pagination will be loaded here -->
                         </ul>
@@ -356,7 +213,7 @@
                         <li>
                             <a href="">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
-                                    style="fill:rgba(0, 0, 0, 1);">
+                                    class="fill-black">
                                     <path
                                         d="M20,3H4C3.447,3,3,3.448,3,4v16c0,0.552,0.447,1,1,1h8.615v-6.96h-2.338v-2.725h2.338v-2c0-2.325,1.42-3.592,3.5-3.592 c0.699-0.002,1.399,0.034,2.095,0.107v2.42h-1.435c-1.128,0-1.348,0.538-1.348,1.325v1.735h2.697l-0.35,2.725h-2.348V21H20 c0.553,0,1-0.448,1-1V4C21,3.448,20.553,3,20,3z">
                                     </path>
@@ -367,7 +224,7 @@
                         <li>
                             <a href="#0">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
-                                    style="fill:rgba(0, 0, 0, 1);">
+                                    class="fill-black">
                                     <path
                                         d="M18.161 2H21.5L14.07 10.49L22.8 22H15.901L10.497 14.921L4.316 22H0.976L8.851 13.012L0.5 2H7.568L12.457 8.455L18.161 2ZM16.98 20.005H18.831L6.417 3.905H4.431L16.98 20.005Z">
                                     </path>
@@ -378,7 +235,7 @@
                         <li>
                             <a href="#0">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 22 22"
-                                    style="fill:rgba(0, 0, 0, 1);">
+                                    class="fill-black">
                                     <path
                                         d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z">
                                     </path>
@@ -389,7 +246,7 @@
                         <li>
                             <a href="#0">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
-                                    style="fill:rgba(0, 0, 0, 1);">
+                                    class="fill-black">
                                     <path
                                         d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-5.2 1.74 2.89 2.89 0 0 1 2.31-4.64 2.93 2.93 0 0 1 .88.13V9.4a6.84 6.84 0 0 0-1-.05A6.33 6.33 0 0 0 5 20.1a6.34 6.34 0 0 0 10.86-4.43v-7a8.16 8.16 0 0 0 4.77 1.52v-3.4a4.85 4.85 0 0 1-1.04-.1z">
                                     </path>
@@ -400,7 +257,7 @@
                         <li>
                             <a href="#0">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 192 192"
-                                    style="fill:rgba(0, 0, 0, 1);">
+                                    class="fill-black">
                                     <path
                                         d="M141.537 88.9883C140.71 88.5919 139.87 88.2104 139.019 87.8451C137.537 60.5382 122.616 44.905 97.5619 44.745C97.4484 44.7443 97.3355 44.7443 97.222 44.7443C82.2364 44.7443 69.7731 51.1409 62.102 62.7807L75.881 72.2328C81.6116 63.5383 90.6052 61.6848 97.2286 61.6848C97.3051 61.6848 97.3819 61.6848 97.4576 61.6855C105.707 61.7381 111.932 64.1366 115.961 68.814C118.893 72.2193 120.854 76.925 121.825 82.8638C114.511 81.6207 106.601 81.2385 98.145 81.7233C74.3247 83.0954 59.0111 96.9879 60.0396 116.292C60.5615 126.084 65.4397 134.508 73.775 140.011C80.8224 144.663 89.899 146.938 99.3323 146.423C111.79 145.74 121.563 140.987 128.381 132.296C133.559 125.696 136.834 117.143 138.28 106.366C144.217 109.949 148.617 114.664 151.047 120.332C155.179 129.967 155.42 145.8 142.501 158.708C131.182 170.016 117.576 174.908 97.0135 175.059C74.2042 174.89 56.9538 167.575 45.7381 153.317C35.2355 139.966 29.8077 120.682 29.6052 96C29.8077 71.3178 35.2355 52.0336 45.7381 38.6827C56.9538 24.4249 74.2039 17.11 97.0132 16.9405C119.988 17.1113 137.539 24.4614 149.184 38.788C154.894 45.8136 159.199 54.6488 162.037 64.9503L178.184 60.6422C174.744 47.9622 169.331 37.0357 161.965 27.974C147.036 9.60668 125.202 0.195148 97.0695 0H96.9569C68.8816 0.19447 47.2921 9.6418 32.7883 28.0793C19.8819 44.4864 13.2244 67.3157 13.0007 95.9325L13 96L13.0007 96.0675C13.2244 124.684 19.8819 147.514 32.7883 163.921C47.2921 182.358 68.8816 191.806 96.9569 192H97.0695C122.03 191.827 139.624 185.292 154.118 170.811C173.081 151.866 172.51 128.119 166.26 113.541C161.776 103.087 153.227 94.5962 141.537 88.9883ZM98.4405 129.507C88.0005 130.095 77.1544 125.409 76.6196 115.372C76.2232 107.93 81.9158 99.626 99.0812 98.6368C101.047 98.5234 102.976 98.468 104.871 98.468C111.106 98.468 116.939 99.0737 122.242 100.233C120.264 124.935 108.662 128.946 98.4405 129.507Z">
                                     </path>
@@ -411,7 +268,7 @@
                         <li>
                             <a href="">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
-                                    style="fill:rgba(0, 0, 0, 1);">
+                                    class="fill-black">
                                     <path
                                         d="M11.999,7.377c-2.554,0-4.623,2.07-4.623,4.623c0,2.554,2.069,4.624,4.623,4.624c2.552,0,4.623-2.07,4.623-4.624 C16.622,9.447,14.551,7.377,11.999,7.377L11.999,7.377z M11.999,15.004c-1.659,0-3.004-1.345-3.004-3.003 c0-1.659,1.345-3.003,3.004-3.003s3.002,1.344,3.002,3.003C15.001,13.659,13.658,15.004,11.999,15.004L11.999,15.004z">
                                     </path>
@@ -455,8 +312,7 @@
         <div id="cookie-banner" class="cookie-banner">
             <h4>We Value Your Privacy</h4>
             <p>We use cookies to enhance your browsing experience and analyze our traffic. By clicking "Accept", you
-                consent to our use of cookies. <a href="legal.html"
-                    style="color: var(--color-1); text-decoration: underline;">Learn more</a></p>
+                consent to our use of cookies. <a href="legal.html" class="link-primary-underline">Learn more</a></p>
             <div class="cookie-banner__buttons">
                 <button class="cookie-banner__btn cookie-banner__btn--accept" onclick="acceptCookies()">Accept</button>
                 <button class="cookie-banner__btn cookie-banner__btn--decline"
@@ -488,7 +344,7 @@
             <div class="promo-news">
                 <span class="promo-news__title">Latest News</span>
                 <div id="promo-news-container">
-                    <p style="font-size: 1.2rem; color: rgba(255,255,255,0.5);">Loading latest updates...</p>
+                    <p class="text-loading">Loading latest updates...</p>
                 </div>
             </div>
         </div>

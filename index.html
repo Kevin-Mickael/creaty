@@ -63,164 +63,7 @@
         rel="stylesheet">
     <meta name="theme-color" content="#ffffff">
 
-    <style>
-        :root {
-            --color-1-rgb: 63, 136, 92;
-        }
 
-        .s-about__screens-slider {
-            width: 100%;
-            margin: 0 auto;
-        }
-
-        .s-about__screen-slide img {
-            width: 100%;
-            height: 650px;
-            object-fit: cover;
-            border-radius: 20px;
-            box-shadow: 0 40px 24px -40px rgba(0, 0, 0, 0.2);
-        }
-
-        @media screen and (max-width: 800px) {
-            .s-about__screen-slide img {
-                height: 450px;
-            }
-        }
-
-        .s-about__howto-slider {
-            padding-bottom: 6rem;
-            width: 100%;
-            counter-reset: ctr;
-        }
-
-        .s-about__howto-slider .swiper-pagination {
-            bottom: 0;
-        }
-
-        .s-about__howto-process-step {
-            height: 100%;
-            background: rgba(255, 255, 255, 0.03);
-            padding: 3rem;
-            border-radius: 12px;
-            border: 1px solid rgba(255, 255, 255, 0.05);
-        }
-
-        .s-about__howto-process-step h3 {
-            padding-left: 7.2rem;
-            /* Keep space for the number */
-        }
-
-        .s-quote-section {
-            padding-top: 15rem;
-            padding-bottom: 15rem;
-            background-color: #050505;
-            text-align: center;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .s-quote-section::before {
-            content: '“';
-            position: absolute;
-            top: 2rem;
-            left: 50%;
-            transform: translateX(-50%);
-            font-size: 30rem;
-            font-family: "Playfair Display", serif;
-            color: rgba(255, 255, 255, 0.02);
-            line-height: 1;
-            pointer-events: none;
-        }
-
-        .s-quote-text {
-            font-family: "Playfair Display", serif;
-            font-size: clamp(3.2rem, 6vw, 6.4rem);
-            font-style: italic;
-            font-weight: 400;
-            line-height: 1.3;
-            color: #ffffff;
-            max-width: 1100px;
-            margin: 0 auto;
-            position: relative;
-            z-index: 1;
-            letter-spacing: -0.01em;
-        }
-
-        .s-quote-text span {
-            font-family: var(--font-1);
-            color: var(--color-1);
-            display: block;
-            margin-top: 4rem;
-            font-size: 1.4rem;
-            text-transform: uppercase;
-            letter-spacing: 0.5em;
-            font-weight: 600;
-            font-style: normal;
-        }
-
-        @media screen and (max-width: 800px) {
-            .s-quote-section {
-                padding: 8rem 2rem;
-            }
-        }
-
-        /* FAQ Styling */
-        .s-faq {
-            padding-top: var(--vspace-5);
-            padding-bottom: var(--vspace-5);
-            background-color: var(--color-gray-1);
-        }
-
-        .faq-list {
-            margin-top: var(--vspace-2);
-        }
-
-        .faq-item {
-            background: #ffffff;
-            border-radius: 12px;
-            margin-bottom: 2rem;
-            padding: 3rem;
-            border: 1px solid var(--color-gray-4);
-            transition: all 0.3s ease;
-        }
-
-        .faq-item:hover {
-            border-color: var(--color-1);
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
-        }
-
-        .faq-question {
-            font-family: var(--font-2);
-            font-size: 2rem;
-            font-weight: 700;
-            color: var(--color-text-dark);
-            margin-bottom: 1.5rem;
-            display: flex;
-            align-items: flex-start;
-            gap: 1.5rem;
-        }
-
-        .faq-question span {
-            color: var(--color-1);
-        }
-
-        .faq-answer {
-            font-size: 1.7rem;
-            line-height: 1.8;
-            color: var(--color-text);
-            padding-left: 3.5rem;
-        }
-
-        @media screen and (max-width: 800px) {
-            .faq-item {
-                padding: 2rem;
-            }
-
-            .faq-question {
-                font-size: 1.8rem;
-            }
-        }
-    </style>
 
     <!-- Schema.org Structured Data - LocalBusiness -->
     <script type="application/ld+json">
@@ -445,7 +288,7 @@
                     <li>
                         <a href="">
                             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
-                                style="fill:rgba(0, 0, 0, 1);">
+                                class="fill-black">
                                 <path
                                     d="M20,3H4C3.447,3,3,3.448,3,4v16c0,0.552,0.447,1,1,1h8.615v-6.96h-2.338v-2.725h2.338v-2c0-2.325,1.42-3.592,3.5-3.592 c0.699-0.002,1.399,0.034,2.095,0.107v2.42h-1.435c-1.128,0-1.348,0.538-1.348,1.325v1.735h2.697l-0.35,2.725h-2.348V21H20 c0.553,0,1-0.448,1-1V4C21,3.448,20.553,3,20,3z">
                                 </path>
@@ -456,7 +299,7 @@
                     <li>
                         <a href="#0">
                             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
-                                style="fill:rgba(0, 0, 0, 1);">
+                                class="fill-black">
                                 <path
                                     d="M18.161 2H21.5L14.07 10.49L22.8 22H15.901L10.497 14.921L4.316 22H0.976L8.851 13.012L0.5 2H7.568L12.457 8.455L18.161 2ZM16.98 20.005H18.831L6.417 3.905H4.431L16.98 20.005Z">
                                 </path>
@@ -467,7 +310,7 @@
                     <li>
                         <a href="#0">
                             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 22 22"
-                                style="fill:rgba(0, 0, 0, 1);">
+                                class="fill-black">
                                 <path
                                     d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z">
                                 </path>
@@ -478,7 +321,7 @@
                     <li>
                         <a href="#0">
                             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
-                                style="fill:rgba(0, 0, 0, 1);">
+                                class="fill-black">
                                 <path
                                     d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-5.2 1.74 2.89 2.89 0 0 1 2.31-4.64 2.93 2.93 0 0 1 .88.13V9.4a6.84 6.84 0 0 0-1-.05A6.33 6.33 0 0 0 5 20.1a6.34 6.34 0 0 0 10.86-4.43v-7a8.16 8.16 0 0 0 4.77 1.52v-3.4a4.85 4.85 0 0 1-1.04-.1z">
                                 </path>
@@ -489,7 +332,7 @@
                     <li>
                         <a href="#0">
                             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 192 192"
-                                style="fill:rgba(0, 0, 0, 1);">
+                                class="fill-black">
                                 <path
                                     d="M141.537 88.9883C140.71 88.5919 139.87 88.2104 139.019 87.8451C137.537 60.5382 122.616 44.905 97.5619 44.745C97.4484 44.7443 97.3355 44.7443 97.222 44.7443C82.2364 44.7443 69.7731 51.1409 62.102 62.7807L75.881 72.2328C81.6116 63.5383 90.6052 61.6848 97.2286 61.6848C97.3051 61.6848 97.3819 61.6848 97.4576 61.6855C105.707 61.7381 111.932 64.1366 115.961 68.814C118.893 72.2193 120.854 76.925 121.825 82.8638C114.511 81.6207 106.601 81.2385 98.145 81.7233C74.3247 83.0954 59.0111 96.9879 60.0396 116.292C60.5615 126.084 65.4397 134.508 73.775 140.011C80.8224 144.663 89.899 146.938 99.3323 146.423C111.79 145.74 121.563 140.987 128.381 132.296C133.559 125.696 136.834 117.143 138.28 106.366C144.217 109.949 148.617 114.664 151.047 120.332C155.179 129.967 155.42 145.8 142.501 158.708C131.182 170.016 117.576 174.908 97.0135 175.059C74.2042 174.89 56.9538 167.575 45.7381 153.317C35.2355 139.966 29.8077 120.682 29.6052 96C29.8077 71.3178 35.2355 52.0336 45.7381 38.6827C56.9538 24.4249 74.2039 17.11 97.0132 16.9405C119.988 17.1113 137.539 24.4614 149.184 38.788C154.894 45.8136 159.199 54.6488 162.037 64.9503L178.184 60.6422C174.744 47.9622 169.331 37.0357 161.965 27.974C147.036 9.60668 125.202 0.195148 97.0695 0H96.9569C68.8816 0.19447 47.2921 9.6418 32.7883 28.0793C19.8819 44.4864 13.2244 67.3157 13.0007 95.9325L13 96L13.0007 96.0675C13.2244 124.684 19.8819 147.514 32.7883 163.921C47.2921 182.358 68.8816 191.806 96.9569 192H97.0695C122.03 191.827 139.624 185.292 154.118 170.811C173.081 151.866 172.51 128.119 166.26 113.541C161.776 103.087 153.227 94.5962 141.537 88.9883ZM98.4405 129.507C88.0005 130.095 77.1544 125.409 76.6196 115.372C76.2232 107.93 81.9158 99.626 99.0812 98.6368C101.047 98.5234 102.976 98.468 104.871 98.468C111.106 98.468 116.939 99.0737 122.242 100.233C120.264 124.935 108.662 128.946 98.4405 129.507Z">
                                 </path>
@@ -500,7 +343,7 @@
                     <li>
                         <a href="">
                             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
-                                style="fill:rgba(0, 0, 0, 1);">
+                                class="fill-black">
                                 <path
                                     d="M11.999,7.377c-2.554,0-4.623,2.07-4.623,4.623c0,2.554,2.069,4.624,4.623,4.624c2.552,0,4.623-2.07,4.623-4.624 C16.622,9.447,14.551,7.377,11.999,7.377L11.999,7.377z M11.999,15.004c-1.659,0-3.004-1.345-3.004-3.003 c0-1.659,1.345-3.003,3.004-3.003s3.002,1.344,3.002,3.003C15.001,13.659,13.658,15.004,11.999,15.004L11.999,15.004z">
                                 </path>
@@ -517,7 +360,7 @@
                 <div class="s-intro__scroll">
                     <a href="#about" class="smoothscroll">
                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
-                            style="fill: rgba(0, 0, 0, 1);transform: rotate(270deg);">
+                            class="icon-scroll-top">
                             <path
                                 d="M21 11H6.414l5.293-5.293-1.414-1.414L2.586 12l7.707 7.707 1.414-1.414L6.414 13H21z">
                             </path>
@@ -540,13 +383,12 @@
                     </div>
                 </div> <!-- end section-header -->
 
-                <div class="row s-about__stats" style="margin-bottom: var(--vspace-1);">
+                <div class="row s-about__stats mb-vspace-1">
                     <div class="column lg-12 s-about__stats-item">
-                        <div class="s-about__stats-count"
-                            style="font-size: 3.2rem; line-height: 1.1; margin-bottom: 2rem; color: var(--color-1);">
+                        <div class="s-about__stats-count stats-count-text">
                             Driving Growth & Visibility</div>
                         <h5>Target: SMEs & Local Businesses</h5>
-                        <p style="max-width: 800px; margin-left: auto; margin-right: auto;">
+                        <p class="max-w-800-center">
                             We turn quiet businesses into market leaders. By blending strategic visibility with
                             precision targeting,
                             we don't just put your brand on a screen—we put it in front of the right customers at the
@@ -558,13 +400,12 @@
                     </div>
                 </div>
 
-                <div class="row s-about__stats" style="margin-bottom: var(--vspace-1);">
+                <div class="row s-about__stats mb-vspace-1">
                     <div class="column lg-12 s-about__stats-item">
-                        <div class="s-about__stats-count"
-                            style="font-size: 3.2rem; line-height: 1.1; margin-bottom: 2rem; color: var(--color-1);">
+                        <div class="s-about__stats-count stats-count-text">
                             Elevating Brand Authority</div>
                         <h5>Target: Established Brands & Busy Professionals</h5>
-                        <p style="max-width: 800px; margin-left: auto; margin-right: auto;">
+                        <p class="max-w-800-center">
                             We protect and project your reputation 24/7. Your social media is your most important
                             storefront,
                             and we ensure it never skips a beat. From high-end storytelling to proactive community
@@ -576,13 +417,12 @@
                     </div>
                 </div>
 
-                <div class="row s-about__stats" style="margin-bottom: var(--vspace-1);">
+                <div class="row s-about__stats mb-vspace-1">
                     <div class="column lg-12 s-about__stats-item">
-                        <div class="s-about__stats-count"
-                            style="font-size: 3.2rem; line-height: 1.1; margin-bottom: 2rem; color: var(--color-1);">
+                        <div class="s-about__stats-count stats-count-text">
                             The Startup Launchpad</div>
                         <h5>Target: Innovators & Visionary Entrepreneurs</h5>
-                        <p style="max-width: 800px; margin-left: auto; margin-right: auto;">
+                        <p class="max-w-800-center">
                             We turn "what if" into "we are live." Launching a startup is a marathon of technical and
                             creative
                             hurdles; we are here to clear the path. From crafting your visual identity to building your
@@ -681,7 +521,7 @@
                     <div class="row section-header" data-num="03">
                         <div class="column lg-12 title-block">
                             <h2 class="title text-display-1">Our Process</h2>
-                            <p class="desc lead" style="margin-top: 1rem;">Turning a great idea into a successful brand
+                            <p class="desc lead mt-1">Turning a great idea into a successful brand
                                 can feel overwhelming, but it doesn't have to be. We’ve designed a clear, collaborative
                                 path to take your business from a vision to a digital reality.
                                 No guesswork, no stress, just a proven method to ensure every detail of your brand is
@@ -814,7 +654,7 @@
                         <div class="column s-about__feature-item">
                             <div class="s-about__feature-icon-block">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
-                                    style="fill: rgba(0, 0, 0, 1);">
+                                    class="fill-black">
                                     <path
                                         d="M18.944 11.112C18.507 7.67 15.56 5 12 5 9.244 5 6.85 6.611 5.757 9.15 3.609 9.792 2 11.82 2 14c0 2.757 2.243 5 5 5h11c2.206 0 4-1.794 4-4a4.01 4.01 0 0 0-3.056-3.888zM18 17H7c-1.654 0-3-1.346-3-3 0-1.404 1.199-2.756 2.673-3.015l.581-.102.192-.558C8.149 8.274 9.895 7 12 7c2.757 0 5 2.243 5 5v1h1c1.103 0 2 .897 2 2s-.897 2-2 2z">
                                     </path>
@@ -833,7 +673,7 @@
                         <div class="column s-about__feature-item">
                             <div class="s-about__feature-icon-block">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
-                                    style="fill: rgba(0, 0, 0, 1);">
+                                    class="fill-black">
                                     <path
                                         d="M18 7c0-1.103-.897-2-2-2H4c-1.103 0-2 .897-2 2v10c0 1.103.897 2 2 2h12c1.103 0 2-.897 2-2v-3.333L22 17V7l-4 3.333V7zm-1.998 10H4V7h12l.001 4.999L16 12l.001.001.001 4.999z">
                                     </path>
@@ -852,7 +692,7 @@
                         <div class="column s-about__feature-item">
                             <div class="s-about__feature-icon-block">
                                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24"
-                                    style="fill: rgba(0, 0, 0, 1);">
+                                    class="fill-black">
                                     <path
                                         d="M20.995 6.9a.998.998 0 0 0-.548-.795l-8-4a1 1 0 0 0-.895 0l-8 4a1.002 1.002 0 0 0-.547.795c-.011.107-.961 10.767 8.589 15.014a.987 0 0 0 .812 0c9.55-4.247 8.6-14.906 8.589-15.014zM12 19.897C5.231 16.625 4.911 9.642 4.966 7.635L12 4.118l7.029 3.515c.037 1.989-.328 9.018-7.029 12.264z">
                                     </path>
@@ -873,7 +713,7 @@
                         <div class="column s-about__feature-item">
                             <div class="s-about__feature-icon-block">
                                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24"
-                                    style="fill: rgba(0, 0, 0, 1);">
+                                    class="fill-black">
                                     <path
                                         d="M22 8.65A5 5 0 0 0 17 4H7a5 5 0 0 0-5 4.74A2 2 0 0 0 2 9v7.5A3.48 3.48 0 0 0 5.5 20c1.43 0 2.32-1.06 3.19-2.09.32-.37.65-.76 1-1.1a4.81 4.81 0 0 1 1.54-.75 6.61 6.61 0 0 1 1.54 0 4.81 4.81 0 0 1 1.54.75c.35.34.68.73 1 1.1.87 1 1.76 2.09 3.19 2.09a3.48 3.48 0 0 0 3.5-3.5V9a2.09 2.09 0 0 0 0-.26zm-2 7.85a1.5 1.5 0 0 1-1.5 1.5c-.5 0-1-.64-1.66-1.38-.34-.39-.72-.85-1.15-1.26a6.68 6.68 0 0 0-2.46-1.25 6.93 6.93 0 0 0-2.46 0 6.68 6.68 0 0 0-2.46 1.25c-.43.41-.81.87-1.15 1.26C6.54 17.36 6 18 5.5 18A1.5 1.5 0 0 1 4 16.5V9a.77.77 0 0 0 0-.15A3 3 0 0 1 7 6h10a3 3 0 0 1 3 2.72v.12A.86.86 0 0 0 20 9z">
                                     </path>
@@ -897,7 +737,7 @@
                         <div class="column s-about__feature-item">
                             <div class="s-about__feature-icon-block">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
-                                    style="fill: rgba(0, 0, 0, 1);">
+                                    class="fill-black">
                                     <path
                                         d="M16 2H8C4.691 2 2 4.691 2 8v12a1 1 0 0 0 1 1h13c3.309 0 6-2.691 6-6V8c0-3.309-2.691-6-6-6zm4 13c0 2.206-1.794 4-4 4H4V8c0-2.206 1.794-4 4-4h8c2.206 0 4 1.794 4 4v7z">
                                     </path>
@@ -918,7 +758,7 @@
                         <div class="column s-about__feature-item">
                             <div class="s-about__feature-icon-block">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
-                                    style="fill: rgba(0, 0, 0, 1);">
+                                    class="fill-black">
                                     <path d="M16 12h2v4h-2z"></path>
                                     <path
                                         d="M20 7V5c0-1.103-.897-2-2-2H5C3.346 3 2 4.346 2 6v12c0 2.201 1.794 3 3 3h15c1.103 0 2-.897 2-2V9c0-1.103-.897-2-2-2zM5 5h13v2H5a1.001 1.001 0 0 1 0-2zm15 14H5.012C4.55 18.988 4 18.805 4 18V8.815c.314.113.647.185 1 .185h15v10z">
@@ -1272,7 +1112,7 @@
                                 required>
                             <input type="submit" name="subscribe" value="Subscribe"
                                 class="btn btn--primary u-fullwidth">
-                            <!-- <div style="position: absolute; left: -5000px;" aria-hidden="true"><input type="text" name="b_cdb7b577e41181934ed6a6a44_9a91cfe7b3" tabindex="-1" value=""></div> -->
+
                             <div class="mc-status"></div>
                         </form>
                     </div>
@@ -1296,7 +1136,7 @@
                         <li>
                             <a href="">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
-                                    style="fill:rgba(0, 0, 0, 1);">
+                                    class="fill-black">
                                     <path
                                         d="M20,3H4C3.447,3,3,3.448,3,4v16c0,0.552,0.447,1,1,1h8.615v-6.96h-2.338v-2.725h2.338v-2c0-2.325,1.42-3.592,3.5-3.592 c0.699-0.002,1.399,0.034,2.095,0.107v2.42h-1.435c-1.128,0-1.348,0.538-1.348,1.325v1.735h2.697l-0.35,2.725h-2.348V21H20 c0.553,0,1-0.448,1-1V4C21,3.448,20.553,3,20,3z">
                                     </path>
@@ -1307,7 +1147,7 @@
                         <li>
                             <a href="#0">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
-                                    style="fill:rgba(0, 0, 0, 1);">
+                                    class="fill-black">
                                     <path
                                         d="M18.161 2H21.5L14.07 10.49L22.8 22H15.901L10.497 14.921L4.316 22H0.976L8.851 13.012L0.5 2H7.568L12.457 8.455L18.161 2ZM16.98 20.005H18.831L6.417 3.905H4.431L16.98 20.005Z">
                                     </path>
@@ -1318,7 +1158,7 @@
                         <li>
                             <a href="#0">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 22 22"
-                                    style="fill:rgba(0, 0, 0, 1);">
+                                    class="fill-black">
                                     <path
                                         d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z">
                                     </path>
@@ -1329,7 +1169,7 @@
                         <li>
                             <a href="#0">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
-                                    style="fill:rgba(0, 0, 0, 1);">
+                                    class="fill-black">
                                     <path
                                         d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-5.2 1.74 2.89 2.89 0 0 1 2.31-4.64 2.93 2.93 0 0 1 .88.13V9.4a6.84 6.84 0 0 0-1-.05A6.33 6.33 0 0 0 5 20.1a6.34 6.34 0 0 0 10.86-4.43v-7a8.16 8.16 0 0 0 4.77 1.52v-3.4a4.85 4.85 0 0 1-1.04-.1z">
                                     </path>
@@ -1340,7 +1180,7 @@
                         <li>
                             <a href="#0">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 192 192"
-                                    style="fill:rgba(0, 0, 0, 1);">
+                                    class="fill-black">
                                     <path
                                         d="M141.537 88.9883C140.71 88.5919 139.87 88.2104 139.019 87.8451C137.537 60.5382 122.616 44.905 97.5619 44.745C97.4484 44.7443 97.3355 44.7443 97.222 44.7443C82.2364 44.7443 69.7731 51.1409 62.102 62.7807L75.881 72.2328C81.6116 63.5383 90.6052 61.6848 97.2286 61.6848C97.3051 61.6848 97.3819 61.6848 97.4576 61.6855C105.707 61.7381 111.932 64.1366 115.961 68.814C118.893 72.2193 120.854 76.925 121.825 82.8638C114.511 81.6207 106.601 81.2385 98.145 81.7233C74.3247 83.0954 59.0111 96.9879 60.0396 116.292C60.5615 126.084 65.4397 134.508 73.775 140.011C80.8224 144.663 89.899 146.938 99.3323 146.423C111.79 145.74 121.563 140.987 128.381 132.296C133.559 125.696 136.834 117.143 138.28 106.366C144.217 109.949 148.617 114.664 151.047 120.332C155.179 129.967 155.42 145.8 142.501 158.708C131.182 170.016 117.576 174.908 97.0135 175.059C74.2042 174.89 56.9538 167.575 45.7381 153.317C35.2355 139.966 29.8077 120.682 29.6052 96C29.8077 71.3178 35.2355 52.0336 45.7381 38.6827C56.9538 24.4249 74.2039 17.11 97.0132 16.9405C119.988 17.1113 137.539 24.4614 149.184 38.788C154.894 45.8136 159.199 54.6488 162.037 64.9503L178.184 60.6422C174.744 47.9622 169.331 37.0357 161.965 27.974C147.036 9.60668 125.202 0.195148 97.0695 0H96.9569C68.8816 0.19447 47.2921 9.6418 32.7883 28.0793C19.8819 44.4864 13.2244 67.3157 13.0007 95.9325L13 96L13.0007 96.0675C13.2244 124.684 19.8819 147.514 32.7883 163.921C47.2921 182.358 68.8816 191.806 96.9569 192H97.0695C122.03 191.827 139.624 185.292 154.118 170.811C173.081 151.866 172.51 128.119 166.26 113.541C161.776 103.087 153.227 94.5962 141.537 88.9883ZM98.4405 129.507C88.0005 130.095 77.1544 125.409 76.6196 115.372C76.2232 107.93 81.9158 99.626 99.0812 98.6368C101.047 98.5234 102.976 98.468 104.871 98.468C111.106 98.468 116.939 99.0737 122.242 100.233C120.264 124.935 108.662 128.946 98.4405 129.507Z">
                                     </path>
@@ -1351,7 +1191,7 @@
                         <li>
                             <a href="">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
-                                    style="fill:rgba(0, 0, 0, 1);">
+                                    class="fill-black">
                                     <path
                                         d="M11.999,7.377c-2.554,0-4.623,2.07-4.623,4.623c0,2.554,2.069,4.624,4.623,4.624c2.552,0,4.623-2.07,4.623-4.624 C16.622,9.447,14.551,7.377,11.999,7.377L11.999,7.377z M11.999,15.004c-1.659,0-3.004-1.345-3.004-3.003 c0-1.659,1.345-3.003,3.004-3.003s3.002,1.344,3.002,3.003C15.001,13.659,13.658,15.004,11.999,15.004L11.999,15.004z">
                                     </path>
@@ -1396,8 +1236,7 @@
         <div id="cookie-banner" class="cookie-banner">
             <h4>We Value Your Privacy</h4>
             <p>We use cookies to enhance your browsing experience and analyze our traffic. By clicking "Accept", you
-                consent to our use of cookies. <a href="legal.html"
-                    style="color: var(--color-1); text-decoration: underline;">Learn more</a></p>
+                consent to our use of cookies. <a href="legal.html" class="link-primary-underline">Learn more</a></p>
             <div class="cookie-banner__buttons">
                 <button class="cookie-banner__btn cookie-banner__btn--accept" onclick="acceptCookies()">Accept</button>
                 <button class="cookie-banner__btn cookie-banner__btn--decline"
@@ -1429,7 +1268,7 @@
             <div class="promo-news">
                 <span class="promo-news__title">Latest News</span>
                 <div id="promo-news-container">
-                    <p style="font-size: 1.2rem; color: rgba(255,255,255,0.5);">Loading latest updates...</p>
+                    <p class="text-loading">Loading latest updates...</p>
                 </div>
             </div>
         </div>
