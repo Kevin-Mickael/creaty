@@ -65,7 +65,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 }
             }
 
-            const date = new Date(attrs.publishedAt || attrs.createdAt).toLocaleDateString('fr-FR', {
+            const date = new Date(attrs.publishedAt || attrs.createdAt).toLocaleDateString('en-MU', {
                 day: 'numeric',
                 month: 'long',
                 year: 'numeric'
@@ -74,14 +74,14 @@ document.addEventListener('DOMContentLoaded', () => {
             const postHTML = `
                 <div class="column">
                     <article class="blog-post-card">
-                        <img src="${imageUrl}" alt="${attrs.title}" class="blog-post-card__image">
+                        <img src="${imageUrl}" alt="${attrs.title}" class="blog-post-card__image" loading="lazy">
                         <div class="blog-post-card__content">
                             <h3 class="blog-post-card__title">${attrs.title}</h3>
                             <div class="blog-post-card__meta-row">
                                 <span class="blog-post-card__category">${attrs.category || 'NEWS'}</span>
                                 ${attrs.pinned ? '<span class="blog-post-card__category" style="background: #000; color: #fff; border-color: #000;">PINNED</span>' : ''}
                                 <span class="blog-post-card__meta-item">
-                                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M7 11h2v2H7zM11 11h2v2h-2zM15 11h2v2h-2zM7 15h2v2H7zM11 15h2v2h-2zM15 15h2v2h-2z"></path><path d="M19 4h-1V2h-2v2H8V2H6v2H5c-1.103 0-2 .897-2 2v14c0 1.103.897 2 2 2h14c1.103 0 2-.897 2-2V6c0-1.103-.897-2-2-2zM5 20V9h14l.002 11H5z"></path></svg>
+                                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M7 11h2v2H7zM11 11h2v2h-2zM15 11h2v2H7zM11 15h2v2H7zM15 15h2v2H7z"></path><path d="M19 4h-1V2h-2v2H8V2H6v2H5c-1.103 0-2 .897-2 2v14c0 1.103.897 2 2 2h14c1.103 0 2-.897 2-2V6c0-1.103-.897-2-2-2zM5 20V9h14l.002 11H5z"></path></svg>
                                     ${date}
                                 </span>
                                 <span class="blog-post-card__meta-item">
@@ -144,6 +144,9 @@ document.addEventListener('DOMContentLoaded', () => {
             `;
         }
 
+        // Update rel="next" and rel="prev" in head for SEO
+        updatePaginationHead(page, pageCount);
+
         // Add event listeners to pagination links
         paginationList.querySelectorAll('a').forEach(link => {
             link.addEventListener('click', (e) => {
@@ -153,6 +156,30 @@ document.addEventListener('DOMContentLoaded', () => {
                 window.scrollTo({ top: blogGrid.offsetTop - 100, behavior: 'smooth' });
             });
         });
+    };
+
+    const updatePaginationHead = (currentPage, totalPages) => {
+        // Remove existing rel="next/prev"
+        const existingNext = document.querySelector('link[rel="next"]');
+        const existingPrev = document.querySelector('link[rel="prev"]');
+        if (existingNext) existingNext.remove();
+        if (existingPrev) existingPrev.remove();
+
+        const baseUrl = window.location.origin + window.location.pathname;
+
+        if (currentPage > 1) {
+            const prevLink = document.createElement('link');
+            prevLink.rel = 'prev';
+            prevLink.href = `${baseUrl}?page=${currentPage - 1}`;
+            document.head.appendChild(prevLink);
+        }
+
+        if (currentPage < totalPages) {
+            const nextLink = document.createElement('link');
+            nextLink.rel = 'next';
+            nextLink.href = `${baseUrl}?page=${currentPage + 1}`;
+            document.head.appendChild(nextLink);
+        }
     };
 
     // Initial fetch

@@ -10,7 +10,7 @@
 
 const SITEMAP_CONFIG = {
     API_URL: 'http://localhost:1337/api', // Update for production
-    SITE_URL: 'https://creaty.mu'
+    SITE_URL: 'https://creatymu.org'
 };
 
 const staticPages = [

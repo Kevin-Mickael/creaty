@@ -16,15 +16,15 @@
         content="digital agency mauritius, social media management mauritius, community management, graphic design mauritius, brand strategy, marketing agency mauritius">
     <meta name="author" content="Creaty - Creativfolio Ltd">
     <meta name="robots" content="index, follow">
-    <link rel="canonical" href="https://creaty.mu/">
+    <link rel="canonical" href="https://creatymu.org/">
 
     <!-- OpenGraph / Facebook -->
     <meta property="og:type" content="website">
-    <meta property="og:url" content="https://creaty.mu/">
+    <meta property="og:url" content="https://creatymu.org/">
     <meta property="og:title" content="Creaty | Digital & Social Media Agency Mauritius">
     <meta property="og:description"
         content="Transform your digital presence with Creaty. Professional Community Management & Graphic Design in Mauritius.">
-    <meta property="og:image" content="https://creaty.mu/images/og-image.jpg">
+    <meta property="og:image" content="https://creatymu.org/images/og-image.jpg">
     <meta property="og:locale" content="en_MU">
     <meta property="og:site_name" content="Creaty">
 
@@ -32,7 +32,7 @@
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="Creaty | Digital Agency Mauritius">
     <meta name="twitter:description" content="Professional Community Management & Graphic Design in Mauritius">
-    <meta name="twitter:image" content="https://creaty.mu/images/og-image.jpg">
+    <meta name="twitter:image" content="https://creatymu.org/images/og-image.jpg">
 
     <script>
         document.documentElement.classList.remove('no-js');
@@ -70,13 +70,13 @@
     {
         "@context": "https://schema.org",
         "@type": "LocalBusiness",
-        "@id": "https://creaty.mu/#organization",
+        "@id": "https://creatymu.org/#organization",
         "name": "Creaty",
         "alternateName": "Creaty Digital Agency",
         "description": "Premier Digital & Social Media Agency in Mauritius specializing in Community Management and Graphic Design",
-        "url": "https://creaty.mu",
-        "logo": "https://creaty.mu/images/creaty.logo.svg",
-        "image": "https://creaty.mu/images/og-image.jpg",
+        "url": "https://creatymu.org",
+        "logo": "https://creatymu.org/images/creaty.logo.svg",
+        "image": "https://creatymu.org/images/og-image.jpg",
         "email": "support@creaty.com",
         "address": {
             "@type": "PostalAddress",
@@ -103,7 +103,7 @@
                         "@type": "Service",
                         "name": "Email Marketing & Brand Authority Pack",
                         "description": "Professional email marketing with domain setup, newsletter design, and campaign management",
-                        "provider": {"@id": "https://creaty.mu/#organization"}
+                        "provider": {"@id": "https://creatymu.org/#organization"}
                     },
                     "price": "18500",
                     "priceCurrency": "MUR",
@@ -115,7 +115,7 @@
                         "@type": "Service",
                         "name": "Social Media Management Pack",
                         "description": "Complete social media management for established brands",
-                        "provider": {"@id": "https://creaty.mu/#organization"}
+                        "provider": {"@id": "https://creatymu.org/#organization"}
                     },
                     "price": "17000",
                     "priceCurrency": "MUR"
@@ -126,7 +126,7 @@
                         "@type": "Service",
                         "name": "The Launchpad: Startup Foundation Pack",
                         "description": "Complete brand identity and digital presence for startups",
-                        "provider": {"@id": "https://creaty.mu/#organization"}
+                        "provider": {"@id": "https://creatymu.org/#organization"}
                     },
                     "price": "35000",
                     "priceCurrency": "MUR"
@@ -619,9 +619,11 @@
 
                             <div class="s-about__howto-screens">
                                 <img src="images/screens/screen-01.png"
-                                    srcset="images/screens/screen-01.png 1x, images/screens/screen-01@2x.png 2x" alt="">
+                                    srcset="images/screens/screen-01.png 1x, images/screens/screen-01@2x.png 2x"
+                                    alt="Creaty Digital Audit Interface" loading="lazy">
                                 <img src="images/screens/screen-04.png"
-                                    srcset="images/screens/screen-04.png 1x, images/screens/screen-04@2x.png 2x" alt="">
+                                    srcset="images/screens/screen-04.png 1x, images/screens/screen-04@2x.png 2x"
+                                    alt="Social Media Analytics Dashboard" loading="lazy">
                             </div>
 
                         </div>
@@ -1234,13 +1236,26 @@
 
         <!-- Cookie Banner -->
         <div id="cookie-banner" class="cookie-banner">
-            <h4>We Value Your Privacy</h4>
-            <p>We use cookies to enhance your browsing experience and analyze our traffic. By clicking "Accept", you
-                consent to our use of cookies. <a href="/legal" class="link-primary-underline">Learn more</a></p>
-            <div class="cookie-banner__buttons">
-                <button class="cookie-banner__btn cookie-banner__btn--accept" onclick="acceptCookies()">Accept</button>
-                <button class="cookie-banner__btn cookie-banner__btn--decline"
-                    onclick="closeCookieBanner()">Decline</button>
+            <div class="cookie-banner__icon-wrapper">
+                <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path
+                        d="M21.355 15.645a9 9 0 1 1-9-9c.343 0 .68.019 1.012.055a4.5 4.5 0 0 0 7.933 7.933c.036.332.055.669.055 1.012z"
+                        stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+                    <circle cx="9.5" cy="11.5" r="1" fill="currentColor" />
+                    <circle cx="12.5" cy="15.5" r="1" fill="currentColor" />
+                    <circle cx="15.5" cy="11.5" r="1" fill="currentColor" />
+                </svg>
+            </div>
+            <div class="cookie-banner__content">
+                <h4>We Value Your Privacy</h4>
+                <p>We use cookies to enhance your browsing experience and analyze our traffic. By clicking "Accept", you
+                    consent to our use of cookies. <a href="/legal" class="link-primary-underline">Learn more</a></p>
+                <div class="cookie-banner__buttons">
+                    <button class="cookie-banner__btn cookie-banner__btn--accept"
+                        onclick="acceptCookies()">Accept</button>
+                    <button class="cookie-banner__btn cookie-banner__btn--decline"
+                        onclick="closeCookieBanner()">Decline</button>
+                </div>
             </div>
         </div>
 
