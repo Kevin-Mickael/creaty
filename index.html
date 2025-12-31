@@ -89,7 +89,7 @@
             "name": "Mauritius"
         },
         "sameAs": [
-            "https://www.facebook.com/creaty",
+            "https://www.facebook.com/creatymauritius/",
             "https://www.instagram.com/creaty",
             "https://www.linkedin.com/company/creaty"
         ],
@@ -286,7 +286,7 @@
 
                 <ul class="s-intro__social">
                     <li>
-                        <a href="">
+                        <a href="https://www.facebook.com/creatymauritius/">
                             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
                                 class="fill-black">
                                 <path
@@ -852,7 +852,9 @@
                                             </svg>
                                         </a>
 
-                                        <a class="btn btn--primary u-fullwidth" href="#0">Get Started</a>
+                                        <a class="btn btn--primary u-fullwidth"
+                                            href="https://wa.me/23054593145?text=Hello,%20I'm%20interested%20in%20the%20Email%20Marketing%20%26%20Brand%20Authority%20Pack">Get
+                                            Started</a>
                                     </div>
 
                                 </div>
@@ -887,7 +889,9 @@
                                             </svg>
                                         </a>
 
-                                        <a class="btn btn--primary u-fullwidth" href="#0">Get Started</a>
+                                        <a class="btn btn--primary u-fullwidth"
+                                            href="https://wa.me/23054593145?text=Hello,%20I'm%20interested%20in%20the%20Social%20Media%20Management%20Pack">Get
+                                            Started</a>
                                     </div>
 
                                 </div>
@@ -934,7 +938,9 @@
                                             </svg>
                                         </a>
 
-                                        <a class="btn btn--primary u-fullwidth" href="#0">Get Started</a>
+                                        <a class="btn btn--primary u-fullwidth"
+                                            href="https://wa.me/23054593145?text=Hello,%20I'm%20interested%20in%20the%20The%20Launchpad:%20Startup%20Foundation%20Pack">Get
+                                            Started</a>
                                     </div>
 
                                 </div>
@@ -966,11 +972,18 @@
                             <fieldset>
                                 <div class="row">
                                     <div class="column lg-6 tab-12">
+                                        <label for="cName">Your Name</label>
+                                        <input name="cName" id="cName" class="u-fullwidth" type="text"
+                                            placeholder="John Doe" required>
+                                    </div>
+                                    <div class="column lg-6 tab-12">
                                         <label for="cEmail">Your Email</label>
                                         <input name="cEmail" id="cEmail" class="u-fullwidth" type="email"
                                             placeholder="test@mailbox.com" required>
                                     </div>
-                                    <div class="column lg-6 tab-12">
+                                </div>
+                                <div class="row">
+                                    <div class="column lg-12">
                                         <label for="cService">What do you need?</label>
                                         <div class="ss-custom-select">
                                             <select name="cService" id="cService" class="u-fullwidth">
@@ -1130,13 +1143,13 @@
                     </div>
 
                     <p>
-                        Creaty is a premier agency in Mauritius specialized in Community Management and Graphic Design.
-                        We help businesses shine online.
+                        Behind every brand Mauritius loves is a strategy they never see. That's Creaty. We craft the
+                        design and community that turns browsers into believers.
                     </p>
 
                     <ul class="s-footer__social">
                         <li>
-                            <a href="">
+                            <a href="https://www.facebook.com/creatymauritius/">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
                                     class="fill-black">
                                     <path
@@ -1220,7 +1233,7 @@
 
                     <p class="s-footer__contact">
                         Do you have a question? Send us a word: <br>
-                        <a href="mailto:#0" class="s-footer__mail-link">support@creaty.com</a>
+                        <a href="mailto:#0" class="s-footer__mail-link">support@creatymu.org</a>
                     </p>
 
                     <div class="ss-copyright">
@@ -1301,6 +1314,67 @@
         <script src="js/config.js"></script>
         <script src="js/promo.js"></script>
         <script src="js/main.js"></script>
+
+        <script>
+            document.addEventListener('DOMContentLoaded', () => {
+                const contactForm = document.getElementById('contactForm');
+                const contactMessage = document.querySelector('.contact-message');
+
+                if (contactForm) {
+                    contactForm.addEventListener('submit', async (e) => {
+                        e.preventDefault();
+
+                        const submitBtn = contactForm.querySelector('#submit');
+                        const originalBtnValue = submitBtn.value;
+
+                        // Clear previous messages
+                        contactMessage.innerHTML = '';
+
+                        submitBtn.value = 'Sending...';
+                        submitBtn.disabled = true;
+
+                        const formData = new FormData(contactForm);
+                        const data = {
+                            name: formData.get('cName'),
+                            email: formData.get('cEmail'),
+                            service: formData.get('cService'),
+                            message: formData.get('cMessage')
+                        };
+
+                        try {
+                            const response = await fetch(`${CONFIG.API_URL}/contact`, {
+                                method: 'POST',
+                                headers: {
+                                    'Content-Type': 'application/json',
+                                },
+                                body: JSON.stringify(data),
+                            });
+
+                            let result;
+                            try {
+                                result = await response.json();
+                            } catch (e) {
+                                result = { error: { message: 'The server returned an invalid response.' } };
+                            }
+
+                            if (response.ok && result.success) {
+                                contactMessage.innerHTML = '<div class="alert-box alert-box--success">Your message has been sent. Thank you!</div>';
+                                contactForm.reset();
+                            } else {
+                                const errorMsg = result.error?.message || result.message || 'An unknown error occurred.';
+                                throw new Error(errorMsg);
+                            }
+                        } catch (error) {
+                            console.error('Submission error:', error);
+                            contactMessage.innerHTML = `<div class="alert-box alert-box--error">Error: ${error.message}</div>`;
+                        } finally {
+                            submitBtn.value = originalBtnValue;
+                            submitBtn.disabled = false;
+                        }
+                    });
+                }
+            });
+        </script>
 
 </body>
 

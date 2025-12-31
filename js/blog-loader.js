@@ -91,7 +91,7 @@ document.addEventListener('DOMContentLoaded', () => {
                                     SHARE
                                 </span>
                             </div>
-                            <p class="blog-post-card__excerpt">${attrs.description || (attrs.content ? attrs.content.substring(0, 120) : '')}...</p>
+                            <p class="blog-post-card__excerpt">${getExcerpt(attrs)}</p>
                             <a href="/blog?slug=${attrs.slug || post.documentId || post.id}" class="blog-post-card__link">READ MORE</a>
                         </div>
                     </article>
@@ -182,6 +182,27 @@ document.addEventListener('DOMContentLoaded', () => {
             nextLink.href = `${baseUrl}?page=${currentPage + 1}`;
             document.head.appendChild(nextLink);
         }
+    };
+
+    const getExcerpt = (attrs) => {
+        if (attrs.description) return attrs.description;
+
+        let text = '';
+        if (Array.isArray(attrs.content)) {
+            // Extract from Blocks
+            text = attrs.content
+                .filter(block => block.type === 'paragraph')
+                .map(block => block.children.map(child => child.text).join(''))
+                .join(' ');
+        } else if (typeof attrs.content === 'string') {
+            // Extract from Markdown/HTML string
+            text = attrs.content.replace(/[#*`_~\[\]]/g, '').replace(/<[^>]*>/g, '');
+        }
+
+        if (text.length > 120) {
+            return text.substring(0, 117) + '...';
+        }
+        return text || 'Read more...';
     };
 
     // Initial fetch
