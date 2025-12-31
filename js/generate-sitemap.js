@@ -15,9 +15,8 @@ const SITEMAP_CONFIG = {
 
 const staticPages = [
     { url: '/', priority: '1.0', changefreq: 'weekly' },
-    { url: '/index.html', priority: '1.0', changefreq: 'weekly' },
-    { url: '/news.html', priority: '0.8', changefreq: 'daily' },
-    { url: '/legal.html', priority: '0.3', changefreq: 'monthly' }
+    { url: '/news', priority: '0.8', changefreq: 'daily' },
+    { url: '/legal', priority: '0.3', changefreq: 'monthly' }
 ];
 
 async function generateSitemap() {
@@ -37,7 +36,7 @@ async function generateSitemap() {
         const articles = data.map(article => {
             const attrs = article.attributes || article;
             return {
-                url: `/blog-single.html?slug=${attrs.slug || article.documentId || article.id}`,
+                url: `/blog?slug=${attrs.slug || article.documentId || article.id}`,
                 lastmod: attrs.updatedAt || new Date().toISOString(),
                 priority: '0.7',
                 changefreq: 'weekly'

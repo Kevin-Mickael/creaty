@@ -36,7 +36,7 @@ async function fetchLatestNews() {
     try {
         // Use CONFIG if available, fallback to hardcoded if not (should be available)
         const apiUrl = (typeof CONFIG !== 'undefined') ? CONFIG.API_URL : 'https://creaty-strapi.railway.app/api';
-        
+
         const response = await fetch(`${apiUrl}/articles?populate=*&pagination[pageSize]=3&sort[0]=publishedAt:desc`);
         if (!response.ok) throw new Error('Failed to fetch');
         const { data } = await response.json();
@@ -55,7 +55,7 @@ async function fetchLatestNews() {
             });
             html += `
                 <li class="promo-news__item">
-                    <a href="blog-single.html?slug=${attrs.slug || post.id}" class="promo-news__link">
+                    <a href="/blog?slug=${attrs.slug || post.id}" class="promo-news__link">
                         <h5 class="promo-news__post-title">${attrs.title}</h5>
                         <span class="promo-news__date">${date}</span>
                     </a>
@@ -83,7 +83,7 @@ window.addEventListener('load', function () {
     // Promo widget delay
     const promoWidget = document.getElementById('promo-widget');
     const promoTrigger = document.getElementById('promo-trigger');
-    
+
     if (promoWidget && promoTrigger) {
         setTimeout(function () {
             if (!localStorage.getItem('promoMinimized')) {
