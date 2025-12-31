@@ -9,9 +9,10 @@
  */
 
 const SITEMAP_CONFIG = {
-    API_URL: 'http://localhost:1337/api', // Update for production
+    API_URL: 'https://admin.creatymu.org/api', // Use production API for sitemap
     SITE_URL: 'https://creatymu.org'
 };
+
 
 const staticPages = [
     { url: '/', priority: '1.0', changefreq: 'weekly' },

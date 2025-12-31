@@ -13,7 +13,8 @@ document.addEventListener('DOMContentLoaded', () => {
     const fetchPosts = async (page = 1) => {
         try {
             // Strapi V4 pagination and population
-            const response = await fetch(`${CONFIG.API_URL}/articles?populate=*&pagination[page]=${page}&pagination[pageSize]=6&sort[0]=pinned:desc&sort[1]=publishedAt:desc`);
+            const response = await fetch(`${CONFIG.API_URL}/articles?populate=*&pagination[page]=${page}&pagination[pageSize]=6&sort[0]=epingle:desc&sort[1]=publishedAt:desc`);
+
 
             if (!response.ok) {
                 throw new Error('Failed to fetch posts');
@@ -79,7 +80,8 @@ document.addEventListener('DOMContentLoaded', () => {
                             <h3 class="blog-post-card__title">${attrs.title}</h3>
                             <div class="blog-post-card__meta-row">
                                 <span class="blog-post-card__category">${attrs.category || 'NEWS'}</span>
-                                ${attrs.pinned ? '<span class="blog-post-card__category" style="background: #000; color: #fff; border-color: #000;">PINNED</span>' : ''}
+                                ${attrs.epingle ? '<span class="blog-post-card__category" style="background: #000; color: #fff; border-color: #000;">ÉPINGLÉ</span>' : ''}
+
                                 <span class="blog-post-card__meta-item">
                                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M7 11h2v2H7zM11 11h2v2h-2zM15 11h2v2H7zM11 15h2v2H7zM15 15h2v2H7z"></path><path d="M19 4h-1V2h-2v2H8V2H6v2H5c-1.103 0-2 .897-2 2v14c0 1.103.897 2 2 2h14c1.103 0 2-.897 2-2V6c0-1.103-.897-2-2-2zM5 20V9h14l.002 11H5z"></path></svg>
                                     ${date}
