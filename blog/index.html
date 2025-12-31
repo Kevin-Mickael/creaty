@@ -592,6 +592,7 @@
         <!-- Java Script
     ================================================== -->
         <script src="/js/plugins.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
         <script src="/js/config.js"></script>
         <script src="/js/promo.js"></script>
         <script>
@@ -849,17 +850,41 @@
                 // Content
                 const contentEl = document.getElementById('article-content');
                 if (contentEl) {
-                    // Simple check if it's Blocks or HTML
                     if (Array.isArray(attrs.content)) {
-                        // Very basic conversion of Strapi Blocks to text if needed
+                        // Improved conversion of Strapi Blocks to HTML
                         contentEl.innerHTML = attrs.content.map(block => {
-                            if (block.type === 'paragraph') {
-                                return `<p>${block.children.map(child => child.text).join('')}</p>`;
+                            switch (block.type) {
+                                case 'paragraph':
+                                    return `<p>${block.children.map(child => {
+                                        let text = child.text;
+                                        if (child.bold) text = `<strong>${text}</strong>`;
+                                        if (child.italic) text = `<em>${text}</em>`;
+                                        if (child.underline) text = `<u>${text}</u>`;
+                                        if (child.strikethrough) text = `<s>${text}</s>`;
+                                        if (child.code) text = `<code>${text}</code>`;
+                                        return text;
+                                    }).join('')}</p>`;
+                                case 'heading':
+                                    const level = block.level || 1;
+                                    return `<h${level}>${block.children.map(c => c.text).join('')}</h${level}>`;
+                                case 'list':
+                                    const tag = block.format === 'ordered' ? 'ol' : 'ul';
+                                    return `<${tag}>${block.items.map(item => `<li>${item.children.map(c => c.text).join('')}</li>`).join('')}</${tag}>`;
+                                case 'quote':
+                                    return `<blockquote>${block.children.map(c => c.text).join('')}</blockquote>`;
+                                case 'code':
+                                    return `<pre><code>${block.children.map(c => c.text).join('')}</code></pre>`;
+                                case 'image':
+                                    return `<img src="${block.image.url}" alt="${block.image.alternativeText || ''}">`;
+                                default:
+                                    return '';
                             }
-                            return '';
                         }).join('');
+                    } else if (typeof attrs.content === 'string') {
+                        // Use marked.js for Markdown/MDX content
+                        contentEl.innerHTML = marked.parse(attrs.content);
                     } else {
-                        contentEl.innerHTML = attrs.content || attrs.description || '<p>No content available.</p>';
+                        contentEl.innerHTML = attrs.description || '<p>No content available.</p>';
                     }
                 }
 
