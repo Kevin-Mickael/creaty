@@ -4771,22 +4771,22 @@ img.u-pull-left {
     position: fixed;
     bottom: 3rem;
     left: 3rem;
-    max-width: 540px;
-    background: rgba(10, 10, 10, 0.85);
-    backdrop-filter: blur(20px);
-    -webkit-backdrop-filter: blur(20px);
+    max-width: 500px;
+    background: rgba(10, 10, 10, 0.82);
+    backdrop-filter: blur(25px);
+    -webkit-backdrop-filter: blur(25px);
     color: #ffffff;
-    padding: 3.5rem;
-    border-radius: 32px;
+    padding: 3rem;
+    border-radius: 28px;
     z-index: 9999;
     transform: translateY(150%);
     transition: transform 1.2s cubic-bezier(0.16, 1, 0.3, 1);
-    border: 1px solid rgba(255, 255, 255, 0.12);
-    box-shadow: 0 30px 60px rgba(0, 0, 0, 0.4);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    box-shadow: 0 40px 80px rgba(0, 0, 0, 0.5);
     box-sizing: border-box;
     display: flex;
     align-items: flex-start;
-    gap: 3rem;
+    gap: 2.5rem;
 }
 
 .cookie-banner.show {
@@ -4795,20 +4795,18 @@ img.u-pull-left {
 
 .cookie-banner__icon-wrapper {
     flex-shrink: 0;
-    width: 64px;
-    height: 64px;
-    background: linear-gradient(135deg, var(--color-1) 0%, var(--color-2) 100%);
-    border-radius: 20px;
+    width: 48px;
+    height: 48px;
     display: flex;
     align-items: center;
     justify-content: center;
-    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+    color: var(--color-1);
+    /* Use brand green for the icon */
 }
 
 .cookie-banner__icon-wrapper svg {
-    width: 32px;
-    height: 32px;
-    color: white;
+    width: 40px;
+    height: 40px;
 }
 
 .cookie-banner__content {
@@ -4818,34 +4816,36 @@ img.u-pull-left {
 .cookie-banner h4 {
     color: #ffffff;
     margin-top: 0;
-    margin-bottom: 1.2rem;
-    font-size: 2.4rem;
+    margin-bottom: 0.8rem;
+    font-size: 2.2rem;
     font-weight: 700;
-    letter-spacing: -0.02em;
+    letter-spacing: -0.01em;
 }
 
 .cookie-banner p {
-    color: rgba(255, 255, 255, 0.8);
-    font-size: 1.55rem;
-    margin-bottom: 3rem;
-    line-height: 1.6;
+    color: rgba(255, 255, 255, 0.75);
+    font-size: 1.5rem;
+    margin-bottom: 2.5rem;
+    line-height: 1.5;
 }
 
 .cookie-banner__buttons {
     display: flex;
     gap: 1.2rem;
+    justify-content: flex-end;
+    /* Frame buttons to the right */
 }
 
 .cookie-banner__btn {
-    padding: 1.4rem 3rem;
-    border-radius: 14px;
-    font-size: 1.4rem;
+    padding: 1.2rem 2.4rem;
+    border-radius: 12px;
+    font-size: 1.35rem;
     font-weight: 700;
     cursor: pointer;
     transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
     border: none;
     text-transform: uppercase;
-    letter-spacing: 0.1em;
+    letter-spacing: 0.08em;
 }
 
 .cookie-banner__btn--accept {
@@ -4857,18 +4857,19 @@ img.u-pull-left {
     background: var(--color-1);
     color: #ffffff;
     transform: translateY(-2px);
-    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+    box-shadow: 0 10px 20px rgba(63, 136, 92, 0.3);
 }
 
 .cookie-banner__btn--decline {
-    background: rgba(255, 255, 255, 0.08);
-    color: #ffffff;
-    border: 1px solid rgba(255, 255, 255, 0.1);
+    background: transparent;
+    color: rgba(255, 255, 255, 0.6);
+    border: 1px solid rgba(255, 255, 255, 0.15);
 }
 
 .cookie-banner__btn--decline:hover {
-    background: rgba(255, 255, 255, 0.15);
-    border-color: rgba(255, 255, 255, 0.2);
+    color: #ffffff;
+    background: rgba(255, 255, 255, 0.05);
+    border-color: rgba(255, 255, 255, 0.3);
 }
 
 @media screen and (max-width: 600px) {
@@ -4879,28 +4880,30 @@ img.u-pull-left {
         max-width: none;
         padding: 2.5rem;
         flex-direction: column;
-        gap: 2rem;
-        border-radius: 24px;
+        gap: 1.5rem;
+        border-radius: 22px;
     }
 
     .cookie-banner__icon-wrapper {
-        width: 48px;
-        height: 48px;
-        border-radius: 14px;
+        width: 36px;
+        height: 36px;
     }
 
     .cookie-banner__icon-wrapper svg {
-        width: 24px;
-        height: 24px;
+        width: 32px;
+        height: 32px;
     }
 
     .cookie-banner__buttons {
         flex-direction: column;
+        width: 100%;
+        gap: 1rem;
     }
 
     .cookie-banner__btn {
         width: 100%;
         text-align: center;
+        padding: 1.5rem;
     }
 }
 
