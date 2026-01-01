@@ -1,9 +1,1 @@
-const IS_PROD = window.location.hostname !== 'localhost' && window.location.hostname !== '127.0.0.1';
-const PROD_URL = 'https://admin.creatymu.org';
-const LOCAL_URL = 'http://localhost:1337';
-
-const CONFIG = {
-    STRAPI_BASE_URL: IS_PROD ? PROD_URL : LOCAL_URL,
-    API_URL: `${IS_PROD ? PROD_URL : LOCAL_URL}/api`,
-};
-
+const IS_PROD=window.location.hostname!=="localhost"&&window.location.hostname!=="127.0.0.1";const PROD_URL="https://admin.creatymu.org";const LOCAL_URL="http://localhost:1337";const CONFIG={STRAPI_BASE_URL:IS_PROD?PROD_URL:LOCAL_URL,API_URL:`${IS_PROD?PROD_URL:LOCAL_URL}/api`};

@@ -62,12 +62,17 @@
 
     <!-- CSS
     ================================================== -->
-    <link rel="stylesheet" href="/css/vendor.css" media="print" onload="this.media='all'">
-    <link rel="stylesheet" href="/css/styles.css" media="print" onload="this.media='all'">
-    <noscript>
-        <link rel="stylesheet" href="/css/vendor.css">
-        <link rel="stylesheet" href="/css/styles.css">
-    </noscript>
+    <link rel="stylesheet" href="/css/vendor.css">
+    <link rel="stylesheet" href="/css/styles.css">
+    <link rel="preload" href="/css/styles.css" as="style">
+    <link rel="preload" as="image" href="/images/creaty.logo.svg" fetchpriority="high">
+    <link rel="preconnect" href="https://fonts.googleapis.com" crossorigin>
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="preload" as="style"
+        href="https://fonts.googleapis.com/css2?family=Heebo:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600&family=Playfair+Display:ital,wght@1,400;1,700&display=swap">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Heebo:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600&family=Playfair+Display:ital,wght@1,400;1,700&display=swap"
+        rel="stylesheet">
 
     <!-- favicons
     ================================================== -->
@@ -108,7 +113,8 @@
                 <div class="s-header__block">
                     <div class="s-header__logo">
                         <a class="logo" href="/">
-                            <img src="/images/creaty.logo.svg" alt="Creaty - Digital Agency Mauritius">
+                            <img src="/images/creaty.logo.svg" alt="Creaty - Digital Agency Mauritius" width="327"
+                                height="94">
                         </a>
                     </div>
 
@@ -143,7 +149,7 @@
 
             <div class="row blog-header">
                 <div class="column lg-12">
-                    <h1 class="text-display-1">Articles & News</h1>
+                    <div role="heading" aria-level="1" class="text-display-1">Articles & News</div>
                     <p class="lead">Discover the latest trends in community management and graphic design for Mauritius.
                     </p>
                 </div>
@@ -230,7 +236,8 @@
                 <div class="column lg-5 md-6 stack-on-900">
                     <div class="footer__logo">
                         <a href="/">
-                            <img src="/images/creaty.logo.svg" alt="Creaty - Digital Agency Mauritius">
+                            <img src="/images/creaty.logo.svg" alt="Creaty - Digital Agency Mauritius" width="327"
+                                height="94">
                         </a>
                     </div>
 

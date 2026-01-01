@@ -50,19 +50,18 @@
     </script>
 
     <!-- DNS Prefetch for Performance -->
-    <link rel="preload" as="image" href="images/hero_creaty1.webp" fetchpriority="high">
+    <link rel="preload" as="image" href="/images/hero_creaty1.webp" fetchpriority="high">
+    <link rel="preload" as="image" href="/images/creaty.logo.svg" fetchpriority="high">
     <link rel="dns-prefetch" href="//fonts.googleapis.com">
     <link rel="dns-prefetch" href="//fonts.gstatic.com">
+    <link rel="preconnect" href="https://cdn.dribbble.com" crossorigin>
     <link rel="dns-prefetch" href="//cdn.dribbble.com">
 
     <!-- CSS
     ================================================== -->
-    <link rel="stylesheet" href="css/vendor.css" media="print" onload="this.media='all'">
-    <link rel="stylesheet" href="css/styles.css" media="print" onload="this.media='all'">
-    <noscript>
-        <link rel="stylesheet" href="css/vendor.css">
-        <link rel="stylesheet" href="css/styles.css">
-    </noscript>
+    <link rel="stylesheet" href="css/vendor.css">
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="preload" href="css/styles.css" as="style">
 
     <!-- favicons
     ================================================== -->
@@ -76,13 +75,10 @@
     <link rel="preconnect" href="https://fonts.googleapis.com" crossorigin>
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link rel="preload" as="style"
-        href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@1,400;1,700&display=swap">
-    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@1,400;1,700&display=swap"
-        rel="stylesheet" media="print" onload="this.media='all'">
-    <noscript>
-        <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@1,400;1,700&display=swap"
-            rel="stylesheet">
-    </noscript>
+        href="https://fonts.googleapis.com/css2?family=Heebo:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600&family=Playfair+Display:ital,wght@1,400;1,700&display=swap">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Heebo:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600&family=Playfair+Display:ital,wght@1,400;1,700&display=swap"
+        rel="stylesheet">
     <meta name="theme-color" content="#ffffff">
 
 
@@ -278,7 +274,8 @@
                 <div class="s-header__block">
                     <div class="s-header__logo">
                         <a class="logo" href="/">
-                            <img src="images/creaty.logo.svg" alt="Creaty - Digital Agency Mauritius">
+                            <img src="/images/creaty.logo.svg" alt="Creaty - Digital Agency Mauritius" width="327"
+                                height="94">
                         </a>
                     </div>
 
@@ -321,10 +318,10 @@
 
                     <div class="column lg-12 s-intro__content-inner">
                         <div class="s-intro__content-left">
-                            <h1 class="s-intro__content-title">
+                            <div role="heading" aria-level="1" class="s-intro__content-title">
                                 Your digital partner in Mauritius. <br>
                                 Zero fluff, pure strategy.
-                            </h1>
+                            </div>
                         </div>
                         <div class="s-intro__content-right">
                             <p class="s-intro__content-desc body-text-2">
@@ -564,7 +561,9 @@
                     <div class="column lg-12">
 
                         <div class="s-about__video-block">
-                            <video autoplay muted loop playsinline class="s-about__video" preload="auto">
+                            <!-- Restored Dribbble video with fix for connection error (crossorigin and poster) -->
+                            <video autoplay muted loop playsinline crossorigin="anonymous" class="s-about__video"
+                                preload="auto" poster="/images/hero_creaty1.webp">
                                 <source
                                     src="https://cdn.dribbble.com/userupload/46018280/file/116872959f12f4f187c89e2493674c71.mp4"
                                     type="video/mp4">
@@ -679,12 +678,10 @@
                         <div class="column s-about__howto-screens-block">
 
                             <div class="s-about__howto-screens">
-                                <img src="images/screens/screen-01.png"
-                                    srcset="images/screens/screen-01.png 1x, images/screens/screen-01@2x.png 2x"
-                                    alt="Creaty Digital Audit Interface" loading="lazy">
-                                <img src="images/screens/screen-04.png"
-                                    srcset="images/screens/screen-04.png 1x, images/screens/screen-04@2x.png 2x"
-                                    alt="Social Media Analytics Dashboard" loading="lazy">
+                                <img src="/images/screens/screen-01.png" alt="Creaty Digital Audit Interface"
+                                    width="375" height="812" loading="lazy">
+                                <img src="/images/screens/screen-04.png" alt="Social Media Analytics Dashboard"
+                                    width="375" height="812" loading="lazy">
                             </div>
 
                         </div>
@@ -1199,7 +1196,8 @@
                 <div class="column lg-5 md-6 stack-on-900">
                     <div class="footer__logo">
                         <a href="index.html">
-                            <img src="images/creaty.logo.svg" alt="Creaty - Digital Agency Mauritius">
+                            <img src="/images/creaty.logo.svg" alt="Creaty - Digital Agency Mauritius" width="327"
+                                height="94">
                         </a>
                     </div>
 
