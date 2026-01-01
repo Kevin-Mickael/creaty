@@ -1,5 +1,131 @@
 !function (e) {
     "use strict";
     const debounce = (fn, delay) => { let timeoutId; return (...args) => { if (timeoutId) clearTimeout(timeoutId); timeoutId = setTimeout(() => fn.apply(null, args), delay); }; };
-    const t = function () { const e = document.querySelector("#mc-form"); function t(t, s = !1) { let n = e.querySelector(".mc-status"); n && (s ? (n.classList.remove("error-message"), n.classList.add("success-message")) : (n.classList.remove("success-message"), n.classList.add("error-message")), n.innerHTML = t) } e && (e.setAttribute("novalidate", !0), e.addEventListener("submit", function (e) { e.preventDefault(); let s = e.target.querySelector("#mce-EMAIL"), n = function (e) { if (e.disabled || "file" === e.type || "reset" === e.type || "submit" === e.type || "button" === e.type) return; let t = e.validity; return t.valid ? void 0 : t.valueMissing ? "Please enter an email address." : t.typeMismatch && "email" === e.type ? "Please enter a valid email address." : t.patternMismatch ? e.hasAttribute("title") ? e.getAttribute("title") : "Please match the requested format." : "The value you entered for this field is invalid." }(s); if (n) return t(n, !1), void s.focus(); !async function (e) { const s = e.querySelector("#mce-EMAIL"), n = e.querySelector('input[type="submit"]'), i = e.querySelector(".mc-status"); if (!s || !n || !i) return; const o = s.value, r = n.value; i.innerHTML = "Submitting...", i.classList.remove("error-message", "success-message"), n.disabled = !0, n.value = "Submitting..."; try { const s = await fetch(`${CONFIG.API_URL}/newsletter/subscribe`, { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ email: o }) }), n = await s.json(); s.ok && n.success ? (t(n.message || "Thank you for subscribing!", !0), e.reset()) : t(n.error?.message || n.message || "An error occurred. Please try again.", !1) } catch (e) { console.error("Newsletter submission error:", e), t("Connection error. Please try again later.", !1) } finally { n.disabled = !1, n.value = r } }(this) }, !1)) }, s = function () { document.querySelectorAll(".alert-box").forEach(function (e) { e.addEventListener("click", function (t) { t.target.matches(".alert-box__close") && (t.stopPropagation(), t.target.parentElement.classList.add("hideit"), setTimeout(function () { e.style.display = "none" }, 500)) }) }) }; !function () { const t = document.querySelector("body"), s = document.querySelector("#preloader"); if (s) { e.classList.add("ss-loaded"), t.classList.add("ss-show"), s.style.display = "none" } setTimeout(function () { e.classList.remove("ss-preload") }, 100) }(), function () { const e = document.querySelector(".s-header"), t = document.querySelector("#intro"); if (!e || !t) return; let s = 0; const n = function () { s = t.offsetHeight - 170 }; n(); window.addEventListener("resize", debounce(n, 200)), window.addEventListener("scroll", function () { let t = window.scrollY; t > s ? e.classList.add("sticky") : e.classList.remove("sticky"), t > s + 20 ? e.classList.add("offset") : e.classList.remove("offset"), t > s + 150 ? e.classList.add("scrolling") : e.classList.remove("scrolling") }, { passive: true }) }(), function () { const e = document.querySelector(".s-header__menu-toggle"), t = document.querySelector(".s-header__nav"), s = document.querySelector("body"); e && t && (e.addEventListener("click", function (t) { t.preventDefault(), e.classList.toggle("is-clicked"), s.classList.toggle("menu-is-open") }), t.querySelectorAll(".s-header__nav a").forEach(function (t) { t.addEventListener("click", function (t) { window.matchMedia("(max-width: 800px)").matches && (e.classList.toggle("is-clicked"), s.classList.toggle("menu-is-open")) }) }), window.addEventListener("resize", debounce(function () { window.matchMedia("(min-width: 801px)").matches && (s.classList.contains("menu-is-open") && s.classList.remove("menu-is-open"), e.classList.contains("is-clicked") && e.classList.remove("is-clicked")) }, 200))) }(), function () { const e = document.querySelectorAll(".target-section"); let t = []; const s = function () { t = [], e.forEach(function (e) { t.push({ id: e.getAttribute("id"), top: e.offsetTop - 50, height: e.offsetHeight }) }) }; s(); window.addEventListener("resize", debounce(s, 200)), window.addEventListener("scroll", function () { let e = window.pageYOffset; t.forEach(function (t) { const s = document.querySelector(".s-header__nav a[href*=" + t.id + "]"); s && (e > t.top && e <= t.top + t.height ? s.parentNode.classList.add("current") : s.parentNode.classList.remove("current")) }) }, { passive: true }) }(), new Swiper(".s-about__info-slider", { slidesPerView: 1, pagination: { el: ".swiper-pagination", clickable: !0 }, breakpoints: { 401: { slidesPerView: 1, spaceBetween: 20 }, 701: { slidesPerView: 2, spaceBetween: 40 }, 1101: { slidesPerView: 3, spaceBetween: 40 } } }), new Swiper(".s-about__screens-slider", { slidesPerView: 1, autoplay: { delay: 3e3, disableOnInteraction: !1 }, loop: !0, speed: 1e3, effect: "slide" }), new Swiper(".s-about__howto-slider", { slidesPerView: 1, pagination: { el: ".swiper-pagination", clickable: !0 }, breakpoints: { 601: { slidesPerView: 2, spaceBetween: 40 } } }), t(), function () { const e = document.querySelector("#contactForm"); if (!e) return; const t = document.querySelector(".contact-message"); e.addEventListener("submit", function (n) { n.preventDefault(); const i = e.querySelector("#submit"), o = i.value; i.value = "Sending...", i.disabled = !0, setTimeout(function () { t.innerHTML = '\n                        <div class="alert-box alert-box--success">\n                            <p>Your message has been sent. Thank you!</p>\n                            <span class="alert-box__close"></span>\n                        </div>\n                    ', e.reset(), i.value = o, i.disabled = !1, s() }, 1e3) }) }(), function () { const e = document.querySelector(".s-intro__content-video-btn"); e && e.addEventListener("click", function (e) { const t = "<iframe src='" + this.getAttribute("href") + "' frameborder='0'></iframe>"; e.preventDefault(), basicLightbox.create(t).show() }) }(), s(), function () { const e = document.querySelectorAll(".smoothscroll"), t = new MoveTo({ tolerance: 0, duration: 1200, easing: "easeInOutCubic", container: window }, { easeInQuad: function (e, t, s, n) { return s * (e /= n) * e + t }, easeOutQuad: function (e, t, s, n) { return -s * (e /= n) * (e - 2) + t }, easeInOutQuad: function (e, t, s, n) { return (e /= n / 2) < 1 ? s / 2 * e * e + t : -s / 2 * (--e * (e - 2) - 1) + t }, easeInOutCubic: function (e, t, s, n) { return (e /= n / 2) < 1 ? s / 2 * e * e * e + t : s / 2 * ((e -= 2) * e * e + 2) + t } }); e.forEach(function (e) { t.registerTrigger(e) }) }(), function () { const e = document.querySelector("#pricing"); e && e.addEventListener("click", function (e) { const t = e.target.closest(".item-plan__show-more"); if (t) { e.preventDefault(); const s = t.previousElementSibling; if (s && s.classList.contains("item-plan__features")) { s.classList.toggle("item-plan__features--expanded"), s.classList.toggle("item-plan__features--limited"); const e = t.querySelector("span"); s.classList.contains("item-plan__features--expanded") ? e && (e.textContent = "Show less") : e && (e.textContent = "Show more") } } }) }()
+    const t = function () {
+        const e = document.querySelector("#mc-form");
+        function t(t, s = !1) {
+            let n = e.querySelector(".mc-status");
+            n && (s ? (n.classList.remove("error-message"), n.classList.add("success-message")) : (n.classList.remove("success-message"), n.classList.add("error-message")), n.innerHTML = t)
+        }
+        e && (e.setAttribute("novalidate", !0), e.addEventListener("submit", function (e) {
+            e.preventDefault();
+            let s = e.target.querySelector("#mce-EMAIL"), n = function (e) {
+                if (e.disabled || "file" === e.type || "reset" === e.type || "submit" === e.type || "button" === e.type) return;
+                let t = e.validity;
+                return t.valid ? void 0 : t.valueMissing ? "Please enter an email address." : t.typeMismatch && "email" === e.type ? "Please enter a valid email address." : t.patternMismatch ? e.hasAttribute("title") ? e.getAttribute("title") : "Please match the requested format." : "The value you entered for this field is invalid."
+            }(s);
+            if (n) return t(n, !1), void s.focus();
+            !async function (e) {
+                const s = e.querySelector("#mce-EMAIL"), n = e.querySelector('input[type="submit"]'), i = e.querySelector(".mc-status");
+                if (!s || !n || !i) return;
+                const o = s.value, r = n.value;
+                i.innerHTML = "Submitting...", i.classList.remove("error-message", "success-message"), n.disabled = !0, n.value = "Submitting...";
+                try {
+                    const s = await fetch(`${CONFIG.API_URL}/newsletter/subscribe`, { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ email: o }) }), n = await s.json();
+                    s.ok && n.success ? (t(n.message || "Thank you for subscribing!", !0), e.reset()) : t(n.error?.message || n.message || "An error occurred. Please try again.", !1)
+                } catch (e) {
+                    console.error("Newsletter submission error:", e), t("Connection error. Please try again later.", !1)
+                } finally {
+                    n.disabled = !1, n.value = r
+                }
+            }(this)
+        }, !1))
+    }, s = function () {
+        document.querySelectorAll(".alert-box").forEach(function (e) {
+            e.addEventListener("click", function (t) {
+                t.target.matches(".alert-box__close") && (t.stopPropagation(), t.target.parentElement.classList.add("hideit"), setTimeout(function () { e.style.display = "none" }, 500))
+            })
+        })
+    };
+    !function () {
+        const t = document.querySelector("body"), s = document.querySelector("#preloader");
+        if (s) {
+            e.classList.add("ss-loaded"), t.classList.add("ss-show"), s.style.display = "none"
+        }
+        setTimeout(function () { e.classList.remove("ss-preload") }, 100)
+    }(),
+        function () {
+            const e = document.querySelector(".s-header"), t = document.querySelector("#intro");
+            if (!e || !t) return;
+            let s = 0;
+            const n = function () { s = t.offsetHeight - 170 };
+            requestAnimationFrame(n);
+            window.addEventListener("resize", debounce(n, 200)), window.addEventListener("scroll", function () {
+                let t = window.scrollY;
+                t > s ? e.classList.add("sticky") : e.classList.remove("sticky"), t > s + 20 ? e.classList.add("offset") : e.classList.remove("offset"), t > s + 150 ? e.classList.add("scrolling") : e.classList.remove("scrolling")
+            }, { passive: true })
+        }(),
+        function () {
+            const e = document.querySelector(".s-header__menu-toggle"), t = document.querySelector(".s-header__nav"), s = document.querySelector("body");
+            e && t && (e.addEventListener("click", function (t) {
+                t.preventDefault(), e.classList.toggle("is-clicked"), s.classList.toggle("menu-is-open")
+            }), t.querySelectorAll(".s-header__nav a").forEach(function (t) {
+                t.addEventListener("click", function (t) {
+                    window.matchMedia("(max-width: 800px)").matches && (e.classList.toggle("is-clicked"), s.classList.toggle("menu-is-open"))
+                })
+            }), window.addEventListener("resize", debounce(function () {
+                window.matchMedia("(min-width: 801px)").matches && (s.classList.contains("menu-is-open") && s.classList.remove("menu-is-open"), e.classList.contains("is-clicked") && e.classList.remove("is-clicked"))
+            }, 200)))
+        }(),
+        function () {
+            const e = document.querySelectorAll(".target-section");
+            let t = [];
+            const s = function () {
+                t = [], e.forEach(function (e) {
+                    t.push({ id: e.getAttribute("id"), top: e.offsetTop - 50, height: e.offsetHeight })
+                })
+            };
+            requestAnimationFrame(s);
+            window.addEventListener("resize", debounce(s, 200)), window.addEventListener("scroll", function () {
+                let e = window.pageYOffset;
+                t.forEach(function (t) {
+                    const s = document.querySelector(".s-header__nav a[href*=" + t.id + "]");
+                    s && (e > t.top && e <= t.top + t.height ? s.parentNode.classList.add("current") : s.parentNode.classList.remove("current"))
+                })
+            }, { passive: true })
+        }(),
+        new Swiper(".s-about__info-slider", { slidesPerView: 1, pagination: { el: ".swiper-pagination", clickable: !0 }, breakpoints: { 401: { slidesPerView: 1, spaceBetween: 20 }, 701: { slidesPerView: 2, spaceBetween: 40 }, 1101: { slidesPerView: 3, spaceBetween: 40 } } }),
+        new Swiper(".s-about__screens-slider", { slidesPerView: 1, autoplay: { delay: 3e3, disableOnInteraction: !1 }, loop: !0, speed: 1e3, effect: "slide" }),
+        new Swiper(".s-about__howto-slider", { slidesPerView: 1, pagination: { el: ".swiper-pagination", clickable: !0 }, breakpoints: { 601: { slidesPerView: 2, spaceBetween: 40 } } }),
+        t(),
+        function () {
+            const e = document.querySelector("#contactForm");
+            if (!e) return;
+            const t = document.querySelector(".contact-message");
+            e.addEventListener("submit", function (n) {
+                n.preventDefault();
+                const i = e.querySelector("#submit"), o = i.value;
+                i.value = "Sending...", i.disabled = !0, setTimeout(function () {
+                    t.innerHTML = '\n                        <div class="alert-box alert-box--success">\n                            <p>Your message has been sent. Thank you!</p>\n                            <span class="alert-box__close"></span>\n                        </div>\n                    ', e.reset(), i.value = o, i.disabled = !1, s()
+                }, 1e3)
+            })
+        }(),
+        function () {
+            const e = document.querySelector(".s-intro__content-video-btn");
+            e && e.addEventListener("click", function (e) {
+                const t = "<iframe src='" + this.getAttribute("href") + "' frameborder='0'></iframe>";
+                e.preventDefault(), basicLightbox.create(t).show()
+            })
+        }(),
+        s(),
+        function () {
+            const e = document.querySelectorAll(".smoothscroll"), t = new MoveTo({ tolerance: 0, duration: 1200, easing: "easeInOutCubic", container: window }, { easeInQuad: function (e, t, s, n) { return s * (e /= n) * e + t }, easeOutQuad: function (e, t, s, n) { return -s * (e /= n) * (e - 2) + t }, easeInOutQuad: function (e, t, s, n) { return (e /= n / 2) < 1 ? s / 2 * e * e + t : -s / 2 * (--e * (e - 2) - 1) + t }, easeInOutCubic: function (e, t, s, n) { return (e /= n / 2) < 1 ? s / 2 * e * e * e + t : s / 2 * ((e -= 2) * e * e + 2) + t } });
+            e.forEach(function (e) { t.registerTrigger(e) })
+        }(),
+        function () {
+            const e = document.querySelector("#pricing");
+            e && e.addEventListener("click", function (e) {
+                const t = e.target.closest(".item-plan__show-more");
+                if (t) {
+                    e.preventDefault();
+                    const s = t.previousElementSibling;
+                    if (s && s.classList.contains("item-plan__features")) {
+                        s.classList.toggle("item-plan__features--expanded"), s.classList.toggle("item-plan__features--limited");
+                        const e = t.querySelector("span");
+                        s.classList.contains("item-plan__features--expanded") ? e && (e.textContent = "Show less") : e && (e.textContent = "Show more")
+                    }
+                }
+            })
+        }()
+
 }(document.documentElement);

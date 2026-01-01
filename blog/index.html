@@ -195,16 +195,8 @@
         <link rel="stylesheet" href="/css/styles.css">
     </noscript>
     <link rel="preload" as="image" href="/images/creaty.logo.svg" fetchpriority="high">
-    <link rel="preconnect" href="https://fonts.googleapis.com" crossorigin>
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link rel="preload" as="style"
-        href="https://fonts.googleapis.com/css2?family=Heebo:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600&family=Playfair+Display:ital,wght@1,400;1,700&display=swap"
-        onload="this.onload=null;this.rel='stylesheet'">
-    <noscript>
-        <link
-            href="https://fonts.googleapis.com/css2?family=Heebo:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600&family=Playfair+Display:ital,wght@1,400;1,700&display=swap"
-            rel="stylesheet">
-    </noscript>
+    <link rel="stylesheet"
+        href="https://fonts.googleapis.com/css2?family=Heebo:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600&family=Playfair+Display:ital,wght@1,400;1,700&display=swap">
 
 
     <style>
@@ -533,19 +525,23 @@
     <link rel="manifest" href="/site.webmanifest">
     <meta name="theme-color" content="#ffffff">
 
-    <!-- Google tag (gtag.js) -->
+    <!-- Google Tag Manager deferred loading -->
     <script>
-        window.dataLayer = window.dataLayer || [];
-        function gtag() { dataLayer.push(arguments); }
-        gtag('consent', 'default', {
-            'analytics_storage': 'denied',
-            'ad_storage': 'denied'
+        window.addEventListener('load', function () {
+            setTimeout(function () {
+                var script = document.createElement('script');
+                script.async = true;
+                script.src = "https://www.googletagmanager.com/gtag/js?id=G-SGEM349PX5";
+                document.head.appendChild(script);
+
+                script.onload = function () {
+                    window.dataLayer = window.dataLayer || [];
+                    function gtag() { dataLayer.push(arguments); }
+                    gtag('js', new Date());
+                    gtag('config', 'G-SGEM349PX5');
+                };
+            }, 2000);
         });
-    </script>
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-SGEM349PX5"></script>
-    <script>
-        gtag('js', new Date());
-        gtag('config', 'G-SGEM349PX5');
     </script>
 
 </head>
@@ -576,8 +572,8 @@
                 <div class="s-header__block">
                     <div class="s-header__logo">
                         <a class="logo" href="/">
-                            <img src="/images/creaty.logo.svg" alt="Creaty - Digital Agency Mauritius" width="327"
-                                height="94">
+                            <img src="/images/creaty.logo.svg" alt="Creaty - Digital Agency Mauritius" width="120"
+                                height="34">
                         </a>
                     </div>
 
@@ -771,8 +767,8 @@
                 <div class="column lg-5 md-6 stack-on-900">
                     <div class="footer__logo">
                         <a href="/">
-                            <img src="/images/creaty.logo.svg" alt="Creaty - Digital Agency Mauritius" width="327"
-                                height="94">
+                            <img src="/images/creaty.logo.svg" alt="Creaty - Digital Agency Mauritius" width="120"
+                                height="34">
                         </a>
                     </div>
 
