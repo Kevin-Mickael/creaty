@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" class="no-js">
+<html lang="en" class="no-js ss-preload">
 
 <head>
 
@@ -122,11 +122,53 @@
         }
 
         #preloader {
-            display: none !important;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: #ffffff;
+            z-index: 10000;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.5s ease;
+        }
+
+        #preloader.ss-loaded {
+            opacity: 0;
+            visibility: hidden;
+        }
+
+        #loader {
+            width: 40px;
+            height: 40px;
+            border: 3px solid #f3f3f3;
+            border-top: 3px solid #000000;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+        }
+
+        @keyframes spin {
+            0% {
+                transform: rotate(0deg);
+            }
+
+            100% {
+                transform: rotate(360deg);
+            }
         }
 
         .ss-preload {
-            overflow: visible !important;
+            overflow: hidden !important;
+        }
+
+        .ss-preload body {
+            opacity: 0;
+        }
+
+        .ss-show body {
+            opacity: 1;
         }
 
         .s-header {
@@ -948,7 +990,7 @@
                     // 1. Try fetching by slug filter
                     console.log('Attempting slug fetch...');
                     try {
-                        const response = await fetchWithTimeout(`${CONFIG.API_URL}/articles?filters[slug][$eq]=${slug}&populate=*`);
+                        const response = await fetchWithTimeout(`${CONFIG.API_URL}/articles?filters[slug][$eq]=${slug}&fields[0]=title&fields[1]=content&fields[2]=publishedAt&fields[3]=category&fields[4]=readTime&fields[5]=description&fields[6]=slug&fields[7]=updatedAt&fields[8]=excerpt&populate[image][fields][0]=url&populate[image][fields][1]=width&populate[image][fields][2]=height&populate[image][fields][3]=formats&populate[author][fields][0]=name`);
                         if (response.ok) {
                             const { data } = await response.json();
                             if (data && data.length > 0) {
@@ -964,7 +1006,7 @@
                     if (!article) {
                         console.log('Attempting direct documentId fetch...');
                         try {
-                            const responseById = await fetchWithTimeout(`${CONFIG.API_URL}/articles/${slug}?populate=*`);
+                            const responseById = await fetchWithTimeout(`${CONFIG.API_URL}/articles/${slug}?fields[0]=title&fields[1]=content&fields[2]=publishedAt&fields[3]=category&fields[4]=readTime&fields[5]=description&fields[6]=slug&fields[7]=updatedAt&fields[8]=excerpt&populate[image][fields][0]=url&populate[image][fields][1]=width&populate[image][fields][2]=height&populate[image][fields][3]=formats&populate[author][fields][0]=name`);
                             if (responseById.ok) {
                                 const singleData = await responseById.json();
                                 if (singleData.data) {

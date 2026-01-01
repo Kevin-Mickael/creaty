@@ -118,7 +118,7 @@ async function fetchLatestNews() {
     if (!container) return;
     try {
         const apiUrl = typeof CONFIG !== "undefined" ? CONFIG.API_URL : "https://creaty-strapi.railway.app/api";
-        const response = await fetch(`${apiUrl}/articles?populate=*&pagination[pageSize]=3&sort[0]=publishedAt:desc`);
+        const response = await fetch(`${apiUrl}/articles?fields[0]=title&fields[1]=slug&fields[2]=publishedAt&pagination[pageSize]=3&sort[0]=publishedAt:desc`);
         if (!response.ok) throw new Error("Failed to fetch");
         const { data: data } = await response.json();
         if (!data || data.length === 0) {
