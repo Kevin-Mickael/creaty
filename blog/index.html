@@ -952,20 +952,17 @@
                 const slug = urlParams.get('slug');
 
                 if (!slug) {
-                    console.log('No slug found, redirecting to /news');
                     window.location.href = '/news';
                     return;
                 }
 
-                // Global Timeout to stop all loading indicators after 10s
+                // Global timeout - 8 seconds max
                 const globalTimeout = setTimeout(() => {
-                    console.warn('Global loading timeout reached.');
-                    handleArticleError('Article loading timeout. Please refresh and try again.');
-                }, 10000);
+                    handleArticleError('Timeout: article took too long to load.');
+                }, 8000);
 
                 try {
-                    // Build single, clean Strapi query
-                    // Use filters[slug][$eq] to match article by slug field
+                    // Build clean Strapi query with proper encoding
                     const params = new URLSearchParams();
                     params.append('filters[slug][$eq]', slug);
                     params.append('populate', 'image');
@@ -980,27 +977,23 @@
                     params.append('fields', 'excerpt');
                     params.append('fields', 'author');
 
-                    console.log('Fetching article with slug:', slug);
                     const url = `${CONFIG.API_URL}/articles?${params.toString()}`;
-                    console.log('Request URL:', url);
 
-                    // Single fetch attempt - NO RETRIES, NO FALLBACK
+                    // Single fetch - no retries, no fallback
                     const controller = new AbortController();
-                    const timeoutId = setTimeout(() => controller.abort(), 8000);
+                    const timeoutId = setTimeout(() => controller.abort(), 7000);
 
                     const response = await fetch(url, { signal: controller.signal });
                     clearTimeout(timeoutId);
 
-                    // Handle HTTP errors
                     if (!response.ok) {
-                        throw new Error(`HTTP ${response.status}: ${response.statusText}`);
+                        throw new Error(`Server error: ${response.status}`);
                     }
 
                     const { data } = await response.json();
 
-                    // Check if article was found
-                    if (!data || data.length === 0) {
-                        throw new Error('Article not found in database.');
+                    if (!data || !Array.isArray(data) || data.length === 0) {
+                        throw new Error('Article not found.');
                     }
 
                     const article = data[0];
@@ -1008,17 +1001,16 @@
                         throw new Error('Invalid article data.');
                     }
 
-                    // Success - render article
+                    // Render article
                     currentArticleDocumentId = article.documentId || article.id;
                     renderArticle(article);
                     loadComments(currentArticleDocumentId);
                     clearTimeout(globalTimeout);
 
                 } catch (error) {
-                    console.error('Error loading article:', error.message);
-                    handleArticleError(error.message);
+                    handleArticleError('Unable to load article. Please check the article exists and is published.');
                 } finally {
-                    // Ensure skeletons and preloader are removed
+                    // Remove loading state
                     document.querySelectorAll('.skeleton').forEach(el => el.classList.remove('skeleton'));
                     const preloader = document.getElementById('preloader');
                     if (preloader) {
