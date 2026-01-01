@@ -272,72 +272,68 @@
 
         };
 
-        // Show error message
-        function showError(field, error) {
+        // Show status message
+        function showStatus(message, isSuccess = false) {
 
-            // Get field id or name
-            let id = field.id || field.name;
-            if (!id) return;
+            let errorMessage = mcForm.querySelector('.mc-status');
+            if (!errorMessage) return;
 
-            let errorMessage = field.form.querySelector('.mc-status');
-
-            // Update error message
-            errorMessage.classList.remove('success-message');
-            errorMessage.classList.add('error-message');
-            errorMessage.innerHTML = error;
-
-        };
-
-        // Display form status (callback function for JSONP)
-        window.displayMailChimpStatus = function (data) {
-
-            // Make sure the data is in the right format and that there's a status container
-            if (!data.result || !data.msg || !mcStatus) return;
-
-            // Update our status message
-            mcStatus.innerHTML = data.msg;
-
-            // If error, add error class
-            if (data.result === 'error') {
-                mcStatus.classList.remove('success-message');
-                mcStatus.classList.add('error-message');
-                return;
+            // Update status message
+            if (isSuccess) {
+                errorMessage.classList.remove('error-message');
+                errorMessage.classList.add('success-message');
+            } else {
+                errorMessage.classList.remove('success-message');
+                errorMessage.classList.add('error-message');
             }
+            errorMessage.innerHTML = message;
 
-            // Otherwise, add success class
-            mcStatus.classList.remove('error-message');
-            mcStatus.classList.add('success-message');
         };
 
         // Submit the form 
-        function submitMailChimpForm(form) {
+        async function submitNewsletterForm(form) {
 
-            let url = cfg.mailChimpURL;
-            let emailField = form.querySelector('#mce-EMAIL');
-            let serialize = '&' + encodeURIComponent(emailField.name) + '=' + encodeURIComponent(emailField.value);
+            const emailField = form.querySelector('#mce-EMAIL');
+            const submitBtn = form.querySelector('input[type="submit"]');
+            const statusEl = form.querySelector('.mc-status');
 
-            if (url == '') return;
+            if (!emailField || !submitBtn || !statusEl) return;
 
-            url = url.replace('/post?u=', '/post-json?u=');
-            url += serialize + '&c=displayMailChimpStatus';
+            const email = emailField.value;
+            const originalBtnValue = submitBtn.value;
 
-            // Create script with url and callback (if specified)
-            var ref = window.document.getElementsByTagName('script')[0];
-            var script = window.document.createElement('script');
-            script.src = url;
+            // Reset status
+            statusEl.innerHTML = 'Submitting...';
+            statusEl.classList.remove('error-message', 'success-message');
+            submitBtn.disabled = true;
+            submitBtn.value = 'Submitting...';
 
-            // Create global variable for the status container
-            window.mcStatus = form.querySelector('.mc-status');
-            window.mcStatus.classList.remove('error-message', 'success-message')
-            window.mcStatus.innerText = 'Submitting...';
+            try {
+                // Use CONFIG.API_URL from js/config.js
+                const response = await fetch(`${CONFIG.API_URL}/newsletter/subscribe`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({ email }),
+                });
 
-            // Insert script tag into the DOM
-            ref.parentNode.insertBefore(script, ref);
+                const result = await response.json();
 
-            // After the script is loaded (and executed), remove it
-            script.onload = function () {
-                this.remove();
-            };
+                if (response.ok && result.success) {
+                    showStatus(result.message || 'Thank you for subscribing!', true);
+                    form.reset();
+                } else {
+                    const errorMsg = result.error?.message || result.message || 'An error occurred. Please try again.';
+                    showStatus(errorMsg, false);
+                }
+            } catch (error) {
+                console.error('Newsletter submission error:', error);
+                showStatus('Connection error. Please try again later.', false);
+            } finally {
+                submitBtn.disabled = false;
+                submitBtn.value = originalBtnValue;
+            }
 
         };
 
@@ -350,12 +346,12 @@
             let error = hasError(emailField);
 
             if (error) {
-                showError(emailField, error);
+                showStatus(error, false);
                 emailField.focus();
                 return;
             }
 
-            submitMailChimpForm(this);
+            submitNewsletterForm(this);
 
         }, false);
 

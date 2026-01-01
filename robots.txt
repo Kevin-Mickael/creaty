@@ -57,7 +57,7 @@ Allow: /
 # --- END AI INTEGRATION ---
 
 # Sitemap Location
-Sitemap: https://creatymu.org/sitemap.xml
+Sitemap: https://admin.creatymu.org/api/sitemap.xml
 
 # Disallow internal directories
 Disallow: /strapi-blog/
