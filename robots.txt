@@ -4,6 +4,58 @@
 User-agent: *
 Allow: /
 
+# --- TOTAL AI INTEGRATION (Generative Engine Optimization) ---
+
+# OpenAI (ChatGPT, GPT-4, SearchGPT)
+User-agent: GPTBot
+User-agent: ChatGPT-User
+User-agent: OAI-SearchBot
+Allow: /
+
+# Google (Gemini, AI Overviews)
+User-agent: Google-Extended
+Allow: /
+
+# Anthropic (Claude)
+User-agent: ClaudeBot
+User-agent: Claude-User
+User-agent: Claude-SearchBot
+Allow: /
+
+# Perplexity AI
+User-agent: PerplexityBot
+User-agent: Perplexity-User
+Allow: /
+
+# Meta (Meta AI)
+User-agent: meta-externalagent
+User-agent: facebookexternalhit
+Allow: /
+
+# Apple (Apple Intelligence)
+User-agent: Applebot-Extended
+Allow: /
+
+# Amazon (Alexa, Amazon AI)
+User-agent: Amazonbot
+Allow: /
+
+# Common Crawl (Universal AI Training Data)
+User-agent: CCBot
+Allow: /
+
+# ByteDance (TikTok AI / Knowledge Graph)
+User-agent: Bytespider
+Allow: /
+
+# Other AI Data Aggregators
+User-agent: Omgilibot
+User-agent: webzio-extended
+User-agent: Diffbot
+Allow: /
+
+# --- END AI INTEGRATION ---
+
 # Sitemap Location
 Sitemap: https://creatymu.org/sitemap.xml
 
@@ -11,9 +63,29 @@ Sitemap: https://creatymu.org/sitemap.xml
 Disallow: /strapi-blog/
 Disallow: /.git/
 
-# Allow search engines to index all public content
+# Standard Search Engines
 User-agent: Googlebot
 Allow: /
 
 User-agent: Bingbot
+Allow: /
+
+# Global Search Bots (Multi-Engine Indexing)
+User-agent: Yandex
+User-agent: YandexBot
+Allow: /
+
+User-agent: Slurp
+Allow: /
+
+User-agent: DuckDuckBot
+Allow: /
+
+User-agent: Baiduspider
+Allow: /
+
+User-agent: Sogou web spider
+Allow: /
+
+User-agent: Exabot
 Allow: /
