@@ -23,24 +23,27 @@ function loadGoogleAnalytics() {
 async function acceptCookies() {
     const apiUrl = typeof CONFIG !== "undefined" ? CONFIG.API_URL : "https://creaty-strapi.railway.app/api";
 
+    // Immediate UI response
+    closeCookieBanner();
+    sessionStorage.setItem("consentVerified", "true");
+    loadGoogleAnalytics();
+
     try {
-        const response = await fetch(`${apiUrl}/consent/accept`, {
+        await fetch(`${apiUrl}/consent/accept`, {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
-            // Credentials included for HttpOnly cookie
             credentials: 'include'
         });
-
-        if (response.ok) {
-            loadGoogleAnalytics();
-            closeCookieBanner();
-            // We can also set a session flag to avoid checking API on every single internal navigation if needed
-            sessionStorage.setItem("consentVerified", "true");
-        }
     } catch (error) {
-        console.error("Error accepting cookies:", error);
-        // Fallback or silently fail
+        console.error("Error accepting cookies (background):", error);
     }
+}
+
+function declineCookies() {
+    closeCookieBanner();
+    // Persist decline Choice for the session to avoid re-prompting
+    sessionStorage.setItem("consentVerified", "declined");
+    console.log("Cookies declined for this session.");
 }
 
 function closeCookieBanner() {
@@ -49,9 +52,14 @@ function closeCookieBanner() {
 }
 
 async function checkConsent() {
-    // Optimization: avoid API call if already verified in this session
-    if (sessionStorage.getItem("consentVerified") === "true") {
+    const consentStatus = sessionStorage.getItem("consentVerified");
+
+    if (consentStatus === "true") {
         loadGoogleAnalytics();
+        return;
+    }
+
+    if (consentStatus === "declined") {
         return;
     }
 
@@ -81,7 +89,10 @@ function showCookieBanner() {
     const cookieBanner = document.getElementById("cookie-banner");
     if (cookieBanner) {
         setTimeout(function () {
-            cookieBanner.classList.add("show");
+            // Only show if no choice was made in this session yet
+            if (!sessionStorage.getItem("consentVerified")) {
+                cookieBanner.classList.add("show");
+            }
         }, 2000);
     }
 }
