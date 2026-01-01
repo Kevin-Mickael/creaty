@@ -965,53 +965,77 @@
                     if (preloader) preloader.style.display = 'none';
                 }, 15000);
 
+                /**
+                 * Enhanced Fetch with Retry and Rate Limiting support
+                 */
+                const fetchWithRetry = async (url, options = {}, retries = 3, backoff = 1000) => {
+                    const controller = new AbortController();
+                    const timeoutId = setTimeout(() => controller.abort(), options.timeout || 10000);
+
+                    try {
+                        const response = await fetch(url, { ...options, signal: controller.signal });
+                        clearTimeout(timeoutId);
+
+                        if (response.status === 429 && retries > 0) {
+                            console.warn(`Rate limited (429). Retrying in ${backoff}ms...`);
+                            await new Promise(resolve => setTimeout(resolve, backoff));
+                            return fetchWithRetry(url, options, retries - 1, backoff * 2);
+                        }
+
+                        return response;
+                    } catch (e) {
+                        clearTimeout(timeoutId);
+                        if (retries > 0 && (e.name === 'AbortError' || e.name === 'TypeError')) {
+                            console.warn(`Fetch error or timeout. Retrying in ${backoff}ms...`, e.message);
+                            await new Promise(resolve => setTimeout(resolve, backoff));
+                            return fetchWithRetry(url, options, retries - 1, backoff * 2);
+                        }
+                        throw e;
+                    }
+                };
+
                 try {
                     console.log('Fetching article with slug/documentId:', slug);
-
-                    const fetchWithTimeout = async (url, options = {}, timeout = 10000) => {
-                        const controller = new AbortController();
-                        const id = setTimeout(() => controller.abort(), timeout);
-                        try {
-                            const response = await fetch(url, { ...options, signal: controller.signal });
-                            clearTimeout(id);
-                            return response;
-                        } catch (e) {
-                            clearTimeout(id);
-                            throw e;
-                        }
-                    };
-
                     let article = null;
+
+                    // Strapi Query with optimized population
+                    // Note: 'author' is a string field, so it shouldn't be in 'populate'
+                    const baseFields = 'fields[0]=title&fields[1]=content&fields[2]=publishedAt&fields[3]=category&fields[4]=readTime&fields[5]=description&fields[6]=slug&fields[7]=updatedAt&fields[8]=excerpt&fields[9]=author';
+                    const populateImg = 'populate[image][fields][0]=url&populate[image][fields][1]=width&populate[image][fields][2]=height&populate[image][fields][3]=formats';
 
                     // 1. Try fetching by slug filter
                     console.log('Attempting slug fetch...');
                     try {
-                        const response = await fetchWithTimeout(`${CONFIG.API_URL}/articles?filters[slug][$eq]=${slug}&fields[0]=title&fields[1]=content&fields[2]=publishedAt&fields[3]=category&fields[4]=readTime&fields[5]=description&fields[6]=slug&fields[7]=updatedAt&fields[8]=excerpt&populate[image][fields][0]=url&populate[image][fields][1]=width&populate[image][fields][2]=height&populate[image][fields][3]=formats&populate[author][fields][0]=name`);
+                        const response = await fetchWithRetry(`${CONFIG.API_URL}/articles?filters[slug][$eq]=${slug}&${baseFields}&${populateImg}`);
                         if (response.ok) {
                             const { data } = await response.json();
                             if (data && data.length > 0) {
                                 console.log('Article found via slug filter');
                                 article = data[0];
                             }
+                        } else {
+                            console.warn('Slug fetch returned status:', response.status);
                         }
                     } catch (e) {
-                        console.warn('Slug fetch failed or timed out:', e);
+                        console.warn('Slug fetch failed after retries:', e);
                     }
 
                     // 2. Fallback: Try direct documentId fetch if not found by slug
                     if (!article) {
                         console.log('Attempting direct documentId fetch...');
                         try {
-                            const responseById = await fetchWithTimeout(`${CONFIG.API_URL}/articles/${slug}?fields[0]=title&fields[1]=content&fields[2]=publishedAt&fields[3]=category&fields[4]=readTime&fields[5]=description&fields[6]=slug&fields[7]=updatedAt&fields[8]=excerpt&populate[image][fields][0]=url&populate[image][fields][1]=width&populate[image][fields][2]=height&populate[image][fields][3]=formats&populate[author][fields][0]=name`);
+                            const responseById = await fetchWithRetry(`${CONFIG.API_URL}/articles/${slug}?${baseFields}&${populateImg}`);
                             if (responseById.ok) {
                                 const singleData = await responseById.json();
                                 if (singleData.data) {
                                     console.log('Article found via direct fetch');
                                     article = singleData.data;
                                 }
+                            } else {
+                                console.warn('Direct fetch returned status:', responseById.status);
                             }
                         } catch (e) {
-                            console.warn('Direct fetch failed or timed out:', e);
+                            console.warn('Direct fetch failed after retries:', e);
                         }
                     }
 
@@ -1343,7 +1367,7 @@
 
             async function loadComments(articleDocId) {
                 try {
-                    const response = await fetch(`${CONFIG.API_URL}/comments?filters[article][documentId][$eq]=${articleDocId}&populate=*&sort=createdAt:desc`);
+                    const response = await fetchWithRetry(`${CONFIG.API_URL}/comments?filters[article][documentId][$eq]=${articleDocId}&populate=*&sort=createdAt:desc`);
                     if (!response.ok) return;
                     const { data } = await response.json();
                     renderComments(data);
@@ -1419,7 +1443,7 @@
                 statusEl.innerHTML = '';
 
                 try {
-                    const response = await fetch(`${CONFIG.API_URL}/comments`, {
+                    const response = await fetchWithRetry(`${CONFIG.API_URL}/comments`, {
                         method: 'POST',
                         headers: {
                             'Content-Type': 'application/json',
@@ -1454,7 +1478,6 @@
                 }
             });
         </script>
-        <script src="/js/main.js"></script>
 
 </body>
 

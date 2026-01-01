@@ -84,10 +84,19 @@
                 })
             }, { passive: true })
         }(),
-        new Swiper(".s-about__info-slider", { slidesPerView: 1, pagination: { el: ".swiper-pagination", clickable: !0 }, breakpoints: { 401: { slidesPerView: 1, spaceBetween: 20 }, 701: { slidesPerView: 2, spaceBetween: 40 }, 1101: { slidesPerView: 3, spaceBetween: 40 } } }),
-        new Swiper(".s-about__screens-slider", { slidesPerView: 1, autoplay: { delay: 3e3, disableOnInteraction: !1 }, loop: !0, speed: 1e3, effect: "slide" }),
-        new Swiper(".s-about__howto-slider", { slidesPerView: 1, pagination: { el: ".swiper-pagination", clickable: !0 }, breakpoints: { 601: { slidesPerView: 2, spaceBetween: 40 } } }),
+
+        function () {
+            if (typeof Swiper !== "undefined") {
+                new Swiper(".s-about__info-slider", { slidesPerView: 1, pagination: { el: ".swiper-pagination", clickable: !0 }, breakpoints: { 401: { slidesPerView: 1, spaceBetween: 20 }, 701: { slidesPerView: 2, spaceBetween: 40 }, 1101: { slidesPerView: 3, spaceBetween: 40 } } });
+                new Swiper(".s-about__screens-slider", { slidesPerView: 1, autoplay: { delay: 3e3, disableOnInteraction: !1 }, loop: !0, speed: 1e3, effect: "slide" });
+                new Swiper(".s-about__howto-slider", { slidesPerView: 1, pagination: { el: ".swiper-pagination", clickable: !0 }, breakpoints: { 601: { slidesPerView: 2, spaceBetween: 40 } } });
+            } else {
+                console.warn("Swiper library not loaded. Sliders skipped.");
+            }
+        }(),
+
         t(),
+
         function () {
             const e = document.querySelector("#contactForm");
             if (!e) return;
