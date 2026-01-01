@@ -50,27 +50,39 @@
     </script>
 
     <!-- DNS Prefetch for Performance -->
+    <link rel="preload" as="image" href="images/hero_creaty1.webp" fetchpriority="high">
     <link rel="dns-prefetch" href="//fonts.googleapis.com">
     <link rel="dns-prefetch" href="//fonts.gstatic.com">
     <link rel="dns-prefetch" href="//cdn.dribbble.com">
 
     <!-- CSS
     ================================================== -->
-    <link rel="stylesheet" href="css/vendor.css">
-    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="css/vendor.css" media="print" onload="this.media='all'">
+    <link rel="stylesheet" href="css/styles.css" media="print" onload="this.media='all'">
+    <noscript>
+        <link rel="stylesheet" href="css/vendor.css">
+        <link rel="stylesheet" href="css/styles.css">
+    </noscript>
 
     <!-- favicons
     ================================================== -->
-    <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
-    <link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png">
-    <link rel="icon" type="image/png" sizes="16x16" href="favicon-16x16.png">
-    <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
-    <link rel="icon" href="favicon.ico" type="image/x-icon">
-    <link rel="manifest" href="site.webmanifest">
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="192x192" href="/android-chrome-192x192.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+    <link rel="icon" type="image/x-icon" href="/favicon.ico">
+    <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico">
+    <link rel="manifest" href="/site.webmanifest">
     <link rel="preconnect" href="https://fonts.googleapis.com" crossorigin>
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="preload" as="style"
+        href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@1,400;1,700&display=swap">
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@1,400;1,700&display=swap"
-        rel="stylesheet">
+        rel="stylesheet" media="print" onload="this.media='all'">
+    <noscript>
+        <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@1,400;1,700&display=swap"
+            rel="stylesheet">
+    </noscript>
     <meta name="theme-color" content="#ffffff">
 
 
@@ -280,7 +292,7 @@
                         <li><a href="#pricing" class="smoothscroll">Pricing</a></li>
                         <li><a href="#faq" class="smoothscroll">FAQ</a></li>
                         <li><a href="/news">News</a></li>
-                        <li><a href="/legal">Terms</a></li>
+                        <li><a href="/legal" aria-label="Terms and Conditions">Terms & Conditions</a></li>
                     </ul>
                 </nav>
 
@@ -1277,18 +1289,19 @@
                         <li><a href="#pricing">Pricing</a></li>
                         <li><a href="#faq">FAQ</a></li>
                         <li><a href="/news">News</a></li>
-                        <li><a href="/legal">Terms</a></li>
+                        <li><a href="/legal" aria-label="Terms and Conditions">Terms & Conditions</a></li>
                     </ul>
 
                     <p class="s-footer__contact">
                         Do you have a question? Send us a word: <br>
-                        <a href="mailto:#0" class="s-footer__mail-link">support@creatymu.org</a>
+                        <a href="mailto:support@creatymu.org" class="s-footer__mail-link">support@creatymu.org</a>
                     </p>
 
                     <div class="ss-copyright">
                         <span>© Creaty 2025 — Operated by <b>Creativfolio Ltd</b>, registered in Mauritius • <b>BRN:
                                 C25227739</b></span>
-                        <span>Created by <a href="https://creativfolio.com/">Création de Site Web & Portfolio
+                        <span>Created by <a href="https://creativfolio.com/"
+                                title="Web Design & Branding Mauritius">Creativfolio</a></span>
                     </div>
                 </div>
 
@@ -1310,7 +1323,8 @@
             <div class="cookie-banner__content">
                 <h4>We Value Your Privacy</h4>
                 <p>We use cookies to enhance your browsing experience and analyze our traffic. By clicking "Accept", you
-                    consent to our use of cookies. <a href="/legal" class="link-primary-underline">Learn more</a></p>
+                    consent to our use of cookies. <a href="/legal" class="link-primary-underline"
+                        title="Read our Legal & Privacy Policy">Learn more about our Terms & Privacy Policy</a></p>
                 <div class="cookie-banner__buttons">
                     <button class="cookie-banner__btn cookie-banner__btn--accept"
                         onclick="acceptCookies()">Accept</button>
@@ -1359,10 +1373,10 @@
 
         <!-- Java Script
     ================================================== -->
-        <script src="js/plugins.js"></script>
-        <script src="js/config.js"></script>
-        <script src="js/promo.js"></script>
-        <script src="js/main.js"></script>
+        <script src="js/plugins.js" defer></script>
+        <script src="js/config.js" defer></script>
+        <script src="js/promo.js" defer></script>
+        <script src="js/main.js" defer></script>
 
         <script>
             document.addEventListener('DOMContentLoaded', () => {

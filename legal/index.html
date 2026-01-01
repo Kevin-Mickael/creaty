@@ -60,8 +60,12 @@
 
     <!-- CSS
     ================================================== -->
-    <link rel="stylesheet" href="/css/vendor.css">
-    <link rel="stylesheet" href="/css/styles.css">
+    <link rel="stylesheet" href="/css/vendor.css" media="print" onload="this.media='all'">
+    <link rel="stylesheet" href="/css/styles.css" media="print" onload="this.media='all'">
+    <noscript>
+        <link rel="stylesheet" href="/css/vendor.css">
+        <link rel="stylesheet" href="/css/styles.css">
+    </noscript>
 
 
     <style>
@@ -123,10 +127,11 @@
     <!-- favicons
     ================================================== -->
     <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="192x192" href="/android-chrome-192x192.png">
     <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
     <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
-    <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon">
-    <link rel="icon" href="/favicon.ico" type="image/x-icon">
+    <link rel="icon" type="image/x-icon" href="/favicon.ico">
+    <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico">
     <link rel="manifest" href="/site.webmanifest">
     <meta name="theme-color" content="#ffffff">
 
@@ -359,7 +364,7 @@
                         <li><a href="/#pricing">Pricing</a></li>
                         <li><a href="/#faq">FAQ</a></li>
                         <li><a href="/news">News</a></li>
-                        <li><a href="/legal">Terms</a></li>
+                        <li><a href="/legal" aria-label="Terms and Conditions">Terms & Conditions</a></li>
                     </ul>
 
                     <p class="s-footer__contact">
@@ -391,7 +396,8 @@
             <div class="cookie-banner__content">
                 <h4>We Value Your Privacy</h4>
                 <p>We use cookies to enhance your browsing experience and analyze our traffic. By clicking "Accept", you
-                    consent to our use of cookies. <a href="/legal" class="link-primary-underline">Learn more</a></p>
+                    consent to our use of cookies. <a href="/legal" class="link-primary-underline"
+                        title="Read our Legal & Privacy Policy">Learn more about our Terms & Privacy Policy</a></p>
                 <div class="cookie-banner__buttons">
                     <button class="cookie-banner__btn cookie-banner__btn--accept"
                         onclick="acceptCookies()">Accept</button>
@@ -440,10 +446,10 @@
 
         <!-- Java Script
     ================================================== -->
-        <script src="/js/plugins.js"></script>
-        <script src="/js/config.js"></script>
-        <script src="/js/promo.js"></script>
-        <script src="/js/main.js"></script>
+        <script src="/js/plugins.js" defer></script>
+        <script src="/js/config.js" defer></script>
+        <script src="/js/promo.js" defer></script>
+        <script src="/js/main.js" defer></script>
 
 </body>
 
