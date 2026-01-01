@@ -8,21 +8,16 @@ const GA_ID = 'G-SGEM349PX5';
 function loadGoogleAnalytics() {
     if (window.gaLoaded) return;
 
-    // Inject Google Tag script
-    const script = document.createElement('script');
-    script.async = true;
-    script.src = `https://www.googletagmanager.com/gtag/js?id=${GA_ID}`;
-    document.head.appendChild(script);
-
-    // Initialize dataLayer and gtag
-    window.dataLayer = window.dataLayer || [];
-    function gtag() { dataLayer.push(arguments); }
-    window.gtag = gtag;
-    gtag('js', new Date());
-    gtag('config', GA_ID);
+    // Update Google Consent Mode
+    if (window.gtag) {
+        window.gtag('consent', 'update', {
+            'analytics_storage': 'granted',
+            'ad_storage': 'granted'
+        });
+    }
 
     window.gaLoaded = true;
-    console.log('Google Analytics loaded.');
+    console.log('Google Analytics consent granted.');
 }
 
 async function acceptCookies() {

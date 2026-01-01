@@ -62,28 +62,103 @@
 
     <!-- CSS
     ================================================== -->
-    <link rel="stylesheet" href="/css/vendor.css">
-    <link rel="stylesheet" href="/css/styles.css">
-    <link rel="preload" href="/css/styles.css" as="style">
+    <!-- Critical CSS
+    ================================================== -->
+    <style>
+        :root {
+            --font-sans: 'Inter', sans-serif;
+            --font-serif: 'Playfair Display', serif;
+            --font-heebo: 'Heebo', sans-serif;
+            --white: #ffffff;
+            --black: #000000;
+        }
+
+        html {
+            line-height: 1.15;
+            -webkit-text-size-adjust: 100%;
+            height: 100%;
+        }
+
+        body {
+            margin: 0;
+            font-family: var(--font-sans);
+            font-size: 1.8rem;
+            line-height: 1.667;
+            color: #555555;
+            background-color: var(--white);
+            height: 100%;
+        }
+
+        #preloader {
+            display: none !important;
+        }
+
+        .ss-preload {
+            overflow: visible !important;
+        }
+
+        .s-header {
+            z-index: 100;
+            width: 100%;
+            height: 88px;
+            position: absolute;
+            top: 0;
+            left: 0;
+        }
+
+        .s-header__logo img {
+            width: 120px;
+            height: 30px;
+        }
+    </style>
+
+    <!-- Defer Non-Critical CSS
+    ================================================== -->
+    <link rel="preload" href="/css/vendor.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+    <link rel="preload" href="/css/styles.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+    <noscript>
+        <link rel="stylesheet" href="/css/vendor.css">
+        <link rel="stylesheet" href="/css/styles.css">
+    </noscript>
     <link rel="preload" as="image" href="/images/creaty.logo.svg" fetchpriority="high">
     <link rel="preconnect" href="https://fonts.googleapis.com" crossorigin>
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link rel="preload" as="style"
-        href="https://fonts.googleapis.com/css2?family=Heebo:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600&family=Playfair+Display:ital,wght@1,400;1,700&display=swap">
-    <link
         href="https://fonts.googleapis.com/css2?family=Heebo:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600&family=Playfair+Display:ital,wght@1,400;1,700&display=swap"
-        rel="stylesheet">
+        onload="this.onload=null;this.rel='stylesheet'">
+    <noscript>
+        <link
+            href="https://fonts.googleapis.com/css2?family=Heebo:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600&family=Playfair+Display:ital,wght@1,400;1,700&display=swap"
+            rel="stylesheet">
+    </noscript>
 
     <!-- favicons
     ================================================== -->
     <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
     <link rel="icon" type="image/png" sizes="192x192" href="/android-chrome-192x192.png">
+    <link rel="icon" type="image/png" sizes="96x96" href="/favicon-96x96.png">
+    <link rel="icon" type="image/png" sizes="48x48" href="/favicon-48x48.png">
     <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
     <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
     <link rel="icon" type="image/x-icon" href="/favicon.ico">
     <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico">
     <link rel="manifest" href="/site.webmanifest">
     <meta name="theme-color" content="#ffffff">
+
+    <!-- Google tag (gtag.js) -->
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag() { dataLayer.push(arguments); }
+        gtag('consent', 'default', {
+            'analytics_storage': 'denied',
+            'ad_storage': 'denied'
+        });
+    </script>
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-SGEM349PX5"></script>
+    <script>
+        gtag('js', new Date());
+        gtag('config', 'G-SGEM349PX5');
+    </script>
 
 </head>
 
