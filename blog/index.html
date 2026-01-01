@@ -42,10 +42,14 @@
 
     <!-- OpenGraph / Facebook (Dynamic) -->
     <meta id="og-type" property="og:type" content="article">
-    <meta id="og-url" property="og:url" content="">
-    <meta id="og-title" property="og:title" content="">
-    <meta id="og-description" property="og:description" content="">
-    <meta id="og-image" property="og:image" content="">
+    <meta id="og-url" property="og:url" content="https://creatymu.org/blog">
+    <meta id="og-title" property="og:title" content="Creaty Blog">
+    <meta id="og-description" property="og:description" content="Read our latest insights.">
+    <meta id="og-image" property="og:image" content="https://creatymu.org/images/og-image.png">
+    <meta id="og-image-secure" property="og:image:secure_url" content="https://creatymu.org/images/og-image.png">
+    <meta id="og-image-type" property="og:image:type" content="image/png">
+    <meta id="og-image-width" property="og:image:width" content="1200">
+    <meta id="og-image-height" property="og:image:height" content="630">
     <meta property="og:locale" content="en_MU">
     <meta property="og:site_name" content="Creaty">
     <meta id="og-article-published" property="article:published_time" content="">
@@ -53,9 +57,9 @@
 
     <!-- Twitter Card (Dynamic) -->
     <meta name="twitter:card" content="summary_large_image">
-    <meta id="twitter-title" name="twitter:title" content="">
-    <meta id="twitter-description" name="twitter:description" content="">
-    <meta id="twitter-image" name="twitter:image" content="">
+    <meta id="twitter-title" name="twitter:title" content="Creaty Blog">
+    <meta id="twitter-description" name="twitter:description" content="Read our latest insights.">
+    <meta id="twitter-image" name="twitter:image" content="https://creatymu.org/images/og-image.png">
 
     <!-- Article Schema (populated via JavaScript) -->
     <script id="article-schema" type="application/ld+json">
@@ -919,25 +923,56 @@
                 const attrs = article.attributes || article;
                 console.log('Rendering article data:', attrs);
 
-                // Build image URL - Ensure absolute for OG tags
+                // Build image URL - Robust Multi-layer Detection
+                let imageObj = attrs.image;
                 let imageUrl = 'https://creatymu.org/images/og-image.png';
-                if (attrs.image) {
+                let imgWidth = 1200;
+                let imgHeight = 630;
+
+                if (imageObj) {
                     let path = '';
-                    if (attrs.image.data?.attributes?.url) {
-                        path = attrs.image.data.attributes.url;
-                    } else if (attrs.image.url) {
-                        path = attrs.image.url;
+                    const data = imageObj.data?.attributes || imageObj.attributes || imageObj;
+
+                    // 1. Try to find the best format (Large -> Medium -> Small -> Thumbnail -> Main)
+                    if (data.formats) {
+                        const formats = data.formats;
+                        const bestFormat = formats.large || formats.medium || formats.small || formats.thumbnail;
+                        path = bestFormat?.url || data.url;
+                        imgWidth = bestFormat?.width || data.width || 1200;
+                        imgHeight = bestFormat?.height || data.height || 630;
+                    } else {
+                        path = data.url;
+                        imgWidth = data.width || 1200;
+                        imgHeight = data.height || 630;
                     }
 
                     if (path) {
-                        imageUrl = path.startsWith('http') ? path : CONFIG.STRAPI_BASE_URL + path;
+                        // Handle protocol-relative URLs
+                        if (path.startsWith('//')) {
+                            path = 'https:' + path;
+                        }
+
+                        // Ensure it's absolute
+                        if (path.startsWith('http')) {
+                            imageUrl = path;
+                        } else {
+                            const baseUrl = CONFIG.STRAPI_BASE_URL.endsWith('/') ? CONFIG.STRAPI_BASE_URL.slice(0, -1) : CONFIG.STRAPI_BASE_URL;
+                            const normalizedPath = path.startsWith('/') ? path : '/' + path;
+                            imageUrl = baseUrl + normalizedPath;
+                        }
                     }
                 }
 
-                // Double check: if still relative (shouldn't be), force absolute domain
+                // Final safety: Force absolute, https, and use main domain if it's a local/relative fallback
                 if (!imageUrl.startsWith('http')) {
-                    imageUrl = window.location.origin + (imageUrl.startsWith('/') ? '' : '/') + imageUrl;
+                    const protocol = window.location.protocol === 'http:' ? 'http://' : 'https://';
+                    imageUrl = protocol + window.location.host + (imageUrl.startsWith('/') ? '' : '/') + imageUrl;
+                } else if (imageUrl.startsWith('http://') && !imageUrl.includes('localhost')) {
+                    // Force https for production urls
+                    imageUrl = imageUrl.replace('http://', 'https://');
                 }
+
+                console.log('Final resolved OG image URL:', imageUrl);
 
                 // Extract description (first 160 chars for SEO)
                 let description = attrs.excerpt || attrs.description || '';
@@ -978,6 +1013,15 @@
 
                 const ogImage = document.getElementById('og-image');
                 if (ogImage) ogImage.setAttribute('content', imageUrl);
+
+                const ogImageSecure = document.getElementById('og-image-secure');
+                if (ogImageSecure) ogImageSecure.setAttribute('content', imageUrl);
+
+                const ogImageWidth = document.getElementById('og-image-width');
+                if (ogImageWidth) ogImageWidth.setAttribute('content', imgWidth);
+
+                const ogImageHeight = document.getElementById('og-image-height');
+                if (ogImageHeight) ogImageHeight.setAttribute('content', imgHeight);
 
                 const ogPublished = document.getElementById('og-article-published');
                 if (ogPublished) ogPublished.setAttribute('content', publishedDate);
