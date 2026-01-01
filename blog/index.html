@@ -957,108 +957,66 @@
                     return;
                 }
 
-                // Global Timeout to stop all loading indicators after 15s
+                // Global Timeout to stop all loading indicators after 10s
                 const globalTimeout = setTimeout(() => {
                     console.warn('Global loading timeout reached.');
-                    document.querySelectorAll('.skeleton').forEach(el => el.classList.remove('skeleton'));
-                    const preloader = document.getElementById('preloader');
-                    if (preloader) preloader.style.display = 'none';
-                }, 15000);
-
-                /**
-                 * Enhanced Fetch with Retry and Rate Limiting support
-                 */
-                const fetchWithRetry = async (url, options = {}, retries = 3, backoff = 1000) => {
-                    const controller = new AbortController();
-                    const timeoutId = setTimeout(() => controller.abort(), options.timeout || 10000);
-
-                    try {
-                        const response = await fetch(url, { ...options, signal: controller.signal });
-                        clearTimeout(timeoutId);
-
-                        if (response.status === 429 && retries > 0) {
-                            console.warn(`Rate limited (429). Retrying in ${backoff}ms...`);
-                            await new Promise(resolve => setTimeout(resolve, backoff));
-                            return fetchWithRetry(url, options, retries - 1, backoff * 2);
-                        }
-
-                        return response;
-                    } catch (e) {
-                        clearTimeout(timeoutId);
-                        if (retries > 0 && (e.name === 'AbortError' || e.name === 'TypeError')) {
-                            console.warn(`Fetch error or timeout. Retrying in ${backoff}ms...`, e.message);
-                            await new Promise(resolve => setTimeout(resolve, backoff));
-                            return fetchWithRetry(url, options, retries - 1, backoff * 2);
-                        }
-                        throw e;
-                    }
-                };
+                    handleArticleError('Article loading timeout. Please refresh and try again.');
+                }, 10000);
 
                 try {
-                    console.log('Fetching article with slug/documentId:', slug);
-                    let article = null;
+                    // Build single, clean Strapi query
+                    // Use filters[slug][$eq] to match article by slug field
+                    const params = new URLSearchParams();
+                    params.append('filters[slug][$eq]', slug);
+                    params.append('populate', 'image');
+                    params.append('fields', 'title');
+                    params.append('fields', 'content');
+                    params.append('fields', 'publishedAt');
+                    params.append('fields', 'category');
+                    params.append('fields', 'readTime');
+                    params.append('fields', 'description');
+                    params.append('fields', 'slug');
+                    params.append('fields', 'updatedAt');
+                    params.append('fields', 'excerpt');
+                    params.append('fields', 'author');
 
-                    // Strapi Query with optimized population
-                    // Note: 'author' is a string field, so it shouldn't be in 'populate'
-                    const baseFields = 'fields[0]=title&fields[1]=content&fields[2]=publishedAt&fields[3]=category&fields[4]=readTime&fields[5]=description&fields[6]=slug&fields[7]=updatedAt&fields[8]=excerpt&fields[9]=author';
-                    const populateImg = 'populate[image][fields][0]=url&populate[image][fields][1]=width&populate[image][fields][2]=height&populate[image][fields][3]=formats';
+                    console.log('Fetching article with slug:', slug);
+                    const url = `${CONFIG.API_URL}/articles?${params.toString()}`;
+                    console.log('Request URL:', url);
 
-                    // 1. Try fetching by slug filter
-                    console.log('Attempting slug fetch...');
-                    try {
-                        const response = await fetchWithRetry(`${CONFIG.API_URL}/articles?filters[slug][$eq]=${slug}&${baseFields}&${populateImg}`);
-                        if (response.ok) {
-                            const { data } = await response.json();
-                            if (data && data.length > 0) {
-                                console.log('Article found via slug filter');
-                                article = data[0];
-                            }
-                        } else {
-                            console.warn('Slug fetch returned status:', response.status);
-                        }
-                    } catch (e) {
-                        console.warn('Slug fetch failed after retries:', e);
+                    // Single fetch attempt - NO RETRIES, NO FALLBACK
+                    const controller = new AbortController();
+                    const timeoutId = setTimeout(() => controller.abort(), 8000);
+
+                    const response = await fetch(url, { signal: controller.signal });
+                    clearTimeout(timeoutId);
+
+                    // Handle HTTP errors
+                    if (!response.ok) {
+                        throw new Error(`HTTP ${response.status}: ${response.statusText}`);
                     }
 
-                    // 2. Fallback: Try direct documentId fetch if not found by slug
+                    const { data } = await response.json();
+
+                    // Check if article was found
+                    if (!data || data.length === 0) {
+                        throw new Error('Article not found in database.');
+                    }
+
+                    const article = data[0];
                     if (!article) {
-                        console.log('Attempting direct documentId fetch...');
-                        try {
-                            const responseById = await fetchWithRetry(`${CONFIG.API_URL}/articles/${slug}?${baseFields}&${populateImg}`);
-                            if (responseById.ok) {
-                                const singleData = await responseById.json();
-                                if (singleData.data) {
-                                    console.log('Article found via direct fetch');
-                                    article = singleData.data;
-                                }
-                            } else {
-                                console.warn('Direct fetch returned status:', responseById.status);
-                            }
-                        } catch (e) {
-                            console.warn('Direct fetch failed after retries:', e);
-                        }
+                        throw new Error('Invalid article data.');
                     }
 
-                    if (article) {
-                        currentArticleDocumentId = article.documentId || article.id;
-                        renderArticle(article);
-                        loadComments(currentArticleDocumentId);
-                        clearTimeout(globalTimeout);
-                    } else {
-                        throw new Error('Article not found in database via slug or ID.');
-                    }
+                    // Success - render article
+                    currentArticleDocumentId = article.documentId || article.id;
+                    renderArticle(article);
+                    loadComments(currentArticleDocumentId);
+                    clearTimeout(globalTimeout);
 
                 } catch (error) {
-                    console.error('Final Error loading article:', error);
-                    const contentEl = document.getElementById('article-content');
-                    if (contentEl) {
-                        contentEl.innerHTML = `
-                            <div class="alert-box alert-box--error">
-                                <p>Désolé, l'article n'a pas pu être chargé. (${error.message})</p>
-                                <p><a href="/news" style="color: white; text-decoration: underline;">Retour aux news</a></p>
-                            </div>
-                        `;
-                    }
+                    console.error('Error loading article:', error.message);
+                    handleArticleError(error.message);
                 } finally {
                     // Ensure skeletons and preloader are removed
                     document.querySelectorAll('.skeleton').forEach(el => el.classList.remove('skeleton'));
@@ -1067,6 +1025,22 @@
                         preloader.classList.add('ss-loaded');
                         document.body.classList.add('ss-show');
                         setTimeout(() => { if (preloader) preloader.style.display = 'none'; }, 500);
+                    }
+                }
+
+                /**
+                 * Handle article loading error - single, clear error display
+                 */
+                function handleArticleError(errorMessage) {
+                    const contentEl = document.getElementById('article-content');
+                    if (contentEl) {
+                        contentEl.innerHTML = `
+                            <div class="alert-box alert-box--error">
+                                <p>Désolé, l'article n'a pas pu être chargé.</p>
+                                <p style="font-size: 1.4rem; color: #999; margin-top: 1rem;">Raison: ${errorMessage}</p>
+                                <p style="margin-top: 2rem;"><a href="/news" style="color: white; text-decoration: underline; font-weight: 700;">← Retour aux news</a></p>
+                            </div>
+                        `;
                     }
                 }
             });
