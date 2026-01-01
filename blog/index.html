@@ -923,56 +923,66 @@
                 const attrs = article.attributes || article;
                 console.log('Rendering article data:', attrs);
 
-                // Build image URL - Robust Multi-layer Detection
-                let imageObj = attrs.image;
+                // Build image URL - Hyper-Robust Multi-layer Detection
                 let imageUrl = 'https://creatymu.org/images/og-image.png';
                 let imgWidth = 1200;
                 let imgHeight = 630;
 
-                if (imageObj) {
+                const findPathInMedia = (media) => {
+                    if (!media) return null;
+                    // Handle Array vs Object
+                    const data = Array.isArray(media.data) ? media.data[0] : (media.data || media);
+                    if (!data) return null;
+
+                    const target = data.attributes || data;
                     let path = '';
-                    const data = imageObj.data?.attributes || imageObj.attributes || imageObj;
 
-                    // 1. Try to find the best format (Large -> Medium -> Small -> Thumbnail -> Main)
-                    if (data.formats) {
-                        const formats = data.formats;
+                    if (target.formats) {
+                        const formats = target.formats;
                         const bestFormat = formats.large || formats.medium || formats.small || formats.thumbnail;
-                        path = bestFormat?.url || data.url;
-                        imgWidth = bestFormat?.width || data.width || 1200;
-                        imgHeight = bestFormat?.height || data.height || 630;
+                        path = bestFormat?.url || target.url;
+                        imgWidth = bestFormat?.width || target.width || 1200;
+                        imgHeight = bestFormat?.height || target.height || 630;
                     } else {
-                        path = data.url;
-                        imgWidth = data.width || 1200;
-                        imgHeight = data.height || 630;
+                        path = target.url;
+                        imgWidth = target.width || 1200;
+                        imgHeight = target.height || 630;
                     }
+                    return path;
+                };
 
-                    if (path) {
-                        // Handle protocol-relative URLs
-                        if (path.startsWith('//')) {
-                            path = 'https:' + path;
-                        }
+                // 1. Try Featured Image (attrs.image or attrs.featuredImage)
+                let imagePath = findPathInMedia(attrs.image) || findPathInMedia(attrs.featuredImage || attrs.thumbnail);
 
-                        // Ensure it's absolute
-                        if (path.startsWith('http')) {
-                            imageUrl = path;
-                        } else {
-                            const baseUrl = CONFIG.STRAPI_BASE_URL.endsWith('/') ? CONFIG.STRAPI_BASE_URL.slice(0, -1) : CONFIG.STRAPI_BASE_URL;
-                            const normalizedPath = path.startsWith('/') ? path : '/' + path;
-                            imageUrl = baseUrl + normalizedPath;
-                        }
+                // 2. Fallback: Search for first image in content blocks
+                if (!imagePath && Array.isArray(attrs.content)) {
+                    const firstImageBlock = attrs.content.find(block => block.type === 'image');
+                    if (firstImageBlock) {
+                        imagePath = firstImageBlock.image?.url || firstImageBlock.url;
+                        // For content images, we might not have metadata directly
                     }
                 }
 
-                // Final safety: Force absolute, https, and use main domain if it's a local/relative fallback
+                if (imagePath) {
+                    if (imagePath.startsWith('//')) imagePath = 'https:' + imagePath;
+                    if (imagePath.startsWith('http')) {
+                        imageUrl = imagePath;
+                    } else {
+                        const baseUrl = CONFIG.STRAPI_BASE_URL.endsWith('/') ? CONFIG.STRAPI_BASE_URL.slice(0, -1) : CONFIG.STRAPI_BASE_URL;
+                        const normalizedPath = imagePath.startsWith('/') ? imagePath : '/' + imagePath;
+                        imageUrl = baseUrl + normalizedPath;
+                    }
+                }
+
+                // Final safety: Force absolute and secure
                 if (!imageUrl.startsWith('http')) {
                     const protocol = window.location.protocol === 'http:' ? 'http://' : 'https://';
                     imageUrl = protocol + window.location.host + (imageUrl.startsWith('/') ? '' : '/') + imageUrl;
                 } else if (imageUrl.startsWith('http://') && !imageUrl.includes('localhost')) {
-                    // Force https for production urls
                     imageUrl = imageUrl.replace('http://', 'https://');
                 }
 
-                console.log('Final resolved OG image URL:', imageUrl);
+                console.log('Hyper-robust OG image URL:', imageUrl);
 
                 // Extract description (first 160 chars for SEO)
                 let description = attrs.excerpt || attrs.description || '';
