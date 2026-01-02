@@ -5,7 +5,7 @@
  */
 
 document.addEventListener("DOMContentLoaded", () => {
-    const newsSection = document.getElementById("news");
+    const newsSection = document.getElementById("latest-news");
     const newsGrid = document.getElementById("latest-news-grid");
 
     if (!newsSection || !newsGrid) return;
