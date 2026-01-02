@@ -7,7 +7,7 @@
     ================================================== -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Creaty | Digital & Social Media Agency in Mauritius </title>
+    <title>Creaty - Digital & Social Media Agency in Mauritius </title>
 
     <!-- SEO Meta Tags -->
     <meta name="description"
@@ -27,7 +27,7 @@
     <!-- OpenGraph / Facebook -->
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://creatymu.org/">
-    <meta property="og:title" content="Creaty | Digital & Social Media Agency Mauritius">
+    <meta property="og:title" content="Creaty - Digital & Social Media Agency Mauritius">
     <meta property="og:description"
         content="Transform your digital presence with Creaty. Professional Community Management & Graphic Design in Mauritius.">
     <meta property="og:image" content="https://creatymu.org/images/og-image.png">
@@ -36,7 +36,7 @@
 
     <!-- Twitter Card -->
     <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:title" content="Creaty | Digital Agency Mauritius">
+    <meta name="twitter:title" content="Creaty - Digital Agency Mauritius">
     <meta name="twitter:description" content="Professional Community Management & Graphic Design in Mauritius">
     <meta name="twitter:image" content="https://creatymu.org/images/og-image.png">
 
@@ -200,41 +200,66 @@
 
     <!-- favicons
     ================================================== -->
-    <link rel="icon" type="image/png" sizes="48x48" href="https://creatymu.org/favicon-48x48.png">
-    <link rel="icon" type="image/png" sizes="96x96" href="https://creatymu.org/favicon-96x96.png">
-    <link rel="icon" type="image/png" sizes="192x192" href="https://creatymu.org/android-chrome-192x192.png">
-    <link rel="apple-touch-icon" sizes="180x180" href="https://creatymu.org/apple-touch-icon.png">
-    <link rel="shortcut icon" href="https://creatymu.org/favicon.ico">
-    <link rel="manifest" href="https://creatymu.org/site.webmanifest">
-    <link rel="stylesheet"
-        href="https://fonts.googleapis.com/css2?family=Heebo:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600&family=Playfair+Display:ital,wght@1,400;1,700&display=swap">
+    <link rel="icon" type="image/png" sizes="48x48" href="/favicon-48x48.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+    <link rel="manifest" href="/site.webmanifest">
     <meta name="theme-color" content="#ffffff">
 
 
 
-    <!-- Schema.org Structured Data - LocalBusiness -->
+    <!-- Schema.org Structured Data - MarketingAgency (LocalBusiness) -->
     <script type="application/ld+json">
     {
         "@context": "https://schema.org",
-        "@type": "LocalBusiness",
+        "@type": "MarketingAgency",
         "@id": "https://creatymu.org/#organization",
         "name": "Creaty",
         "alternateName": "Creaty Digital Agency",
-        "description": "Premier Digital & Social Media Agency in Mauritius specializing in Community Management and Graphic Design",
-        "url": "https://creatymu.org",
+        "url": "https://creatymu.org/",
         "logo": "https://creatymu.org/images/creaty.logo.svg",
         "image": "https://creatymu.org/images/og-image.png",
+        "description": "Your first Social Media Agency in Mauritius. Focus on your business while we take care of your Marketing. A professional, flexible, and cost-effective alternative to hiring internally.",
+        "telephone": "+23054593145",
         "email": "support@creatymu.org",
         "address": {
             "@type": "PostalAddress",
             "addressLocality": "Port Louis",
             "addressCountry": "MU"
         },
-        "priceRange": "$$",
         "areaServed": {
-            "@type": "Country",
-            "name": "Mauritius"
+            "@type": "GeoShape",
+            "box": "-20.5255, 57.3061 -19.9760, 57.8062" 
         },
+        "serviceArea": {
+             "@type": "Place",
+             "name": "Mauritius"
+        },
+        "priceRange": "$$",
+        "openingHoursSpecification": [
+            {
+                "@type": "OpeningHoursSpecification",
+                "dayOfWeek": [
+                    "Monday",
+                    "Tuesday",
+                    "Wednesday",
+                    "Thursday"
+                ],
+                "opens": "08:00",
+                "closes": "18:00"
+            },
+            {
+                "@type": "OpeningHoursSpecification",
+                "dayOfWeek": [
+                    "Friday",
+                    "Saturday",
+                    "Sunday"
+                ],
+                "opens": "09:00",
+                "closes": "17:00"
+            }
+        ],
         "sameAs": [
             "https://www.facebook.com/creatymauritius/",
             "https://www.instagram.com/creatymu",
@@ -243,6 +268,15 @@
             "https://www.linkedin.com/company/creatymu",
             "https://x.com/creatymu"
         ],
+        "contactPoint": {
+            "@type": "ContactPoint",
+            "telephone": "+23054593145",
+            "contactType": "customer service",
+            "contactOption": "TollFree",
+            "areaServed": "MU",
+            "availableLanguage": ["en", "fr"],
+            "url": "https://wa.me/+23054593145"
+        },
         "hasOfferCatalog": {
             "@type": "OfferCatalog",
             "name": "Digital Services",
@@ -255,9 +289,8 @@
                         "description": "Professional email marketing with domain setup, newsletter design, and campaign management",
                         "provider": {"@id": "https://creatymu.org/#organization"}
                     },
-                    "price": "18500",
-                    "priceCurrency": "MUR",
-                    "priceValidUntil": "2025-12-31"
+                    "price": "22500",
+                    "priceCurrency": "MUR"
                 },
                 {
                     "@type": "Offer",
@@ -267,7 +300,7 @@
                         "description": "Complete social media management for established brands",
                         "provider": {"@id": "https://creatymu.org/#organization"}
                     },
-                    "price": "17000",
+                    "price": "19000",
                     "priceCurrency": "MUR"
                 },
                 {
@@ -285,6 +318,7 @@
         }
     }
     </script>
+
 
     <!-- Schema.org Structured Data - FAQPage -->
     <script type="application/ld+json">
@@ -436,7 +470,7 @@
                         <li><a href="#about" class="smoothscroll">About</a></li>
                         <li><a href="#pricing" class="smoothscroll">Pricing</a></li>
                         <li><a href="#faq" class="smoothscroll">FAQ</a></li>
-                        <li><a href="/news">News</a></li>
+                        <li><a href="#news" class="smoothscroll">News</a></li>
                         <li><a href="/legal" aria-label="Terms and Conditions">Terms & Conditions</a></li>
                     </ul>
                 </nav>
@@ -1157,6 +1191,51 @@
                 </div> <!-- end s-pricing__content -->
             </section> <!-- end pricing -->
 
+            <!-- news
+            ----------------------------------------------- -->
+            <section id="news" class="s-news target-section">
+                <div class="row section-header" data-num="05">
+                    <div class="column lg-12 title-block">
+                        <h2 class="title text-display-1">Latest News.</h2>
+                        <p class="desc lead">Stay updated with our latest articles and insights.</p>
+                    </div>
+                </div>
+
+                <div class="row block-lg-one-third block-tab-one-half block-stack" style="margin-top: 4rem;">
+                    <div class="column">
+                        <div class="news-preview" style="margin-bottom: 2rem;">
+                            <h3 class="h5"><a href="/news">Community Management in 2025</a></h3>
+                            <p>Discover the key trends shaping social media in Mauritius. Engagement is moving to
+                                private channels.</p>
+                            <a href="/news" class="btn btn--stroke btn--small">Read More</a>
+                        </div>
+                    </div>
+                    <div class="column">
+                        <div class="news-preview" style="margin-bottom: 2rem;">
+                            <h3 class="h5"><a href="/news">Why Your Brand Needs a Voice</a></h3>
+                            <p>It's not just about logo, it's about what you say. Consistency is the secret weapon of
+                                trust.</p>
+                            <a href="/news" class="btn btn--stroke btn--small">Read More</a>
+                        </div>
+                    </div>
+                    <div class="column">
+                        <div class="news-preview" style="margin-bottom: 2rem;">
+                            <h3 class="h5"><a href="/news">SEO for Mauritian Business</a></h3>
+                            <p>How to rank on Google in a small island market. Local SEO strategies that actually work.
+                            </p>
+                            <a href="/news" class="btn btn--stroke btn--small">Read More</a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="column lg-12 text-center">
+                        <a href="/news" class="btn btn--primary">View All News</a>
+                    </div>
+                </div>
+
+            </section> <!-- end news -->
+
 
 
 
@@ -1165,7 +1244,7 @@
             ----------------------------------------------- -->
             <section id="contact" class="s-contact target-section">
 
-                <div class="row section-header" data-num="05">
+                <div class="row section-header" data-num="06">
                     <div class="column lg-12 title-block">
                         <h2 class="title text-display-1">Get In Touch.</h2>
                     </div>
@@ -1225,7 +1304,7 @@
             ----------------------------------------------- -->
             <section id="faq" class="s-faq target-section">
 
-                <div class="row section-header" data-num="06">
+                <div class="row section-header" data-num="07">
                     <div class="column lg-12 title-block">
                         <h2 class="title text-display-1">Frequently Asked Questions</h2>
                         <p class="desc lead">Quick answers to common questions about working with Creaty.</p>
