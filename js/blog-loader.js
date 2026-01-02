@@ -14,7 +14,6 @@ document.addEventListener("DOMContentLoaded", () => {
                 "fields[3]": "category",
                 "fields[4]": "epingle",
                 "fields[5]": "description",
-                "fields[6]": "content",
                 "populate[image][fields][0]": "url",
                 "pagination[page]": page,
                 "pagination[pageSize]": 6,
@@ -22,7 +21,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 "sort[1]": "publishedAt:desc"
             });
 
-            const response = await fetch(`${CONFIG.API_URL}/articles?${query.toString()}`);
+            const response = await ApiClient.fetch(`${CONFIG.API_URL}/articles?${query.toString()}`);
             if (!response.ok) {
                 throw new Error("Failed to fetch posts");
             }
@@ -83,7 +82,7 @@ document.addEventListener("DOMContentLoaded", () => {
                                 </span>
                             </div>
                             <p class="blog-post-card__excerpt">${getExcerpt(attrs)}</p>
-                            <a href="/blog?slug=${attrs.slug || post.documentId || post.id}" class="blog-post-card__link">READ MORE</a>
+                            <a href="/blog/index.html?slug=${attrs.slug || post.documentId || post.id}" class="blog-post-card__link">READ MORE</a>
                         </div>
                     </article>
                 </div>

@@ -942,6 +942,7 @@
         <script src="/js/plugins.js" defer></script>
         <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
         <script src="/js/config.js" defer></script>
+        <script src="/js/api-client.js" defer></script>
         <script src="/js/promo.js" defer></script>
         <script src="/js/main.js" defer></script>
         <script>
@@ -965,26 +966,23 @@
                     // Build clean Strapi query with proper encoding
                     const params = new URLSearchParams();
                     params.append('filters[slug][$eq]', slug);
-                    params.append('populate', 'image');
-                    params.append('fields', 'title');
-                    params.append('fields', 'content');
-                    params.append('fields', 'publishedAt');
-                    params.append('fields', 'category');
-                    params.append('fields', 'readTime');
-                    params.append('fields', 'description');
-                    params.append('fields', 'slug');
-                    params.append('fields', 'updatedAt');
-                    params.append('fields', 'excerpt');
-                    params.append('fields', 'author');
+                    params.append('populate[image][fields][0]', 'url');
+                    params.append('populate[image][fields][1]', 'width');
+                    params.append('populate[image][fields][2]', 'height');
+                    params.append('populate[image][fields][3]', 'formats');
+                    params.append('fields[0]', 'title');
+                    params.append('fields[1]', 'content');
+                    params.append('fields[2]', 'publishedAt');
+                    params.append('fields[3]', 'category');
+                    params.append('fields[4]', 'readTime');
+                    params.append('fields[5]', 'description');
+                    params.append('fields[6]', 'slug');
+                    params.append('fields[7]', 'updatedAt');
+                    params.append('fields[8]', 'author');
 
                     const url = `${CONFIG.API_URL}/articles?${params.toString()}`;
 
-                    // Single fetch - no retries, no fallback
-                    const controller = new AbortController();
-                    const timeoutId = setTimeout(() => controller.abort(), 7000);
-
-                    const response = await fetch(url, { signal: controller.signal });
-                    clearTimeout(timeoutId);
+                    const response = await ApiClient.fetch(url); // Using ApiClient for fetch operations
 
                     if (!response.ok) {
                         throw new Error(`Server error: ${response.status}`);
@@ -1113,7 +1111,8 @@
                 }
                 if (description.length > 160) description = description.substring(0, 157) + '...';
 
-                const articleUrl = `https://creatymu.org/blog?slug=${attrs.slug || article.documentId}`;
+                // Use the precise canonical URL for sharing
+                const articleUrl = `https://creatymu.org/blog/index.html?slug=${attrs.slug || article.documentId || article.id}`;
                 const publishedDate = attrs.publishedAt || attrs.createdAt;
                 const modifiedDate = attrs.updatedAt || publishedDate;
 
@@ -1155,7 +1154,7 @@
                 const ogPublished = document.getElementById('og-article-published');
                 if (ogPublished) ogPublished.setAttribute('content', publishedDate);
 
-                // Twitter tags
+                // Twitter tags - ensuring robust updates
                 const twitterTitle = document.getElementById('twitter-title');
                 if (twitterTitle) twitterTitle.setAttribute('content', attrs.title);
 
@@ -1333,7 +1332,7 @@
 
             async function loadComments(articleDocId) {
                 try {
-                    const response = await fetchWithRetry(`${CONFIG.API_URL}/comments?filters[article][documentId][$eq]=${articleDocId}&populate=*&sort=createdAt:desc`);
+                    const response = await ApiClient.fetch(`${CONFIG.API_URL}/comments?filters[article][documentId][$eq]=${articleDocId}&populate=*&sort=createdAt:desc`);
                     if (!response.ok) return;
                     const { data } = await response.json();
                     renderComments(data);
@@ -1409,7 +1408,7 @@
                 statusEl.innerHTML = '';
 
                 try {
-                    const response = await fetchWithRetry(`${CONFIG.API_URL}/comments`, {
+                    const response = await ApiClient.fetch(`${CONFIG.API_URL}/comments`, {
                         method: 'POST',
                         headers: {
                             'Content-Type': 'application/json',

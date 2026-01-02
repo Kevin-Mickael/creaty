@@ -21,7 +21,7 @@
                 const o = s.value, r = n.value;
                 i.innerHTML = "Submitting...", i.classList.remove("error-message", "success-message"), n.disabled = !0, n.value = "Submitting...";
                 try {
-                    const s = await fetch(`${CONFIG.API_URL}/newsletter/subscribe`, { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ email: o }) }), n = await s.json();
+                    const s = await ApiClient.fetch(`${CONFIG.API_URL}/newsletter/subscribe`, { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ email: o }) }), n = await s.json();
                     s.ok && n.success ? (t(n.message || "Thank you for subscribing!", !0), e.reset()) : t(n.error?.message || n.message || "An error occurred. Please try again.", !1)
                 } catch (e) {
                     console.error("Newsletter submission error:", e), t("Connection error. Please try again later.", !1)

@@ -29,7 +29,7 @@ async function acceptCookies() {
     loadGoogleAnalytics();
 
     try {
-        await fetch(`${apiUrl}/consent/accept`, {
+        await ApiClient.fetch(`${apiUrl}/consent/accept`, {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             credentials: 'include'
@@ -66,7 +66,7 @@ async function checkConsent() {
     const apiUrl = typeof CONFIG !== "undefined" ? CONFIG.API_URL : "https://creaty-strapi.railway.app/api";
 
     try {
-        const response = await fetch(`${apiUrl}/consent/check`, {
+        const response = await ApiClient.fetch(`${apiUrl}/consent/check`, {
             method: 'GET',
             credentials: 'include'
         });
@@ -118,7 +118,7 @@ async function fetchLatestNews() {
     if (!container) return;
     try {
         const apiUrl = typeof CONFIG !== "undefined" ? CONFIG.API_URL : "https://creaty-strapi.railway.app/api";
-        const response = await fetch(`${apiUrl}/articles?fields[0]=title&fields[1]=slug&fields[2]=publishedAt&pagination[pageSize]=3&sort[0]=publishedAt:desc`);
+        const response = await ApiClient.fetch(`${apiUrl}/articles?fields[0]=title&fields[1]=slug&fields[2]=publishedAt&pagination[pageSize]=3&sort[0]=publishedAt:desc`);
         if (!response.ok) throw new Error("Failed to fetch");
         const { data: data } = await response.json();
         if (!data || data.length === 0) {
@@ -129,7 +129,7 @@ async function fetchLatestNews() {
         data.forEach(post => {
             const attrs = post.attributes || post;
             const date = new Date(attrs.publishedAt || attrs.createdAt).toLocaleDateString("en-US", { day: "numeric", month: "short" });
-            html += `\n                <li class="promo-news__item">\n                    <a href="/blog?slug=${attrs.slug || post.id}" class="promo-news__link">\n                        <h5 class="promo-news__post-title">${attrs.title}</h5>\n                        <span class="promo-news__date">${date}</span>\n                    </a>\n                </li>\n            `;
+            html += `\n                <li class="promo-news__item">\n                    <a href="/blog/index.html?slug=${attrs.slug || post.id}" class="promo-news__link">\n                        <h5 class="promo-news__post-title">${attrs.title}</h5>\n                        <span class="promo-news__date">${date}</span>\n                    </a>\n                </li>\n            `;
         });
         html += "</ul>";
         container.innerHTML = html;
