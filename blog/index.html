@@ -92,6 +92,12 @@
     <script>
         document.documentElement.classList.remove('no-js');
         document.documentElement.classList.add('js');
+
+        // Visual Redirect: Clean URL bar (Remove index.html)
+        if (window.location.pathname.endsWith('index.html')) {
+            const cleanUrl = window.location.pathname.replace('index.html', '') + window.location.search + window.location.hash;
+            window.history.replaceState(null, '', cleanUrl);
+        }
     </script>
 
     <!-- Critical CSS

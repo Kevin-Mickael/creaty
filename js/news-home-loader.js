@@ -59,7 +59,7 @@ document.addEventListener("DOMContentLoaded", () => {
                     excerpt = excerpt.substring(0, 117) + "...";
                 }
 
-                const postUrl = `/blog/index.html?slug=${attrs.slug || post.id}`;
+                const postUrl = `/blog?slug=${attrs.slug || post.id}`;
 
                 const newsItemHTML = `
                     <div class="column">
