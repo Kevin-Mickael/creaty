@@ -514,6 +514,7 @@
 
     <!-- favicons
     ================================================== -->
+    <link rel="icon" href="/favicon.ico" sizes="any">
     <link rel="icon" type="image/png" sizes="48x48" href="/favicon-48x48.png">
     <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
     <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
@@ -1112,7 +1113,7 @@
                 if (description.length > 160) description = description.substring(0, 157) + '...';
 
                 // Use the precise canonical URL for sharing
-                const articleUrl = `https://creatymu.org/blog/index.html?slug=${attrs.slug || article.documentId || article.id}`;
+                const articleUrl = `https://creatymu.org/blog?slug=${attrs.slug || article.documentId || article.id}`;
                 const publishedDate = attrs.publishedAt || attrs.createdAt;
                 const modifiedDate = attrs.updatedAt || publishedDate;
 
