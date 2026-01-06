@@ -414,10 +414,22 @@ async function generateStaticPages() {
 
         // Generate static pages
         const generatedUrls = [];
+        const articlesData = []; // Store data for static JSON
 
         for (const article of articles) {
             const attrs = article.attributes || article;
             const slug = attrs.slug || article.documentId || article.id;
+
+            // Collect data for static JSON (lighter version for lists)
+            articlesData.push({
+                title: attrs.title,
+                slug: slug,
+                category: attrs.category || 'NEWS',
+                publishedAt: attrs.publishedAt,
+                description: attrs.description,
+                image: attrs.image?.data?.attributes?.url || attrs.image?.url || null,
+                epingle: attrs.epingle
+            });
 
             // Create directory for article
             const articleDir = path.join(CONFIG.OUTPUT_DIR, slug);
@@ -438,6 +450,12 @@ async function generateStaticPages() {
                 changefreq: 'weekly'
             });
         }
+
+        // Save articles.json for frontend usage (Home & News page)
+        const jsonPath = path.join(__dirname, '..', 'js', 'articles.json');
+        fs.writeFileSync(jsonPath, JSON.stringify(articlesData, null, 2), 'utf8');
+        console.log(`\n💾 Generated static database: ${jsonPath}`);
+
 
         // Update sitemap
         console.log('\n🔄 Updating sitemap.xml...');

@@ -1,7 +1,8 @@
 /**
  * news-home-loader.js
- * Dynamically fetches and renders the latest 3 news items on the home page.
- * Uses ApiClient for rate limiting and caching.
+ * Dynamically renders the latest 3 news items on the home page.
+ * Uses local static JSON database for maximum speed and reliability.
+ * No direct Strapi dependency on frontend.
  */
 
 document.addEventListener("DOMContentLoaded", () => {
@@ -12,59 +13,46 @@ document.addEventListener("DOMContentLoaded", () => {
 
     const fetchHomeNews = async () => {
         try {
-            const apiUrl = typeof CONFIG !== "undefined" ? CONFIG.API_URL : "https://admin.creatymu.org/api";
-
-            // Build query for latest 3 articles with specific fields
-            const query = new URLSearchParams({
-                "fields[0]": "title",
-                "fields[1]": "slug",
-                "fields[2]": "publishedAt",
-                "fields[3]": "description",
-                "pagination[pageSize]": 3,
-                "sort[0]": "publishedAt:desc"
-            });
-
-            const response = await ApiClient.fetch(`${apiUrl}/articles?${query.toString()}`);
+            // Fetch from static JSON generated at build time
+            const response = await fetch('/js/articles.json');
 
             if (!response.ok) {
-                throw new Error("Failed to fetch articles");
-            }
-
-            const { data } = await response.json();
-
-            if (!data || data.length === 0) {
-                // Keep hidden as per request: "quand il n' y a pas on affiche rien"
+                // If json missing or error, hide section silently
                 newsSection.style.display = "none";
                 return;
             }
 
-            // Clear static placeholders
+            const data = await response.json();
+
+            if (!data || data.length === 0) {
+                newsSection.style.display = "none";
+                return;
+            }
+
+            // Clear placeholders
             newsGrid.innerHTML = "";
 
-            data.forEach(post => {
-                const attrs = post.attributes || post;
-                const date = new Date(attrs.publishedAt || attrs.createdAt).toLocaleDateString("en-US", {
+            // Display latest 3 articles
+            // They are already sorted by generation script, but we can safety slice
+            data.slice(0, 3).forEach(post => {
+                const date = new Date(post.publishedAt).toLocaleDateString("en-US", {
                     day: "numeric",
                     month: "short",
                     year: "numeric"
                 });
 
-                // Get excerpt/description
-                let excerpt = attrs.description || "";
-                if (!excerpt && attrs.content) {
-                    // Fallback to content parsing if needed, but we requested description
-                }
-
+                let excerpt = post.description || "";
                 if (excerpt.length > 120) {
                     excerpt = excerpt.substring(0, 117) + "...";
                 }
 
-                const postUrl = `/blog?slug=${attrs.slug || post.id}`;
+                // USE CLEAN STATIC URLS
+                const postUrl = `/articles/${post.slug}/`;
 
                 const newsItemHTML = `
                     <div class="column">
                         <div class="news-preview" style="margin-bottom: 2rem;">
-                            <h3 class="h5"><a href="${postUrl}">${attrs.title}</a></h3>
+                            <h3 class="h5"><a href="${postUrl}">${post.title}</a></h3>
                             <p>${excerpt}</p>
                             <a href="${postUrl}" class="btn btn--stroke btn--small">Read More</a>
                         </div>
@@ -73,12 +61,11 @@ document.addEventListener("DOMContentLoaded", () => {
                 newsGrid.insertAdjacentHTML("beforeend", newsItemHTML);
             });
 
-            // Show the section now that we have content
+            // Show section
             newsSection.style.display = "block";
 
         } catch (error) {
             console.error("Error loading home news:", error);
-            // Hide section on error as well to avoid showing broken or empty area
             newsSection.style.display = "none";
         }
     };
