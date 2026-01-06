@@ -5,6 +5,11 @@
  * Usage (Node.js): node js/generate-sitemap.js
  * Usage (Browser): Call generateSitemap() - outputs to console
  * 
+ * IMPORTANT SEO NOTE:
+ * - Blog articles using /blog?slug=X are NOT indexable by Google as content is JS-rendered
+ * - This sitemap only includes static, crawlable pages
+ * - For article indexing, implement SSG/SSR or pre-rendered HTML pages
+ * 
  * For production: Update CONFIG.SITE_URL and CONFIG.API_URL
  */
 
@@ -15,42 +20,24 @@ const SITEMAP_CONFIG = {
 
 
 const staticPages = [
-    { url: '/', priority: '1.0', changefreq: 'weekly' },
-    { url: '/news', priority: '0.8', changefreq: 'daily' },
-    { url: '/legal', priority: '0.3', changefreq: 'monthly' }
+    { url: '/', priority: '1.0', changefreq: 'weekly', lastmod: new Date().toISOString().split('T')[0] },
+    { url: '/news', priority: '0.8', changefreq: 'daily', lastmod: new Date().toISOString().split('T')[0] },
+    { url: '/legal', priority: '0.3', changefreq: 'monthly', lastmod: '2025-12-30' }
 ];
 
 async function generateSitemap() {
     try {
-        console.log('🔄 Fetching articles from Strapi...');
+        console.log('🔄 Generating Sitemap for Creaty...');
 
-        // Fetch all articles from Strapi
-        const response = await fetch(`${SITEMAP_CONFIG.API_URL}/articles?fields[0]=slug&fields[1]=updatedAt&fields[2]=title`);
-
-        if (!response.ok) {
-            throw new Error(`Failed to fetch articles: ${response.status}`);
-        }
-
-        const { data } = await response.json();
-        console.log(`✅ Found ${data.length} articles`);
-
-        const articles = data.map(article => {
-            const attrs = article.attributes || article;
-            return {
-                url: `/blog?slug=${attrs.slug || article.documentId || article.id}`,
-                lastmod: attrs.updatedAt || new Date().toISOString(),
-                priority: '0.7',
-                changefreq: 'weekly'
-            };
-        });
-
-        const allPages = [...staticPages, ...articles];
+        // Only include static pages - blog URLs with query params are NOT crawlable
+        // Google cannot render JavaScript content on first crawl
+        const allPages = [...staticPages];
 
         const xml = `<?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 ${allPages.map(page => `  <url>
     <loc>${SITEMAP_CONFIG.SITE_URL}${page.url}</loc>
-    ${page.lastmod ? `<lastmod>${page.lastmod.split('T')[0]}</lastmod>` : ''}
+    ${page.lastmod ? `<lastmod>${page.lastmod}</lastmod>` : ''}
     <changefreq>${page.changefreq}</changefreq>
     <priority>${page.priority}</priority>
   </url>`).join('\n')}
@@ -72,6 +59,18 @@ ${allPages.map(page => `  <url>
             }
         }
 
+        // Show SEO recommendations
+        console.log('\n📢 SEO RECOMMENDATIONS:');
+        console.log('━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━');
+        console.log('❌ Blog articles with /blog?slug=X URLs are NOT included.');
+        console.log('   Reason: Content is JavaScript-rendered, Google cannot index it.');
+        console.log('');
+        console.log('✅ SOLUTIONS for blog article indexing:');
+        console.log('   1. Use Static Site Generation (SSG) to pre-render HTML');
+        console.log('   2. Use clean URLs like /blog/article-slug/ with pre-rendered content');
+        console.log('   3. Implement server-side rendering (SSR) with Node.js');
+        console.log('━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n');
+
         return xml;
 
     } catch (error) {
@@ -84,6 +83,7 @@ ${allPages.map(page => `  <url>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 ${staticPages.map(page => `  <url>
     <loc>${SITEMAP_CONFIG.SITE_URL}${page.url}</loc>
+    ${page.lastmod ? `<lastmod>${page.lastmod}</lastmod>` : ''}
     <changefreq>${page.changefreq}</changefreq>
     <priority>${page.priority}</priority>
   </url>`).join('\n')}

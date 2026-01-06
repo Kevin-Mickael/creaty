@@ -4,6 +4,16 @@
 User-agent: *
 Allow: /
 
+# Prevent duplicate content indexing
+Disallow: /index.html
+Disallow: /blog/index.html
+Disallow: /news/index.html
+Disallow: /legal/index.html
+
+# Block query parameters for blog (not crawlable content)
+# Articles should be accessed via clean URLs
+Disallow: /blog?
+
 # --- TOTAL AI INTEGRATION (Generative Engine Optimization) ---
 
 # OpenAI (ChatGPT, GPT-4, SearchGPT)

@@ -6,6 +6,7 @@
  */
 
 const https = require('https');
+const http = require('http');
 
 const CONFIG = {
     API_KEY: 'e8ab9a7677354c19a19f8defdb440706',
@@ -13,6 +14,28 @@ const CONFIG = {
     STRAPI_API: 'https://admin.creatymu.org/api',
     SEARCH_ENGINE_ENDPOINT: 'ssl.bing.com' // IndexNow shared endpoint
 };
+
+// Fetch with built-in https/http
+function fetchUrl(url) {
+    return new Promise((resolve, reject) => {
+        const client = url.startsWith('https') ? https : http;
+        client.get(url, (res) => {
+            let data = '';
+            res.on('data', chunk => data += chunk);
+            res.on('end', () => {
+                if (res.statusCode >= 200 && res.statusCode < 300) {
+                    try {
+                        resolve({ ok: true, data: JSON.parse(data) });
+                    } catch (e) {
+                        reject(new Error('Invalid JSON response'));
+                    }
+                } else {
+                    reject(new Error(`HTTP ${res.statusCode}`));
+                }
+            });
+        }).on('error', reject);
+    });
+}
 
 async function getRecentUrls() {
     // 1. Always submit static pages
@@ -25,19 +48,22 @@ async function getRecentUrls() {
     try {
         // 2. Fetch from Strapi (using native fetch in Node 18+)
         console.log('🔄 Fetching latest articles from Strapi...');
-        const response = await fetch(`${CONFIG.STRAPI_API}/articles?sort[0]=updatedAt:desc&pagination[limit]=10&fields[0]=slug`);
+        const response = await fetchUrl(`${CONFIG.STRAPI_API}/articles?sort[0]=updatedAt:desc&pagination[limit]=10&fields[0]=slug`);
 
         if (response.ok) {
-            const { data } = await response.json();
-            data.forEach(article => {
-                // Use the clean URL format we established
+            const articles = response.data.data;
+            articles.forEach(article => {
+                // Use the new clean URL format with /articles/slug/
                 const slug = article.attributes?.slug || article.slug;
-                urls.push(`${CONFIG.SITE_URL}/blog?slug=${slug}`);
+                if (slug) {
+                    urls.push(`${CONFIG.SITE_URL}/articles/${slug}/`);
+                }
             });
-            console.log(`✅ Found ${data.length} recent articles.`);
+            console.log(`✅ Found ${articles.length} recent articles.`);
         }
     } catch (error) {
-        console.error('⚠️ Could not fetch articles (strapi might be down), submitting static pages only.');
+        console.error('⚠️ Could not fetch articles (Strapi might be down), submitting static pages only.');
+        console.error('   Error:', error.message);
     }
 
     return urls;
@@ -63,19 +89,27 @@ function submitToIndexNow(urlList) {
     };
 
     console.log(`🚀 Submitting ${urlList.length} URLs to IndexNow...`);
+    console.log('   URLs:', urlList);
 
     const req = https.request(options, (res) => {
-        console.log(`STATUS: ${res.statusCode}`);
+        console.log(`\n📡 Response Status: ${res.statusCode}`);
 
         if (res.statusCode === 200 || res.statusCode === 202) {
             console.log('✅ Success! URLs submitted for indexing.');
+            console.log('   Bing and Yandex will process these URLs shortly.');
+        } else if (res.statusCode === 400) {
+            console.log('❌ Bad Request - Check URL format and API key.');
+        } else if (res.statusCode === 422) {
+            console.log('❌ Unprocessable Entity - URL might not match the host.');
         } else {
             console.log('❌ Error submitting to IndexNow.');
         }
 
         res.setEncoding('utf8');
         res.on('data', (chunk) => {
-            // console.log(`BODY: ${chunk}`); // Usually empty on success
+            if (chunk.trim()) {
+                console.log(`   Body: ${chunk}`);
+            }
         });
     });
 
@@ -89,6 +123,10 @@ function submitToIndexNow(urlList) {
 
 // Main execution
 (async () => {
+    console.log('━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━');
+    console.log('🔔 IndexNow URL Submitter for Creaty');
+    console.log('━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n');
+
     const urls = await getRecentUrls();
     submitToIndexNow(urls);
 })();
