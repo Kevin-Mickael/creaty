@@ -20,7 +20,7 @@ const https = require('https');
 const http = require('http');
 
 const CONFIG = {
-    API_URL: process.env.STRAPI_API_URL || 'http://localhost:1337/api',
+    API_URL: process.env.STRAPI_API_URL || 'https://admin.creatymu.org/api',
     SITE_URL: 'https://creatymu.org',
     OUTPUT_DIR: path.join(__dirname, '..', 'articles')
 };

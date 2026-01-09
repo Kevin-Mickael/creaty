@@ -21,7 +21,7 @@ function loadGoogleAnalytics() {
 }
 
 async function acceptCookies() {
-    const apiUrl = typeof CONFIG !== "undefined" ? CONFIG.API_URL : "https://creaty-strapi.railway.app/api";
+    const apiUrl = typeof CONFIG !== "undefined" ? CONFIG.API_URL : "https://admin.creatymu.org/api";
 
     // Immediate UI response
     closeCookieBanner();
@@ -63,7 +63,7 @@ async function checkConsent() {
         return;
     }
 
-    const apiUrl = typeof CONFIG !== "undefined" ? CONFIG.API_URL : "https://creaty-strapi.railway.app/api";
+    const apiUrl = typeof CONFIG !== "undefined" ? CONFIG.API_URL : "https://admin.creatymu.org/api";
 
     try {
         const response = await ApiClient.fetch(`${apiUrl}/consent/check`, {
