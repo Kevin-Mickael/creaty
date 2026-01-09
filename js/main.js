@@ -101,12 +101,49 @@
             const e = document.querySelector("#contactForm");
             if (!e) return;
             const t = document.querySelector(".contact-message");
-            e.addEventListener("submit", function (n) {
+            e.addEventListener("submit", async function (n) {
                 n.preventDefault();
                 const i = e.querySelector("#submit"), o = i.value;
-                i.value = "Sending...", i.disabled = !0, setTimeout(function () {
-                    t.innerHTML = '\n                        <div class="alert-box alert-box--success">\n                            <p>Your message has been sent. Thank you!</p>\n                            <span class="alert-box__close"></span>\n                        </div>\n                    ', e.reset(), i.value = o, i.disabled = !1, s()
-                }, 1e3)
+                const name = e.querySelector("#cName")?.value;
+                const email = e.querySelector("#cEmail")?.value;
+                const subject = e.querySelector("#cService")?.value;
+                const message = e.querySelector("#cMessage")?.value;
+
+                i.value = "Sending...", i.disabled = !0;
+
+                try {
+                    const response = await ApiClient.fetch(`${CONFIG.API_URL}/contact/send`, {
+                        method: "POST",
+                        headers: { "Content-Type": "application/json" },
+                        body: JSON.stringify({ name, email, subject, message })
+                    });
+                    const data = await response.json();
+
+                    if (response.ok && data.success) {
+                        t.innerHTML = `
+                            <div class="alert-box alert-box--success">
+                                <p>${data.message || "Your message has been sent. Thank you!"}</p>
+                                <span class="alert-box__close"></span>
+                            </div>
+                        `;
+                        e.reset();
+                        s();
+                    } else {
+                        throw new Error(data.error?.message || data.message || "Failed to send message");
+                    }
+                } catch (error) {
+                    console.error("Contact form error:", error);
+                    t.innerHTML = `
+                        <div class="alert-box alert-box--error">
+                            <p>Error: ${error.message || "Connection error. Please try again later."}</p>
+                            <span class="alert-box__close"></span>
+                        </div>
+                    `;
+                    s();
+                } finally {
+                    i.value = o;
+                    i.disabled = !1;
+                }
             })
         }(),
         function () {
