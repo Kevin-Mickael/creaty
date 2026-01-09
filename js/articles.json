@@ -1,20 +1,35 @@
 [
-    {
-        "title": "Digital & Social Media Agency in Mauritius: Why Your Business Needs One",
-        "slug": "digital-social-media-agency-mauritius-creaty",
-        "category": "NEWS",
-        "publishedAt": "2025-12-31T19:02:19.861Z",
-        "description": "Discover how Creaty, a digital and social media agency in Mauritius, transforms the online presence of startups and SMEs.",
-        "image": "https://res.cloudinary.com/dvfbakbsf/image/upload/v1767193452/Chat_GPT_Image_Dec_18_2025_05_13_39_PM_fbf38c082f.png",
-        "epingle": true
-    },
-    {
-        "title": "Community Management in 2025",
-        "slug": "community-management-in-2025",
-        "category": "TRENDS",
-        "publishedAt": "2026-01-02T10:00:00.000Z",
-        "description": "The future of community management involves AI, authentic connections, and data-driven strategies.",
-        "image": "https://res.cloudinary.com/dvfbakbsf/image/upload/v1767370111/medium_2026_88e71891c0.png",
-        "epingle": false
-    }
+  {
+    "title": "How to Build a Powerful Social Network in Mauritius",
+    "slug": "how_to_build_a_powerfull_network",
+    "category": "NEWS",
+    "publishedAt": "2026-01-09T05:51:42.977Z",
+    "description": "Discover proven tactics to create meaningful connections in Mauritius through workplace culture, community events, and authentic relationship-building.",
+    "image": "https://res.cloudinary.com/dvfbakbsf/image/upload/v1767935080/social_network_99e283deaf.webp",
+    "video": "https://res.cloudinary.com/dvfbakbsf/video/upload/v1767934903/social_network_0d8624f8c8.mp4",
+    "epingle": false,
+    "source": "strapi"
+  },
+  {
+    "title": "Community Management in 2025",
+    "slug": "community-management-in-2025",
+    "category": "NEWS",
+    "publishedAt": "2026-01-02T16:12:34.507Z",
+    "description": "Explore how community management is evolving in Mauritius in 2025. From public posts to private conversations, discover why engagement is shifting to DMs, WhatsApp, and closed groups—and how Creaty helps brands adapt to this new reality.",
+    "image": "https://res.cloudinary.com/dvfbakbsf/image/upload/v1767370111/medium_2026_88e71891c0.png",
+    "video": null,
+    "epingle": false,
+    "source": "legacy"
+  },
+  {
+    "title": "Why Creaty is Your Digital & Social Media Agency in Mauritius",
+    "slug": "digital-social-media-agency-mauritius-creaty",
+    "category": "NEWS",
+    "publishedAt": "2025-12-30T10:00:00.000Z",
+    "description": "Discover why Creaty is the leading digital and social media agency in Mauritius, offering innovative solutions for brand growth, content creation, and digital marketing strategies.",
+    "image": "https://creatymu.org/images/og-image.png",
+    "video": null,
+    "epingle": false,
+    "source": "legacy"
+  }
 ]

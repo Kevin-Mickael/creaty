@@ -18,7 +18,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     const fetchPosts = async () => {
         try {
-            const response = await fetch('/js/articles.json');
+            const response = await fetch(`/js/articles.json?v=${new Date().getTime()}`);
 
             if (!response.ok) {
                 throw new Error("Failed to load static articles database");
