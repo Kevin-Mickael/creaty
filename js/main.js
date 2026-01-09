@@ -110,6 +110,7 @@
                 const message = e.querySelector("#cMessage")?.value;
 
                 i.value = "Sending...", i.disabled = !0;
+                t.innerHTML = ""; // Clear previous messages
 
                 try {
                     const response = await ApiClient.fetch(`${CONFIG.API_URL}/contact/send`, {

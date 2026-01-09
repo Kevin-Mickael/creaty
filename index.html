@@ -1610,66 +1610,6 @@
         <script src="/js/promo.js" defer></script>
         <script src="/js/main.js" defer></script>
 
-        <script>
-            document.addEventListener('DOMContentLoaded', () => {
-                const contactForm = document.getElementById('contactForm');
-                const contactMessage = document.querySelector('.contact-message');
-
-                if (contactForm) {
-                    contactForm.addEventListener('submit', async (e) => {
-                        e.preventDefault();
-
-                        const submitBtn = contactForm.querySelector('#submit');
-                        const originalBtnValue = submitBtn.value;
-
-                        // Clear previous messages
-                        contactMessage.innerHTML = '';
-
-                        submitBtn.value = 'Sending...';
-                        submitBtn.disabled = true;
-
-                        const formData = new FormData(contactForm);
-                        const data = {
-                            name: formData.get('cName'),
-                            email: formData.get('cEmail'),
-                            service: formData.get('cService'),
-                            message: formData.get('cMessage')
-                        };
-
-                        try {
-                            const response = await fetch(`${CONFIG.API_URL}/contact`, {
-                                method: 'POST',
-                                headers: {
-                                    'Content-Type': 'application/json',
-                                },
-                                body: JSON.stringify(data),
-                            });
-
-                            let result;
-                            try {
-                                result = await response.json();
-                            } catch (e) {
-                                result = { error: { message: 'The server returned an invalid response.' } };
-                            }
-
-                            if (response.ok && result.success) {
-                                contactMessage.innerHTML = '<div class="alert-box alert-box--success">Your message has been sent. Thank you!</div>';
-                                contactForm.reset();
-                            } else {
-                                const errorMsg = result.error?.message || result.message || 'An unknown error occurred.';
-                                throw new Error(errorMsg);
-                            }
-                        } catch (error) {
-                            console.error('Submission error:', error);
-                            contactMessage.innerHTML = `<div class="alert-box alert-box--error">Error: ${error.message}</div>`;
-                        } finally {
-                            submitBtn.value = originalBtnValue;
-                            submitBtn.disabled = false;
-                        }
-                    });
-                }
-            });
-        </script>
 
 </body>
 
