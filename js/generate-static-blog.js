@@ -182,7 +182,9 @@ function generateArticleHTML(article) {
             "name": "Creaty",
             "logo": {
                 "@type": "ImageObject",
-                "url": "https://creatymu.org/images/creaty.logo.svg"
+                "url": "https://creatymu.org/android-chrome-512x512.png",
+                "width": 512,
+                "height": 512
             }
         },
         "datePublished": "${publishedAt}",

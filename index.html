@@ -195,6 +195,52 @@
             width: 120px;
             height: 30px;
         }
+
+        /* Pricing Card Alignment Fix */
+        .s-pricing__plans .plans.row {
+            display: flex;
+            align-items: stretch;
+        }
+
+        .s-pricing__plans .item-plan {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .s-pricing__plans .item-plan__block {
+            display: flex;
+            flex-direction: column;
+            height: 100%;
+            flex: 1;
+            margin-bottom: 30px;
+            /* Spacing between cards on mobile */
+        }
+
+        .s-pricing__plans .item-plan__bottom-part {
+            display: flex;
+            flex-direction: column;
+            flex: 1;
+        }
+
+        .s-pricing__plans .item-plan__features {
+            flex-grow: 1;
+        }
+
+        .s-pricing__plans .item-plan__show-more {
+            margin-top: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .s-pricing__plans .item-plan__bottom-part .btn {
+            margin-top: 0;
+        }
+
+        @media screen and (max-width: 800px) {
+            .s-pricing__plans .item-plan {
+                width: 100%;
+                flex: none;
+            }
+        }
     </style>
 
     <!-- Defer Non-Critical CSS
@@ -230,7 +276,12 @@
         "name": "Creaty",
         "alternateName": "Creaty Digital Agency",
         "url": "https://creatymu.org/",
-        "logo": "https://creatymu.org/images/creaty.logo.svg",
+        "logo": {
+            "@type": "ImageObject",
+            "url": "https://creatymu.org/android-chrome-512x512.png",
+            "width": 512,
+            "height": 512
+        },
         "image": "https://creatymu.org/images/og-image.png",
         "description": "Your first Social Media Agency in Mauritius. Focus on your business while we take care of your Marketing. A professional, flexible, and cost-effective alternative to hiring internally.",
         "telephone": "+23054593145",
