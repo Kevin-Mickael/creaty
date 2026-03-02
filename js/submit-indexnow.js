@@ -41,8 +41,8 @@ async function getRecentUrls() {
     // 1. Always submit static pages
     const urls = [
         `${CONFIG.SITE_URL}/`,
-        `${CONFIG.SITE_URL}/news`,
-        `${CONFIG.SITE_URL}/legal`
+        `${CONFIG.SITE_URL}/news/`,
+        `${CONFIG.SITE_URL}/legal/`
     ];
 
     try {
@@ -66,7 +66,7 @@ async function getRecentUrls() {
         console.error('   Error:', error.message);
     }
 
-    return urls;
+    return [...new Set(urls)];
 }
 
 function submitToIndexNow(urlList) {

@@ -15,12 +15,40 @@
     <meta name="keywords"
         content="digital marketing tips mauritius, social media trends, community management, graphic design insights, mauritius business">
     <meta name="author" content="Creaty">
-    <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large">
+    <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1">
     <link rel="canonical" href="https://creatymu.org/news/">
 
     <!-- Hreflang for International SEO -->
     <link rel="alternate" hreflang="en" href="https://creatymu.org/news/">
     <link rel="alternate" hreflang="x-default" href="https://creatymu.org/news/">
+
+    <!-- Schema.org Organization -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "Organization",
+        "@id": "https://creatymu.org/#organization",
+        "name": "Creaty",
+        "url": "https://creatymu.org/",
+        "logo": {
+            "@type": "ImageObject",
+            "url": "https://creatymu.org/android-chrome-512x512.png",
+            "width": 512,
+            "height": 512
+        }
+    }
+    </script>
+
+    <!-- Schema.org WebSite -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "WebSite",
+        "@id": "https://creatymu.org/#website",
+        "name": "Creaty",
+        "url": "https://creatymu.org/"
+    }
+    </script>
 
     <!-- Schema.org Breadcrumb -->
     <script type="application/ld+json">
@@ -31,12 +59,12 @@
             "@type": "ListItem",
             "position": 1,
             "name": "Home",
-            "item": "https://creatymu.org"
+            "item": "https://creatymu.org/"
         }, {
             "@type": "ListItem",
             "position": 2,
             "name": "News",
-            "item": "https://creatymu.org/news"
+            "item": "https://creatymu.org/news/"
         }]
     }
     </script>
@@ -50,27 +78,27 @@
         "description": "Stay updated with the latest digital marketing trends, community management tips, and graphic design insights for Mauritian businesses.",
         "url": "https://creatymu.org/news/",
         "isPartOf": {
+            "@id": "https://creatymu.org/#website"
+        },
+        "about": {
             "@id": "https://creatymu.org/#organization"
         },
         "publisher": {
-            "@type": "Organization",
-            "name": "Creaty",
-            "logo": {
-                "@type": "ImageObject",
-                "url": "https://creatymu.org/android-chrome-512x512.png",
-                "width": 512,
-                "height": 512
-            }
+            "@id": "https://creatymu.org/#organization"
         }
     }
     </script>
 
     <!-- OpenGraph / Facebook -->
     <meta property="og:type" content="website">
-    <meta property="og:url" content="https://creatymu.org/news">
+    <meta property="og:url" content="https://creatymu.org/news/">
     <meta property="og:title" content="News & Insights | Creaty Digital Agency">
     <meta property="og:description" content="Latest digital marketing trends and tips for Mauritian businesses.">
     <meta property="og:image" content="https://creatymu.org/images/og-image.png">
+    <meta property="og:image:secure_url" content="https://creatymu.org/images/og-image.png">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    <meta property="og:image:alt" content="Creaty news and insights">
     <meta property="og:locale" content="en_MU">
     <meta property="og:site_name" content="Creaty">
 
@@ -270,8 +298,8 @@
                         <li><a href="/#about">About</a></li>
                         <li><a href="/#pricing">Pricing</a></li>
                         <li><a href="/#faq">FAQ</a></li>
-                        <li class="current"><a href="/news">News</a></li>
-                        <li><a href="/legal" aria-label="Terms and Conditions">Terms & Conditions</a></li>
+                        <li class="current"><a href="/news/">News</a></li>
+                        <li><a href="/legal/" aria-label="Terms and Conditions">Terms & Conditions</a></li>
                     </ul>
                 </nav>
 
@@ -303,7 +331,7 @@
 
             <div class="row blog-header">
                 <div class="column lg-12">
-                    <div role="heading" aria-level="1" class="text-display-1">Articles & News</div>
+                    <h1 class="text-display-1">Articles & News</h1>
                     <p class="lead">Discover the latest trends in community management and graphic design for Mauritius.
                     </p>
                 </div>
@@ -480,8 +508,8 @@
                         <li><a href="/#about">About</a></li>
                         <li><a href="/#pricing">Pricing</a></li>
                         <li><a href="/#faq">FAQ</a></li>
-                        <li><a href="/news">News</a></li>
-                        <li><a href="/legal" aria-label="Terms and Conditions">Terms & Conditions</a></li>
+                        <li><a href="/news/">News</a></li>
+                        <li><a href="/legal/" aria-label="Terms and Conditions">Terms & Conditions</a></li>
                     </ul>
 
                     <div id="wcb" class="carbonbadge wcb-d"></div>
@@ -517,7 +545,7 @@
             <div class="cookie-banner__content">
                 <h4>We Value Your Privacy</h4>
                 <p>We use cookies to enhance your browsing experience and analyze our traffic. By clicking "Accept", you
-                    consent to our use of cookies. <a href="/legal" class="link-primary-underline"
+                    consent to our use of cookies. <a href="/legal/" class="link-primary-underline"
                         title="Read our Legal & Privacy Policy">Learn more about our Terms & Privacy Policy</a></p>
                 <div class="cookie-banner__buttons">
                     <button class="cookie-banner__btn cookie-banner__btn--accept"

@@ -115,6 +115,30 @@ app.post('/webhook/strapi', (req, res) => {
     res.status(200).send('Webhook received. Regeneration queued.');
 });
 
+// SEO canonicalization redirects
+app.get(['/blog', '/blog/'], (req, res) => {
+    const slug = (req.query.slug || '').toString().trim();
+    if (slug) {
+        return res.redirect(301, `/articles/${encodeURIComponent(slug)}/`);
+    }
+    return res.redirect(301, '/news/');
+});
+
+// Redirect /path/index.html to canonical /path/
+app.use((req, res, next) => {
+    if (req.path === '/index.html') {
+        return res.redirect(301, '/');
+    }
+
+    if (req.path.endsWith('/index.html')) {
+        const canonicalPath = req.path.slice(0, -'index.html'.length);
+        const queryString = req.url.includes('?') ? req.url.slice(req.url.indexOf('?')) : '';
+        return res.redirect(301, `${canonicalPath}${queryString}`);
+    }
+
+    next();
+});
+
 // Serve static files (Optional: allows you to preview the site on this port)
 app.use(express.static(__dirname));
 
@@ -123,7 +147,7 @@ app.listen(PORT, () => {
     console.log(`
 🤖 Creaty Automation Server is Running!
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-guilening on: http://localhost:${PORT}
+Listening on: http://localhost:${PORT}
 Webhook URL:  http://localhost:${PORT}/webhook/strapi
 
 👉 Go to your Strapi Admin Panel > Settings > Webhooks

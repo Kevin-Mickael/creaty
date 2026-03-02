@@ -79,16 +79,19 @@ function parseMarkdown(text) {
 function generateArticleHTML(article) {
     const attrs = article.attributes || article;
     const slug = attrs.slug || article.documentId || article.id;
-    const title = attrs.title || 'Article';
-    const rawDescription = attrs.description || title;
-    const description = rawDescription.replace(/<[^>]*>/g, '').substring(0, 160); // Plain text for SEO
+    const title = normalizeWhitespace(attrs.title || 'Article');
+    const rawDescription = normalizeWhitespace(attrs.description || title);
+    const description = normalizeWhitespace(rawDescription.replace(/<[^>]*>/g, '')).substring(0, 160); // Plain text for SEO
     const descriptionHtml = parseMarkdown(rawDescription); // Rendered MDX for display
     const content = formatContent(attrs.content);
     const publishedAt = attrs.publishedAt || new Date().toISOString();
     const updatedAt = attrs.updatedAt || publishedAt;
-    const category = attrs.category || 'NEWS';
-    const author = attrs.author || 'Creaty Team';
+    const category = normalizeWhitespace(attrs.category || 'NEWS');
+    const author = normalizeWhitespace(typeof attrs.author === 'string' ? attrs.author : (attrs.author?.name || 'Creaty Team'));
     const readTime = attrs.readTime || estimateReadTime(content);
+    const articleUrl = `${CONFIG.SITE_URL}/articles/${slug}/`;
+    const ogDescription = description || title;
+    const wordCount = countWords(content);
 
     // Image handling (for SEO meta tags only)
     let imageUrl = 'https://creatymu.org/images/og-image.png';
@@ -125,6 +128,85 @@ function generateArticleHTML(article) {
         .article-hero__content .article-header__category { border-color: rgba(255,255,255,0.5); color: #fff; }
     ` : '';
 
+    const organizationSchema = {
+        "@context": "https://schema.org",
+        "@type": "Organization",
+        "@id": "https://creatymu.org/#organization",
+        "name": "Creaty",
+        "url": "https://creatymu.org/",
+        "logo": {
+            "@type": "ImageObject",
+            "url": "https://creatymu.org/android-chrome-512x512.png",
+            "width": 512,
+            "height": 512
+        },
+        "sameAs": [
+            "https://www.facebook.com/creatymauritius/",
+            "https://www.instagram.com/creatymu",
+            "https://www.tiktok.com/@creatymu",
+            "https://www.threads.net/@creatymu",
+            "https://www.linkedin.com/company/creatymu",
+            "https://x.com/creatymu"
+        ]
+    };
+
+    const articleSchema = {
+        "@context": "https://schema.org",
+        "@type": "BlogPosting",
+        "@id": `${articleUrl}#article`,
+        "mainEntityOfPage": {
+            "@type": "WebPage",
+            "@id": articleUrl
+        },
+        "headline": title,
+        "description": ogDescription,
+        "articleSection": category,
+        "image": [imageUrl],
+        "author": {
+            "@type": "Person",
+            "name": author
+        },
+        "publisher": {
+            "@id": "https://creatymu.org/#organization"
+        },
+        "datePublished": publishedAt,
+        "dateModified": updatedAt,
+        "wordCount": wordCount
+    };
+
+    if (videoUrl) {
+        articleSchema.video = {
+            "@type": "VideoObject",
+            "name": title,
+            "description": ogDescription,
+            "thumbnailUrl": imageUrl,
+            "uploadDate": publishedAt,
+            "contentUrl": videoUrl
+        };
+    }
+
+    const breadcrumbSchema = {
+        "@context": "https://schema.org",
+        "@type": "BreadcrumbList",
+        "@id": `${articleUrl}#breadcrumb`,
+        "itemListElement": [{
+            "@type": "ListItem",
+            "position": 1,
+            "name": "Home",
+            "item": "https://creatymu.org/"
+        }, {
+            "@type": "ListItem",
+            "position": 2,
+            "name": "News",
+            "item": "https://creatymu.org/news/"
+        }, {
+            "@type": "ListItem",
+            "position": 3,
+            "name": title,
+            "item": articleUrl
+        }]
+    };
+
     return `<!DOCTYPE html>
 <html lang="en">
 <head>
@@ -133,19 +215,25 @@ function generateArticleHTML(article) {
     <title>${escapeHtml(title)} | Creaty Digital Agency Mauritius</title>
 
     <!-- SEO Meta Tags -->
-    <meta name="description" content="${escapeHtml(description)}">
+    <meta name="description" content="${escapeHtml(ogDescription)}">
     <meta name="author" content="${escapeHtml(author)}">
-    <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large">
-    <link rel="canonical" href="${CONFIG.SITE_URL}/articles/${slug}/">
+    <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1">
+    <link rel="canonical" href="${articleUrl}">
+
+    <!-- Hreflang -->
+    <link rel="alternate" hreflang="en" href="${articleUrl}">
+    <link rel="alternate" hreflang="x-default" href="${articleUrl}">
 
     <!-- OpenGraph / Facebook -->
     <meta property="og:type" content="article">
-    <meta property="og:url" content="${CONFIG.SITE_URL}/articles/${slug}/">
+    <meta property="og:url" content="${articleUrl}">
     <meta property="og:title" content="${escapeHtml(title)}">
-    <meta property="og:description" content="${escapeHtml(description)}">
+    <meta property="og:description" content="${escapeHtml(ogDescription)}">
     <meta property="og:image" content="${imageUrl}">
+    <meta property="og:image:secure_url" content="${imageUrl}">
     <meta property="og:image:width" content="1200">
     <meta property="og:image:height" content="630">
+    <meta property="og:image:alt" content="${escapeHtml(title)}">
     <meta property="og:locale" content="en_MU">
     <meta property="og:site_name" content="Creaty">
     <meta property="article:published_time" content="${publishedAt}">
@@ -159,73 +247,24 @@ function generateArticleHTML(article) {
     <!-- Twitter Card -->
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="${escapeHtml(title)}">
-    <meta name="twitter:description" content="${escapeHtml(description)}">
+    <meta name="twitter:description" content="${escapeHtml(ogDescription)}">
     <meta name="twitter:image" content="${imageUrl}">
-    <meta name="twitter:site" content="@creaty">
-    <meta name="twitter:creator" content="@creaty">
+    <meta name="twitter:site" content="@creatymu">
+    <meta name="twitter:creator" content="@creatymu">
 
-    <!-- Schema.org Article -->
+    <!-- Schema.org Organization -->
     <script type="application/ld+json">
-    {
-        "@context": "https://schema.org",
-        "@type": "Article",
-        "headline": "${escapeHtml(title).replace(/"/g, '\\"')}",
-        "description": "${escapeHtml(description).replace(/"/g, '\\"')}",
-        "image": "${imageUrl}",
-        "author": {
-            "@type": "Organization",
-            "name": "Creaty",
-            "url": "https://creatymu.org"
-        },
-        "publisher": {
-            "@type": "Organization",
-            "name": "Creaty",
-            "logo": {
-                "@type": "ImageObject",
-                "url": "https://creatymu.org/android-chrome-512x512.png",
-                "width": 512,
-                "height": 512
-            }
-        },
-        "datePublished": "${publishedAt}",
-        "dateModified": "${updatedAt}",
-        "mainEntityOfPage": {
-            "@type": "WebPage",
-            "@id": "${CONFIG.SITE_URL}/articles/${slug}/"
-        }${videoUrl ? `,
-        "video": {
-            "@type": "VideoObject",
-            "name": "${escapeHtml(title).replace(/"/g, '\\"')}",
-            "description": "${escapeHtml(description).replace(/"/g, '\\"')}",
-            "thumbnailUrl": "${imageUrl}",
-            "uploadDate": "${publishedAt}",
-            "contentUrl": "${videoUrl}"
-        }` : ''}
-    }
+${toJsonLd(organizationSchema)}
+    </script>
+
+    <!-- Schema.org BlogPosting -->
+    <script type="application/ld+json">
+${toJsonLd(articleSchema)}
     </script>
 
     <!-- Schema.org Breadcrumb -->
     <script type="application/ld+json">
-    {
-        "@context": "https://schema.org",
-        "@type": "BreadcrumbList",
-        "itemListElement": [{
-            "@type": "ListItem",
-            "position": 1,
-            "name": "Home",
-            "item": "https://creatymu.org"
-        }, {
-            "@type": "ListItem",
-            "position": 2,
-            "name": "News",
-            "item": "https://creatymu.org/news"
-        }, {
-            "@type": "ListItem",
-            "position": 3,
-            "name": "${escapeHtml(title).replace(/"/g, '\\"')}",
-            "item": "${CONFIG.SITE_URL}/articles/${slug}/"
-        }]
-    }
+${toJsonLd(breadcrumbSchema)}
     </script>
 
     <!-- Favicons -->
@@ -303,8 +342,8 @@ function generateArticleHTML(article) {
                         <li><a href="/#about">About</a></li>
                         <li><a href="/#pricing">Pricing</a></li>
                         <li><a href="/#faq">FAQ</a></li>
-                        <li class="current"><a href="/news">News</a></li>
-                        <li><a href="/legal">Terms & Conditions</a></li>
+                        <li class="current"><a href="/news/">News</a></li>
+                        <li><a href="/legal/">Terms & Conditions</a></li>
                     </ul>
                 </nav>
                 <div class="s-header__cta">
@@ -318,13 +357,13 @@ function generateArticleHTML(article) {
             <div class="row">
                 <div class="column lg-12">
                      <p style="font-size: 1.2rem; text-transform: uppercase; color: #888; font-family: var(--font-sans); letter-spacing: 1px; margin-bottom: 2rem;">
-                        <a href="/" style="color: #555; text-decoration: none;">Home</a> <span style="margin: 0 5px;">&gt;</span> <a href="/news" style="color: #555; text-decoration: none;">News</a> <span style="margin: 0 5px;">&gt;</span> <span style="color: #e31b6d; font-weight: 600; overflow-wrap: break-word;">${escapeHtml(title)}</span>
+                        <a href="/" style="color: #555; text-decoration: none;">Home</a> <span style="margin: 0 5px;">&gt;</span> <a href="/news/" style="color: #555; text-decoration: none;">News</a> <span style="margin: 0 5px;">&gt;</span> <span style="color: #e31b6d; font-weight: 600; overflow-wrap: break-word;">${escapeHtml(title)}</span>
                     </p>
                 </div>
             </div>
             <div class="row">
                 <div class="column lg-12">
-                    <a href="/news" class="article-back">
+                    <a href="/news/" class="article-back">
                         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
                             <path d="M10.25 6.75L4.75 12L10.25 17.25M19.25 12H5"></path>
                         </svg>
@@ -520,8 +559,8 @@ function generateArticleHTML(article) {
                         <li><a href="/#intro">Intro</a></li>
                         <li><a href="/#about">About</a></li>
                         <li><a href="/#pricing">Pricing</a></li>
-                        <li><a href="/news">News</a></li>
-                        <li><a href="/legal">Terms & Conditions</a></li>
+                        <li><a href="/news/">News</a></li>
+                        <li><a href="/legal/">Terms & Conditions</a></li>
                     </ul>
                     <p class="s-footer__contact">
                         Do you have a question? <a href="mailto:support@creatymu.org">support@creatymu.org</a>
@@ -550,7 +589,7 @@ function generateArticleHTML(article) {
             <div class="cookie-banner__content">
                 <h4>We Value Your Privacy</h4>
                 <p>We use cookies to enhance your browsing experience and analyze our traffic. By clicking "Accept", you
-                    consent to our use of cookies. <a href="/legal" class="link-primary-underline"
+                    consent to our use of cookies. <a href="/legal/" class="link-primary-underline"
                         title="Read our Legal & Privacy Policy">Learn more about our Terms & Privacy Policy</a></p>
                 <div class="cookie-banner__buttons">
                     <button class="cookie-banner__btn cookie-banner__btn--accept"
@@ -608,6 +647,10 @@ function generateArticleHTML(article) {
 }
 
 // ===== HELPER FUNCTIONS =====
+function normalizeWhitespace(text) {
+    return String(text || '').replace(/\s+/g, ' ').trim();
+}
+
 function escapeHtml(text) {
     if (!text) return '';
     return String(text)
@@ -616,6 +659,16 @@ function escapeHtml(text) {
         .replace(/>/g, '&gt;')
         .replace(/"/g, '&quot;')
         .replace(/'/g, '&#039;');
+}
+
+function toJsonLd(object) {
+    return JSON.stringify(object, null, 4).replace(/</g, '\\u003c');
+}
+
+function countWords(content) {
+    const text = String(content || '').replace(/<[^>]*>/g, ' ').trim();
+    if (!text) return 0;
+    return text.split(/\s+/).filter(Boolean).length;
 }
 
 function formatContent(content) {
@@ -704,8 +757,7 @@ function formatContent(content) {
 }
 
 function estimateReadTime(content) {
-    const text = content.replace(/<[^>]*>/g, '');
-    const words = text.split(/\s+/).length;
+    const words = countWords(content);
     return Math.max(1, Math.round(words / 200));
 }
 
@@ -891,8 +943,8 @@ async function generateStaticPages() {
         console.log('\n🔄 Updating sitemap.xml...');
         const staticPages = [
             { url: '/', priority: '1.0', changefreq: 'weekly', lastmod: new Date().toISOString().split('T')[0] },
-            { url: '/news', priority: '0.8', changefreq: 'daily', lastmod: new Date().toISOString().split('T')[0] },
-            { url: '/legal', priority: '0.3', changefreq: 'monthly', lastmod: '2025-12-30' }
+            { url: '/news/', priority: '0.8', changefreq: 'daily', lastmod: new Date().toISOString().split('T')[0] },
+            { url: '/legal/', priority: '0.3', changefreq: 'monthly', lastmod: '2025-12-30' }
         ];
 
         const allPages = [...staticPages, ...allArticleUrls];
@@ -926,4 +978,3 @@ ${allPages.map(page => `  <url>
 
 // Run
 generateStaticPages();
-

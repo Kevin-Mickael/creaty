@@ -7,7 +7,7 @@
     ================================================== -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Creaty - Digital & Social Media Agency in Mauritius </title>
+    <title>Creaty - Digital & Social Media Agency in Mauritius</title>
 
     <!-- SEO Meta Tags -->
     <meta name="description"
@@ -35,8 +35,10 @@
     <meta property="og:description"
         content="Transform your digital presence with Creaty. Professional Community Management & Graphic Design in Mauritius.">
     <meta property="og:image" content="https://creatymu.org/images/og-image.png">
+    <meta property="og:image:secure_url" content="https://creatymu.org/images/og-image.png">
     <meta property="og:image:width" content="1200">
     <meta property="og:image:height" content="630">
+    <meta property="og:image:alt" content="Creaty digital agency in Mauritius">
     <meta property="og:locale" content="en_MU">
     <meta property="og:site_name" content="Creaty">
 
@@ -335,10 +337,9 @@
             "@type": "ContactPoint",
             "telephone": "+23054593145",
             "contactType": "customer service",
-            "contactOption": "TollFree",
             "areaServed": "MU",
             "availableLanguage": ["en", "fr"],
-            "url": "https://wa.me/+23054593145"
+            "url": "https://wa.me/23054593145"
         },
         "hasOfferCatalog": {
             "@type": "OfferCatalog",
@@ -441,34 +442,37 @@
     }
     </script>
 
-    <!-- Schema.org Structured Data - WebSite with SearchAction -->
+    <!-- Schema.org Structured Data - WebSite -->
     <script type="application/ld+json">
     {
         "@context": "https://schema.org",
         "@type": "WebSite",
+        "@id": "https://creatymu.org/#website",
         "name": "Creaty",
         "alternateName": "Creaty Digital Agency Mauritius",
-        "url": "https://creatymu.org",
-        "potentialAction": {
-            "@type": "SearchAction",
-            "target": "https://creatymu.org/news?search={search_term_string}",
-            "query-input": "required name=search_term_string"
-        }
+        "url": "https://creatymu.org/"
     }
     </script>
 
-    <!-- Schema.org Structured Data - SpeakableSpecification for AI/Voice -->
+    <!-- Schema.org Structured Data - WebPage -->
     <script type="application/ld+json">
     {
         "@context": "https://schema.org",
         "@type": "WebPage",
+        "@id": "https://creatymu.org/#webpage",
         "name": "Creaty - Digital & Social Media Agency Mauritius",
-        "url": "https://creatymu.org",
+        "url": "https://creatymu.org/",
+        "isPartOf": {
+            "@id": "https://creatymu.org/#website"
+        },
+        "about": {
+            "@id": "https://creatymu.org/#organization"
+        },
         "speakable": {
             "@type": "SpeakableSpecification",
             "cssSelector": [".s-intro__content-title", ".s-intro__content-desc", ".faq-answer"]
         },
-        "lastReviewed": "2026-01-01"
+        "dateModified": "2026-03-02"
     }
     </script>
 
@@ -533,8 +537,8 @@
                         <li><a href="#about" class="smoothscroll">About</a></li>
                         <li><a href="#pricing" class="smoothscroll">Pricing</a></li>
                         <li><a href="#faq" class="smoothscroll">FAQ</a></li>
-                        <li><a href="/news">News</a></li>
-                        <li><a href="/legal" aria-label="Terms and Conditions">Terms & Conditions</a></li>
+                        <li><a href="/news/">News</a></li>
+                        <li><a href="/legal/" aria-label="Terms and Conditions">Terms & Conditions</a></li>
                     </ul>
                 </nav>
 
@@ -563,10 +567,10 @@
 
                     <div class="column lg-12 s-intro__content-inner">
                         <div class="s-intro__content-left">
-                            <div role="heading" aria-level="1" class="s-intro__content-title">
+                            <h1 class="s-intro__content-title">
                                 Your digital partner in Mauritius. <br>
                                 Zero fluff, pure strategy.
-                            </div>
+                            </h1>
                         </div>
                         <div class="s-intro__content-right">
                             <p class="s-intro__content-desc body-text-2">
@@ -1268,33 +1272,33 @@
                     style="margin-top: 4rem;">
                     <div class="column">
                         <div class="news-preview" style="margin-bottom: 2rem;">
-                            <h3 class="h5"><a href="/news">Community Management in 2025</a></h3>
+                            <h3 class="h5"><a href="/news/">Community Management in 2025</a></h3>
                             <p>Discover the key trends shaping social media in Mauritius. Engagement is moving to
                                 private channels.</p>
-                            <a href="/news" class="btn btn--stroke btn--small">Read More</a>
+                            <a href="/news/" class="btn btn--stroke btn--small">Read More</a>
                         </div>
                     </div>
                     <div class="column">
                         <div class="news-preview" style="margin-bottom: 2rem;">
-                            <h3 class="h5"><a href="/news">Why Your Brand Needs a Voice</a></h3>
+                            <h3 class="h5"><a href="/news/">Why Your Brand Needs a Voice</a></h3>
                             <p>It's not just about logo, it's about what you say. Consistency is the secret weapon of
                                 trust.</p>
-                            <a href="/news" class="btn btn--stroke btn--small">Read More</a>
+                            <a href="/news/" class="btn btn--stroke btn--small">Read More</a>
                         </div>
                     </div>
                     <div class="column">
                         <div class="news-preview" style="margin-bottom: 2rem;">
-                            <h3 class="h5"><a href="/news">SEO for Mauritian Business</a></h3>
+                            <h3 class="h5"><a href="/news/">SEO for Mauritian Business</a></h3>
                             <p>How to rank on Google in a small island market. Local SEO strategies that actually work.
                             </p>
-                            <a href="/news" class="btn btn--stroke btn--small">Read More</a>
+                            <a href="/news/" class="btn btn--stroke btn--small">Read More</a>
                         </div>
                     </div>
                 </div>
 
                 <div class="row">
                     <div class="column lg-12 text-center">
-                        <a href="/news" class="btn btn--primary">View All News</a>
+                        <a href="/news/" class="btn btn--primary">View All News</a>
                     </div>
                 </div>
 
@@ -1486,7 +1490,7 @@
             <div class="row s-footer__bottom">
                 <div class="column lg-5 md-6 stack-on-900">
                     <div class="footer__logo">
-                        <a href="index.html">
+                        <a href="/">
                             <img src="/images/creaty.logo.svg" alt="Creaty - Digital Agency Mauritius" width="327"
                                 height="94">
                         </a>
@@ -1577,8 +1581,8 @@
                         <li><a href="#about">About</a></li>
                         <li><a href="#pricing">Pricing</a></li>
                         <li><a href="#faq">FAQ</a></li>
-                        <li><a href="/news">News</a></li>
-                        <li><a href="/legal" aria-label="Terms and Conditions">Terms & Conditions</a></li>
+                        <li><a href="/news/">News</a></li>
+                        <li><a href="/legal/" aria-label="Terms and Conditions">Terms & Conditions</a></li>
                     </ul>
 
                     <div id="wcb" class="carbonbadge wcb-d"></div>
@@ -1614,7 +1618,7 @@
             <div class="cookie-banner__content">
                 <h4>We Value Your Privacy</h4>
                 <p>We use cookies to enhance your browsing experience and analyze our traffic. By clicking "Accept", you
-                    consent to our use of cookies. <a href="/legal" class="link-primary-underline"
+                    consent to our use of cookies. <a href="/legal/" class="link-primary-underline"
                         title="Read our Legal & Privacy Policy">Learn more about our Terms & Privacy Policy</a></p>
                 <div class="cookie-banner__buttons">
                     <button class="cookie-banner__btn cookie-banner__btn--accept"

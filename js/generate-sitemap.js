@@ -21,8 +21,8 @@ const SITEMAP_CONFIG = {
 
 const staticPages = [
     { url: '/', priority: '1.0', changefreq: 'weekly', lastmod: new Date().toISOString().split('T')[0] },
-    { url: '/news', priority: '0.8', changefreq: 'daily', lastmod: new Date().toISOString().split('T')[0] },
-    { url: '/legal', priority: '0.3', changefreq: 'monthly', lastmod: '2025-12-30' }
+    { url: '/news/', priority: '0.8', changefreq: 'daily', lastmod: new Date().toISOString().split('T')[0] },
+    { url: '/legal/', priority: '0.3', changefreq: 'monthly', lastmod: '2025-12-30' }
 ];
 
 async function generateSitemap() {
@@ -67,7 +67,7 @@ ${allPages.map(page => `  <url>
         console.log('');
         console.log('✅ SOLUTIONS for blog article indexing:');
         console.log('   1. Use Static Site Generation (SSG) to pre-render HTML');
-        console.log('   2. Use clean URLs like /blog/article-slug/ with pre-rendered content');
+        console.log('   2. Use clean URLs like /articles/article-slug/ with pre-rendered content');
         console.log('   3. Implement server-side rendering (SSR) with Node.js');
         console.log('━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n');
 

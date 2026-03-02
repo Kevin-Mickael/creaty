@@ -8,8 +8,12 @@
     <!-- SEO Meta Tags -->
     <meta name="description" content="Discover proven tactics to create meaningful connections in Mauritius through workplace culture, community events, and authentic relationship-building.">
     <meta name="author" content="Creaty Team">
-    <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large">
+    <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1">
     <link rel="canonical" href="https://creatymu.org/articles/how_to_build_a_powerfull_network/">
+
+    <!-- Hreflang for International SEO -->
+    <link rel="alternate" hreflang="en" href="https://creatymu.org/articles/how_to_build_a_powerfull_network/">
+    <link rel="alternate" hreflang="x-default" href="https://creatymu.org/articles/how_to_build_a_powerfull_network/">
 
     <!-- OpenGraph / Facebook -->
     <meta property="og:type" content="article">
@@ -34,14 +38,31 @@
     <meta name="twitter:title" content="How to Build a Powerful Social Network in Mauritius">
     <meta name="twitter:description" content="Discover proven tactics to create meaningful connections in Mauritius through workplace culture, community events, and authentic relationship-building.">
     <meta name="twitter:image" content="https://res.cloudinary.com/dvfbakbsf/image/upload/v1767935080/social_network_99e283deaf.webp">
-    <meta name="twitter:site" content="@creaty">
-    <meta name="twitter:creator" content="@creaty">
+    <meta name="twitter:site" content="@creatymu">
+    <meta name="twitter:creator" content="@creatymu">
 
-    <!-- Schema.org Article -->
+    <!-- Schema.org Organization -->
     <script type="application/ld+json">
     {
         "@context": "https://schema.org",
-        "@type": "Article",
+        "@type": "Organization",
+        "@id": "https://creatymu.org/#organization",
+        "name": "Creaty",
+        "url": "https://creatymu.org/",
+        "logo": {
+            "@type": "ImageObject",
+            "url": "https://creatymu.org/android-chrome-512x512.png",
+            "width": 512,
+            "height": 512
+        }
+    }
+    </script>
+
+    <!-- Schema.org BlogPosting -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "BlogPosting",
         "headline": "How to Build a Powerful Social Network in Mauritius",
         "description": "Discover proven tactics to create meaningful connections in Mauritius through workplace culture, community events, and authentic relationship-building.",
         "image": "https://res.cloudinary.com/dvfbakbsf/image/upload/v1767935080/social_network_99e283deaf.webp",
@@ -86,12 +107,12 @@
             "@type": "ListItem",
             "position": 1,
             "name": "Home",
-            "item": "https://creatymu.org"
+            "item": "https://creatymu.org/"
         }, {
             "@type": "ListItem",
             "position": 2,
             "name": "News",
-            "item": "https://creatymu.org/news"
+            "item": "https://creatymu.org/news/"
         }, {
             "@type": "ListItem",
             "position": 3,
@@ -184,8 +205,8 @@
                         <li><a href="/#about">About</a></li>
                         <li><a href="/#pricing">Pricing</a></li>
                         <li><a href="/#faq">FAQ</a></li>
-                        <li class="current"><a href="/news">News</a></li>
-                        <li><a href="/legal">Terms & Conditions</a></li>
+                        <li class="current"><a href="/news/">News</a></li>
+                        <li><a href="/legal/">Terms & Conditions</a></li>
                     </ul>
                 </nav>
                 <div class="s-header__cta">
@@ -199,13 +220,13 @@
             <div class="row">
                 <div class="column lg-12">
                      <p style="font-size: 1.2rem; text-transform: uppercase; color: #888; font-family: var(--font-sans); letter-spacing: 1px; margin-bottom: 2rem;">
-                        <a href="/" style="color: #555; text-decoration: none;">Home</a> <span style="margin: 0 5px;">&gt;</span> <a href="/news" style="color: #555; text-decoration: none;">News</a> <span style="margin: 0 5px;">&gt;</span> <span style="color: #e31b6d; font-weight: 600; overflow-wrap: break-word;">How to Build a Powerful Social Network in Mauritius</span>
+                        <a href="/" style="color: #555; text-decoration: none;">Home</a> <span style="margin: 0 5px;">&gt;</span> <a href="/news/" style="color: #555; text-decoration: none;">News</a> <span style="margin: 0 5px;">&gt;</span> <span style="color: #e31b6d; font-weight: 600; overflow-wrap: break-word;">How to Build a Powerful Social Network in Mauritius</span>
                     </p>
                 </div>
             </div>
             <div class="row">
                 <div class="column lg-12">
-                    <a href="/news" class="article-back">
+                    <a href="/news/" class="article-back">
                         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
                             <path d="M10.25 6.75L4.75 12L10.25 17.25M19.25 12H5"></path>
                         </svg>
@@ -619,8 +640,8 @@
                         <li><a href="/#intro">Intro</a></li>
                         <li><a href="/#about">About</a></li>
                         <li><a href="/#pricing">Pricing</a></li>
-                        <li><a href="/news">News</a></li>
-                        <li><a href="/legal">Terms & Conditions</a></li>
+                        <li><a href="/news/">News</a></li>
+                        <li><a href="/legal/">Terms & Conditions</a></li>
                     </ul>
                     <p class="s-footer__contact">
                         Do you have a question? <a href="mailto:support@creatymu.org">support@creatymu.org</a>
@@ -649,7 +670,7 @@
             <div class="cookie-banner__content">
                 <h4>We Value Your Privacy</h4>
                 <p>We use cookies to enhance your browsing experience and analyze our traffic. By clicking "Accept", you
-                    consent to our use of cookies. <a href="/legal" class="link-primary-underline"
+                    consent to our use of cookies. <a href="/legal/" class="link-primary-underline"
                         title="Read our Legal & Privacy Policy">Learn more about our Terms & Privacy Policy</a></p>
                 <div class="cookie-banner__buttons">
                     <button class="cookie-banner__btn cookie-banner__btn--accept"

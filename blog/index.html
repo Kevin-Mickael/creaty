@@ -7,14 +7,14 @@
     ================================================== -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title id="page-title">Blog & Insights | Digital Agency Mauritius - Creaty</title>
+    <title id="page-title">Legacy Blog URL Redirect | Creaty</title>
 
     <!-- Dynamic SEO Meta Tags (populated via JavaScript from Strapi) -->
     <meta id="meta-description" name="description"
-        content="Discover latest news, marketing trends, and brand identity insights from Creaty, the premier digital agency in Mauritius.">
+        content="This legacy blog URL redirects to the current Creaty News and article pages.">
     <meta name="author" content="Creaty - Creativfolio Ltd">
-    <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large">
-    <link id="meta-canonical" rel="canonical" href="https://creatymu.org/blog">
+    <meta name="robots" content="noindex, follow">
+    <link id="meta-canonical" rel="canonical" href="https://creatymu.org/news/">
 
     <!-- Schema.org Breadcrumb (static for listing, dynamic for article) -->
     <script type="application/ld+json">
@@ -25,26 +25,26 @@
             "@type": "ListItem",
             "position": 1,
             "name": "Home",
-            "item": "https://creatymu.org"
+            "item": "https://creatymu.org/"
         }, {
             "@type": "ListItem",
             "position": 2,
             "name": "News",
-            "item": "https://creatymu.org/news"
+            "item": "https://creatymu.org/news/"
         }, {
             "@type": "ListItem",
             "position": 3,
             "name": "Article",
-            "item": "https://creatymu.org/blog"
+            "item": "https://creatymu.org/news/"
         }]
     }
     </script>
 
     <!-- OpenGraph / Facebook (Dynamic) -->
-    <meta id="og-type" property="og:type" content="article">
-    <meta id="og-url" property="og:url" content="https://creatymu.org/blog">
-    <meta id="og-title" property="og:title" content="Creaty Blog">
-    <meta id="og-description" property="og:description" content="Read our latest insights.">
+    <meta id="og-type" property="og:type" content="website">
+    <meta id="og-url" property="og:url" content="https://creatymu.org/news/">
+    <meta id="og-title" property="og:title" content="Creaty News">
+    <meta id="og-description" property="og:description" content="Legacy URL redirecting to the current Creaty News section.">
     <meta id="og-image" property="og:image" content="https://creatymu.org/images/og-image.png">
     <meta id="og-image-secure" property="og:image:secure_url" content="https://creatymu.org/images/og-image.png">
     <meta id="og-image-type" property="og:image:type" content="image/png">
@@ -57,35 +57,20 @@
 
     <!-- Twitter Card (Dynamic) -->
     <meta name="twitter:card" content="summary_large_image">
-    <meta id="twitter-title" name="twitter:title" content="Creaty Blog">
-    <meta id="twitter-description" name="twitter:description" content="Read our latest insights.">
+    <meta id="twitter-title" name="twitter:title" content="Creaty News">
+    <meta id="twitter-description" name="twitter:description" content="Legacy URL redirecting to the current Creaty News section.">
     <meta id="twitter-image" name="twitter:image" content="https://creatymu.org/images/og-image.png">
 
     <!-- Verification Codes -->
     <meta name="yandex-verification" content="5c39865338a8b0c6" />
 
-    <!-- Article Schema (populated via JavaScript) -->
+    <!-- Legacy URL WebPage Schema -->
     <script id="article-schema" type="application/ld+json">
     {
         "@context": "https://schema.org",
-        "@type": "Article",
-        "headline": "",
-        "description": "",
-        "image": "",
-        "author": {
-            "@type": "Organization",
-            "name": "Creaty"
-        },
-        "publisher": {
-            "@type": "Organization",
-            "name": "Creaty",
-            "logo": {
-                "@type": "ImageObject",
-                "url": "https://creatymu.org/images/creaty.logo.svg"
-            }
-        },
-        "datePublished": "",
-        "dateModified": ""
+        "@type": "WebPage",
+        "name": "Legacy Blog URL Redirect",
+        "url": "https://creatymu.org/news/"
     }
     </script>
 
@@ -93,14 +78,15 @@
         document.documentElement.classList.remove('no-js');
         document.documentElement.classList.add('js');
 
-        // Redirect old /blog?slug=X URLs to new static /articles/X/ URLs
+        // Redirect old /blog URLs to canonical static pages
         (function () {
             const urlParams = new URLSearchParams(window.location.search);
             const slug = urlParams.get('slug');
             if (slug) {
-                // Redirect to the new static article URL
                 window.location.replace('/articles/' + slug + '/');
+                return;
             }
+            window.location.replace('/news/');
         })();
 
         // Visual Redirect: Clean URL bar (Remove index.html)
@@ -601,8 +587,8 @@
                         <li><a href="/#about">About</a></li>
                         <li><a href="/#pricing">Pricing</a></li>
                         <li><a href="/#faq">FAQ</a></li>
-                        <li class="current"><a href="/news">News</a></li>
-                        <li><a href="/legal" aria-label="Terms and Conditions">Terms & Conditions</a></li>
+                        <li class="current"><a href="/news/">News</a></li>
+                        <li><a href="/legal/" aria-label="Terms and Conditions">Terms & Conditions</a></li>
                     </ul>
                 </nav>
 
@@ -623,7 +609,7 @@
 
             <div class="row">
                 <div class="column lg-12">
-                    <a href="/news" class="article-back">
+                    <a href="/news/" class="article-back">
                         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
                             <path d="M10.25 6.75L4.75 12L10.25 17.25M19.25 12H5"></path>
                         </svg>
@@ -872,8 +858,8 @@
                         <li><a href="/#about">About</a></li>
                         <li><a href="/#pricing">Pricing</a></li>
                         <li><a href="/#faq">FAQ</a></li>
-                        <li><a href="/news">News</a></li>
-                        <li><a href="/legal" aria-label="Terms and Conditions">Terms & Conditions</a></li>
+                        <li><a href="/news/">News</a></li>
+                        <li><a href="/legal/" aria-label="Terms and Conditions">Terms & Conditions</a></li>
                     </ul>
 
                     <div id="wcb" class="carbonbadge wcb-d"></div>
@@ -908,7 +894,7 @@
             <div class="cookie-banner__content">
                 <h4>We Value Your Privacy</h4>
                 <p>We use cookies to enhance your browsing experience and analyze our traffic. By clicking "Accept", you
-                    consent to our use of cookies. <a href="/legal" class="link-primary-underline"
+                    consent to our use of cookies. <a href="/legal/" class="link-primary-underline"
                         title="Read our Legal & Privacy Policy">Learn more about our Terms & Privacy Policy</a></p>
                 <div class="cookie-banner__buttons">
                     <button class="cookie-banner__btn cookie-banner__btn--accept"
@@ -972,7 +958,7 @@
                 const slug = urlParams.get('slug');
 
                 if (!slug) {
-                    window.location.href = '/news';
+                    window.location.href = '/news/';
                     return;
                 }
 
@@ -1047,7 +1033,7 @@
                             <div class="alert-box alert-box--error">
                                 <p>Désolé, l'article n'a pas pu être chargé.</p>
                                 <p style="font-size: 1.4rem; color: #999; margin-top: 1rem;">Raison: ${errorMessage}</p>
-                                <p style="margin-top: 2rem;"><a href="/news" style="color: white; text-decoration: underline; font-weight: 700;">← Retour aux news</a></p>
+                                <p style="margin-top: 2rem;"><a href="/news/" style="color: white; text-decoration: underline; font-weight: 700;">← Retour aux news</a></p>
                             </div>
                         `;
                     }
@@ -1131,7 +1117,7 @@
                 if (description.length > 160) description = description.substring(0, 157) + '...';
 
                 // Use the precise canonical URL for sharing
-                const articleUrl = `https://creatymu.org/blog?slug=${attrs.slug || article.documentId || article.id}`;
+                const articleUrl = `https://creatymu.org/articles/${attrs.slug || article.documentId || article.id}/`;
                 const publishedDate = attrs.publishedAt || attrs.createdAt;
                 const modifiedDate = attrs.updatedAt || publishedDate;
 
